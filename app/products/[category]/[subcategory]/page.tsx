@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { RevealHeadline } from "@/components/reveal-headline";
-import { FinalCta } from "@/components/final-cta";
+import { CTASection } from "@/components/cta-section";
 import { ProductGrid } from "@/components/products/catalog-views";
 import { categories, getCategoryBySlug } from "@/data/products";
 import { createMetadata } from "@/lib/metadata";
@@ -63,12 +62,11 @@ export default async function SubcategoryPage({ params }: { params: Params }) {
           <span className="text-foreground/70">{sub.name}</span>
         </nav>
 
-        <RevealHeadline
-          as="h1"
+        <h1
           className="mt-4 text-balance text-[clamp(2.25rem,5vw,4rem)] font-medium leading-[0.98] tracking-tight"
         >
           {sub.name}
-        </RevealHeadline>
+        </h1>
 
         <ProductGrid
           products={sub.products}
@@ -76,7 +74,7 @@ export default async function SubcategoryPage({ params }: { params: Params }) {
           backLabel={cat.name}
         />
       </div>
-      <FinalCta />
+      <CTASection />
     </section>
   );
 }

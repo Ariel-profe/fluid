@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ProductDetail } from "@/components/products/product-detail";
-import { FinalCta } from "@/components/final-cta";
+import { CTASection } from "@/components/cta-section";
 import {
   categories,
   getCategoryBySlug,
@@ -57,7 +57,7 @@ export default async function ProductPage({ params }: { params: Params }) {
   return (
     <section>
       <ProductDetail product={prod} category={cat} subcategory={sub} />
-      <FinalCta />
+      <CTASection />
     </section>
   );
 }

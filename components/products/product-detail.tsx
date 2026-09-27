@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowLeft, Download } from "lucide-react";
 import type { Category, Product, Subcategory } from "@/data/products";
-import { RevealHeadline } from "@/components/reveal-headline";
 
 export function ProductDetail({
   product,
@@ -109,12 +108,11 @@ export function ProductDetail({
                 </>
               ) : null}
             </p>
-            <RevealHeadline
-              as="h1"
+            <h1
               className="mt-4 text-balance text-[clamp(2rem,4vw,3.25rem)] font-semibold leading-[0.98] tracking-[-0.03em]"
             >
               {product.name}
-            </RevealHeadline>
+            </h1>
             {product.description ? (
               <p className="mt-5 max-w-[52ch] text-pretty text-base leading-relaxed text-foreground/65">
                 {product.description}
