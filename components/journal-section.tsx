@@ -60,7 +60,7 @@ export function JournalSection() {
   const { ref, isVisible } = useScrollReveal(0.05)
 
   return (
-    <section id="journal" className="px-6 py-28 md:px-12 lg:px-20 md:py-36">
+    <section id="journal" className="container mx-auto px-3 py-10 lg:py-20">
       <div
         ref={ref}
         className={`mb-20 pb-6 border-b border-border transition-all duration-700 ${
