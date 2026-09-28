@@ -109,7 +109,7 @@ export function PartnersLogoGrid({
   partners,
   inView,
   spotlight = true,
-  className = "grid grid-cols-8 gap-3 max-[1280px]:grid-cols-6 max-[1024px]:grid-cols-5 max-[850px]:grid-cols-4 max-[560px]:grid-cols-3",
+  className = "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7",
 }: {
   partners: Partner[];
   inView: boolean;

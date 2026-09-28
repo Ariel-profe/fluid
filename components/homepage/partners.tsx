@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, useInView } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { PartnersLogoGrid } from "@/components/partners/partner-logo";
-import { FEATURED_PARTNERS, PARTNERS } from "@/data/partners";
+import { FEATURED_PARTNERS } from "@/data/partners";
 import { Button } from "../ui/button";
 
 const easeOutExpo = [0.33, 1, 0.68, 1] as const;
@@ -34,17 +34,17 @@ export function Partners(): ReactNode {
                     </motion.div>
 
                     <Button variant="outline">
-                        <Link href="/contact">Ver clientes</Link>
+                        <Link href="/contact">Ver todos</Link>
                     </Button>
                 </div>
 
                 <div className="mt-10 h-px w-full bg-accent-foreground/15" />
 
-                <div className="mt-16 max-[850px]:mt-12">
+                <div className="mt-16">
                     <PartnersLogoGrid
                         partners={FEATURED_PARTNERS}
                         inView={inView}
-                        className="grid grid-cols-8 gap-3 max-[1280px]:grid-cols-6 max-[1024px]:grid-cols-5 max-[850px]:grid-cols-4 max-[560px]:grid-cols-3"
+                        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 gap-4"
                     />
                 </div>
             </div>
