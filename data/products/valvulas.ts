@@ -5,10 +5,9 @@ import { Category } from "./types";
 // envíe el modelo entidad-relación definitivo.
 export const valvulas: Category = {
   id: "valvulas",
-  slug: "valvulas",
-  title: "Válvulas",
-  href: "",
-  body:
+  slug: "valves",
+  name: "Válvulas",
+  description:
     "Mariposas, esféricas, de retención, esclusas, de aire, guillotina y compuertas, y aplicaciones especiales.",
   image: "/categories/valvulas.webp",
   subcategories: [

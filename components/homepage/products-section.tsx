@@ -18,7 +18,7 @@ const TILES: Tile[] = [
     index: "01",
     title: "Válvulas",
     body: "Mariposas, Esféricas, Esclusas, de Retención, de Aire, Guillotina y compuertas, y más.",
-    href: "/products/valvulas",
+    href: "/products/valves",
     image: "/categories/valvulas.webp",
     subcategories: ["Mariposa", "Esférica", "Retención", "Esclusa", "Guillotina", "Aire"],
   },
@@ -77,7 +77,7 @@ export function ProductsSection() {
         </span>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-px bg-border">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-px">
         {TILES.map((tile) => (
           <CategoryCard
             key={tile.index}

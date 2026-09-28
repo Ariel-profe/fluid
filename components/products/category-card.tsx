@@ -14,7 +14,7 @@ interface CategoryCardProps {
   /** Nombres de subcategorías para el pie de la card. */
   subcategories?: string[] | undefined;
   /** Navegación por ruta (home). */
-  href: string;
+  href?: string;
   /** Navegación por estado (catálogo). */
   onClick?: () => void;
   /** Categoría sin ficha navegable aún: card no interactiva con sello. */
@@ -37,12 +37,12 @@ export function CategoryCard({
   return (
     <Link
       ref={ref}
-      className={`bg-background group cursor-pointer transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+      className={`bg-white group cursor-pointer transition-all duration-700 shadow ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
         }`}
       style={{ transitionDelay: `${(+index % 2) * 150}ms` }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      href={href}
+      href={href || ""}
     >
       <div className="overflow-hidden">
         <img

@@ -7,8 +7,13 @@ export type { Category, Subcategory, Product, ProductSpec, ProductDoc } from "./
 // A medida que se generen las demás categorías se agregan acá.
 export const categories: Category[] = [valvulas];
 
-export function getCategoryBySlug(slug: string): Category | undefined {
-  return categories.find((c) => c.slug === slug);
+export function getCategoryBySlug(slug: string) {
+  if (!slug) return undefined;
+  
+  // Buscamos ignorando espacios extras al inicio o al final
+  return categories.find(
+    (cat) => cat.slug.trim() === slug.trim()
+  );
 }
 
 export function getAllProducts(): Product[] {

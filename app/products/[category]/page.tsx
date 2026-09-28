@@ -36,8 +36,8 @@ export default async function CategoryPage({ params }: { params: Params }) {
   if (!cat) notFound();
 
   return (
-    <section className="relative w-full bg-background text-foreground">
-      <div className="mx-auto max-w-420 px-10 max-[850px]:px-6 pt-28 max-[850px]:pt-24 pb-16 max-[850px]:pb-12">
+    <section className="relative w-full text-foreground">
+      <div className="container mx-auto px-3 my-10 lg:my-32">
         <nav
           aria-label="Ruta"
           className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/45"
@@ -53,7 +53,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
           <span className="text-foreground/70">{cat.name}</span>
         </nav>
 
-        <h2 className="text-3xl md:text-[2.75rem] font-extralight tracking-tight text-foreground">
+        <h2 className="text-3xl md:text-[2.75rem] font-extralight tracking-tight text-foreground mt-10">
           {cat.name}
         </h2>
 

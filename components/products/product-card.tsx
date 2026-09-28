@@ -10,38 +10,33 @@ export function ProductCard({ product }: { product: Product }): ReactNode {
 
   return (
     <Link
-      href={href}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-foreground/8 bg-foreground/[0.02] transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-foreground/16 hover:bg-foreground/4"
+      className="bg-white group cursor-pointer transition-all duration-700 shadow group"
+      href={href || ""}
     >
-      <div className="relative flex aspect-4/3 items-center justify-center overflow-hidden bg-white p-6">
+      <div className="overflow-hidden">
         <img
           src={product.image}
-          alt={product.name}
-          loading="lazy"
-          decoding="async"
-          className="max-h-full w-auto object-contain transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+          alt={`${product.name} - ${product.brand}`}
+          className="w-full  object-cover transition-all duration-800 ease-out md:group-hover:scale-[102%]"
         />
       </div>
-      <div className="flex flex-1 flex-col p-6 max-[850px]:p-5">
-        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/40">
-          {subcategory}
-        </p>
-        <h3 className="mt-2 text-lg font-medium leading-tight tracking-tight">
-          {product.name}
-        </h3>
-        {product.description ? (
-          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-foreground/55">
-            {product.description}
-          </p>
-        ) : null}
-        <span className="mt-auto inline-flex items-center gap-1.5 pt-5 font-mono text-xs uppercase tracking-[0.2em] text-foreground/60 transition-colors group-hover:text-foreground">
-          Ver ficha
-          <ArrowUpRight
-            className="h-4 w-4 transition-transform duration-300 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            strokeWidth={1.6}
-            aria-hidden
-          />
-        </span>
+      <div className="p-4 flex items-start justify-between relative">
+        <div className="flex items-start gap-4">
+          <div>
+          <span className="text-[9px] tracking-[0.15em] text-muted-foreground/50 mt-1.5 tabular-nums">
+            {product.categoryId}
+          </span>
+            <h3 className="text-lg font-light tracking-tight text-foreground mb-1.5">
+              {product.name}
+            </h3>
+            <p className="hidden md:block text-[10px] tracking-widest uppercase text-muted-foreground">
+              {product.description}
+            </p>
+          </div>
+        </div>
+        <ArrowUpRight
+          className="h-4 w-4 absolute bottom-1 right-3 text-muted-foreground/40 transition-all duration-300 mt-1.5 md:group-hover:-translate-y-0.5 md:group-hover:translate-x-0.5 md:group-hover:text-blue-500"
+        />
       </div>
     </Link>
   );
