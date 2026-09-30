@@ -13,16 +13,15 @@ type PageHeroProps = {
 export const PageHero = ({ subtitle, title, className }: PageHeroProps) => {
     const textRef = useRef<HTMLDivElement>(null);
     return (
-        <section
-            className={`relative isolate overflow-hidden ${className ?? ""}`}
-        >
+        <section className={`relative isolate overflow-hidden py-10 ${className ?? ""}`}>
 
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(75%_60%_at_80%_18%,rgba(47,121,159,0.12),transparent_62%),linear-gradient(180deg,rgba(10,10,10,0.02),transparent_22%)]" />
             {/* Grilla tipo blueprint, sutil, para dar carácter industrial. */}
             <div className="pointer-events-none absolute inset-0 opacity-[0.4] [background-image:linear-gradient(to_right,rgba(47,121,159,0.16)_1px,transparent_1px),linear-gradient(to_bottom,rgba(47,121,159,0.16)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(120%_90%_at_50%_0%,black,transparent_75%)]" />
 
             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-foreground/10" />
 
-            <div className="relative z-10 mx-auto grid min-h-[36vh] grid-cols-[minmax(0,1.4fr)_minmax(260px,0.8fr)] gap-12 pb-16 pt-28 max-[850px]:min-h-[42vh] max-[850px]:grid-cols-1 max-[850px]:gap-8 max-[850px]:px-6 max-[850px]:pb-12 max-[850px]:pt-24">
+            <div className="container mx-auto px-3 grid md:grid-cols-2 py-16 lg:py-32 gap-6">
                 <div ref={textRef} className="flex h-full flex-col justify-end max-w-xl">
                     <nav
                         aria-label="Ruta"
@@ -47,7 +46,7 @@ export const PageHero = ({ subtitle, title, className }: PageHeroProps) => {
                     <div className="group/card relative w-full overflow-hidden rounded-2xl border border-foreground/10 bg-background/70 p-6 backdrop-blur-sm max-[850px]:p-5">
                         <span
                             aria-hidden
-                            className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/70 to-transparent"
+                            className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent"
                         />
                         <div className="mt-5 space-y-1">
                             {HERO_POINTS.map((point, i) => (

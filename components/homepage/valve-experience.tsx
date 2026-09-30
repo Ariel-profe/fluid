@@ -55,7 +55,7 @@ export const ValveExperience = ({
 }: CircularTestimonialsProps) => {
 
     const { ref: headRef, isVisible: headVisible } = useScrollReveal(0.15)
-    
+
     // Color & font config
     const colorName = colors.name ?? "#000";
     const colorDesignation = colors.designation ?? "#6b7280";
@@ -189,8 +189,13 @@ export const ValveExperience = ({
     };
 
     return (
-        <div ref={headRef} className="testimonial-container container mx-auto my-10 lg:my-20">
-            <div className="valve-grid">
+        <div ref={headRef} className="container mx-auto px-3 mt:10 flex flex-row w-full justify-between">
+            <div className="border-b border-border transition-all duration-700 opacity-100 translate-y-0 w-full lg:w-1/2">
+                <h2 className="text-3xl md:text-[2.75rem] font-extralight tracking-tight text-foreground">
+                    Soluciones integrales <br /> para la industria
+                </h2>
+            </div>
+            <div className="w-full lg:w-1/2">
                 {/* Images */}
                 <div className="image-container" ref={imageContainerRef}>
                     {valves.map((valve, index) => (
@@ -251,7 +256,7 @@ export const ValveExperience = ({
                             </motion.p>
                         </motion.div>
                     </AnimatePresence>
-                    
+
                     <div className="arrow-buttons">
                         <button
                             className="arrow-button prev-button"
@@ -280,19 +285,7 @@ export const ValveExperience = ({
                     </div>
                 </div>
             </div>
-            
-          <style jsx>{`
-                .testimonial-container {
-                    width: 100%;
-                    max-width: 56rem;
-                    padding: 1rem;
-                    margin-left: auto;
-                    margin-right: auto;
-                }
-                .valve-grid {
-                    display: grid;
-                    gap: 1.5rem;
-                }
+            <style jsx>{`
                 .image-container {
                     position: relative;
                     width: 100%;

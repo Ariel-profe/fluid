@@ -3,28 +3,9 @@ import type { ReactNode } from "react";
 import { ArrowLeft, ArrowUpRight, Boxes } from "lucide-react";
 import { getCategoryBySlug, type Category, type Product } from "@/data/products";
 import { ProductCard } from "./product-card";
-import {
-  ValveIcon,
-  ActuatorIcon,
-  PipeFlangeIcon,
-  GaugeIcon,
-  ExAreaIcon,
-} from "./category-icons";
 import { CategoryCard } from "./category-card";
 
 type CategoryIcon = (props: { className?: string }) => ReactNode;
-
-const CATEGORY_ICONS: Record<string, CategoryIcon> = {
-  valvulas: ValveIcon,
-  "actuadores-y-accesorios": ActuatorIcon,
-  "canos-bridas-y-accesorios": PipeFlangeIcon,
-  "caudal-presion-temperatura": GaugeIcon,
-  "areas-clasificadas": ExAreaIcon,
-};
-
-export function iconFor(categoryId: string): CategoryIcon {
-  return CATEGORY_ICONS[categoryId] ?? Boxes;
-}
 
 export function countProducts(category: Category): number {
   return category.subcategories.reduce((n, s) => n + s.products.length, 0);
@@ -107,7 +88,7 @@ const CATALOG_TILES: {
 
 export function CategoryGrid(): ReactNode {
   return (
-    <div className="mt-8 flex flex-wrap justify-center gap-5">
+    <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
       {CATALOG_TILES.map((tile, i) => {
         const category = tile.slug ? getCategoryBySlug(tile.slug) : undefined;
         const subcategories = category
@@ -142,12 +123,12 @@ export function SubcategoryGrid({ category }: { category: Category }): ReactNode
   return (
     <>
       <BackLink href="/products" label="Todas las categorías" />
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-px">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-px mt-10">
         {category.subcategories.map((s, index) => (
           <Link
             key={s.id}
             href={`/products/${category.slug}/${s.slug}`}
-            className="bg-white group cursor-pointer transition-all duration-700 shadow group"
+            className="bg-white group cursor-pointer transition-all duration-700 shadow py-5 group"
           >
             <div className="overflow-hidden">
               <img

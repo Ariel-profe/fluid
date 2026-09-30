@@ -449,7 +449,7 @@ export const valvulas: Category = {
           id: "valvulas-retencion-doble-clapeta",
           slug: "doble-clapeta",
           name: "Doble Clapeta",
-          image: "/products/valvulas/retencion/doble-clapeta.png",
+          image: "/products/valvulas/retencion/doble-clapeta-agua-y-saneamiento.jpg",
           categoryId: "valvulas",
           subcategoryId: "valvulas-retencion",
           brand: "",

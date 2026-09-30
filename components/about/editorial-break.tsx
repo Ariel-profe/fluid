@@ -7,7 +7,7 @@ export function EditorialBreak() {
   const { ref: quoteRef, isVisible: quoteVisible } = useScrollReveal(0.2)
 
   return (
-    <section className="px-6 md:px-12 lg:px-20 py-16 md:py-24">
+    <section className="container mx-auto px-3 py-16 lg:py-32">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6 items-center">
         <div
           ref={imgRef}
@@ -18,7 +18,7 @@ export function EditorialBreak() {
           <img
             src="/group.jpg"
             alt="Architectural detail of modern building with dramatic light and shadow"
-            className="w-full aspect-[16/10] object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+            className="w-full aspect-[16/10] object-cover grayscale-75 hover:grayscale-0 transition-all duration-1000"
           />
         </div>
         <div

@@ -10,14 +10,14 @@ export function ProductCard({ product }: { product: Product }): ReactNode {
 
   return (
     <Link
-      className="bg-white group cursor-pointer transition-all duration-700 shadow group"
+      className="bg-white group cursor-pointer transition-all duration-700 shadow group py-5"
       href={href || ""}
     >
       <div className="overflow-hidden">
         <img
           src={product.image}
           alt={`${product.name} - ${product.brand}`}
-          className="w-full  object-cover transition-all duration-800 ease-out md:group-hover:scale-[102%]"
+          className="w-full object-cover transition-all duration-800 ease-out md:group-hover:scale-105"
         />
       </div>
       <div className="p-4 flex items-start justify-between relative">
@@ -26,10 +26,10 @@ export function ProductCard({ product }: { product: Product }): ReactNode {
           <span className="text-[9px] tracking-[0.15em] text-muted-foreground/50 mt-1.5 tabular-nums">
             {product.categoryId}
           </span>
-            <h3 className="text-lg font-light tracking-tight text-foreground mb-1.5">
+            <h3 className="text-lg font-light tracking-tight text-primary mb-1.5">
               {product.name}
             </h3>
-            <p className="hidden md:block text-[10px] tracking-widest uppercase text-muted-foreground">
+            <p className="hidden md:block text-[10px] tracking-widest uppercase text-muted-foreground max-w-3xs">
               {product.description}
             </p>
           </div>

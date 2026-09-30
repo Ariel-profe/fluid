@@ -60,7 +60,7 @@ export function ApproachSection() {
   const { ref, isVisible } = useScrollReveal(0.05)
 
   return (
-    <section id="approach" className="container mx-auto px-3 py-10 lg:py-20">
+    <section id="approach" className="container mx-auto px-3 py-16 lg:py-32">
       <div
         ref={ref}
         className={`mb-20 pb-6 border-b border-border transition-all duration-700 ${

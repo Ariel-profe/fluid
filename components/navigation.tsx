@@ -53,10 +53,6 @@ const navigationItems = [
       {
         title: "Servicios",
         href: "/services",
-      },
-      {
-        title: "Socios",
-        href: "/partners",
       }
     ],
   },
@@ -118,7 +114,6 @@ function MobileNavSearch({onNavigate}: {onNavigate: () => void;}): ReactNode {
   );
 }
 
-
 export const Navigation = () => {
 
   const [isOpen, setIsOpen] = useState(false);
@@ -129,7 +124,7 @@ export const Navigation = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY
-      setScrolled(currentY > 60)
+      setScrolled(currentY > 20)
       setLastScrollY(currentY)
     }
     window.addEventListener("scroll", handleScroll, { passive: true })
@@ -142,8 +137,6 @@ export const Navigation = () => {
         <div className="flex lg:justify-center">
           <Link href="/" className="size-10 flex items-center gap-x-1 md:hover:opacity-80 transition-all">
             <img src="/logo.webp" alt="Fluid-logo" />
-            <span className={`text-xl text-black font-bold`}>FLUID
-            </span>
           </Link>
         </div>
         <div className="justify-start items-center gap-4 lg:flex hidden flex-row">
@@ -189,7 +182,7 @@ export const Navigation = () => {
             </NavigationMenuList>
 
             <Button variant="ghost">
-              <Link href="/partners">Clientes</Link>
+              <Link href="/partners">Socios</Link>
             </Button>
             <Button>
               <Link href="/contact">Contacto</Link>

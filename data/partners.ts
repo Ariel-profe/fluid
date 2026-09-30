@@ -33,7 +33,7 @@ export const PARTNERS: Partner[] = [
   { id: "celulosa-argentina", name: "Celulosa Argentina", legalName: "Celulosa Argentina S.A.", type: "sansLight", logo: "/partners/celulosa-argentina.jpg" },
   { id: "celulosa-campana", name: "Celulosa Campana", legalName: "Celulosa Campana S.A.", type: "sans", logo: "/partners/celulosa-campana.jpg" },
   { id: "cerveceria-malteria-quilmes", name: "Cervecería y Maltería Quilmes", legalName: "Cervecería y Maltería Quilmes S.A.I.C.A. y G.", type: "italic", logo: "/partners/cerveceria-malteria-quilmes.jpg", featured: true },
-  { id: "coto", name: "Coto", legalName: "Coto C.I.C.S.A.", type: "serif", logo: "/partners/coto.jpg" },
+  { id: "coto", name: "Coto", legalName: "Coto C.I.C.S.A.", type: "serif", logo: "/partners/coto.jpg", featured: true },
   { id: "diaser", name: "Diaser", legalName: "Diaser S.A.", type: "mono", logo: "/partners/diaser.jpg" },
   { id: "disal", name: "Disal", legalName: "Disal S.A.", type: "sansBold", logo: "/partners/disal.jpg" },
   { id: "dreamco", name: "Dreamco", legalName: "Dreamco S.A.", type: "sansLight", logo: "/partners/dreamco.jpg" },

@@ -21,7 +21,7 @@ export function Partners(): ReactNode {
             className="relative w-full bg-primary text-accent-foreground rounded-md"
             aria-labelledby="partners-heading"
         >
-            <div className="max-w-420 mx-auto px-10 max-[850px]:px-6 py-24 max-[850px]:py-16">
+            <div className="container mx-auto px-3 py-16 lg:py-32">
                 <div className="flex items-end justify-between gap-8 max-[850px]:flex-col max-[850px]:items-start">
                     <motion.div
                         initial={{ opacity: 0, y: 8 }}
@@ -34,7 +34,7 @@ export function Partners(): ReactNode {
                     </motion.div>
 
                     <Button variant="outline">
-                        <Link href="/contact">Ver todos</Link>
+                        <Link href="/partners">Ver todos</Link>
                     </Button>
                 </div>
 

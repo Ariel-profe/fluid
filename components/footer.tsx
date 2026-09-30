@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 interface Footer7Props {
   logo?: {
@@ -72,21 +73,20 @@ export const Footer = ({
   const year = new Date().getFullYear();
 
   return (
-    <section className="py-32 px-3 lg:px-6">
-      <div className="container mx-auto">
+    <section className="container mx-auto py-16 lg:pt-10 px-3">
         <div className="flex w-full flex-col justify-between gap-10 lg:flex-row lg:items-start lg:text-left">
           <div className="flex w-full flex-col justify-between gap-6 lg:items-start">
             {/* Logo */}
-            <div className="flex items-center gap-2 lg:justify-start">
-              <a href={logo.url}>
+            <div className="">
+              <Link href={logo.url}>
                 <img
                   src={logo.src}
                   alt={logo.alt}
                   title={logo.title}
-                  className="h-8"
+                  className="size-12"
                 />
-              </a>
-              <h2 className="text-xl font-semibold">{logo.title}</h2>
+              </Link>
+              <h2 className="text-xl font-semibold mt-3">{logo.title}</h2>
             </div>
             <p className="max-w-[70%] text-sm text-muted-foreground">
               {description}
@@ -128,7 +128,6 @@ export const Footer = ({
             Todos los derechos reservados.
           </p>
         </div>
-      </div>
     </section>
   );
 };

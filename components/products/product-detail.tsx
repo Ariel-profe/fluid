@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowLeft, Download } from "lucide-react";
 import type { Category, Product, Subcategory } from "@/data/products";
+import { Button } from "../ui/button";
 
 export function ProductDetail({
   product,
@@ -17,7 +18,7 @@ export function ProductDetail({
   )}`;
 
   return (
-    <section className="relative w-full bg-background text-foreground">
+    <section className="relative w-full text-foreground">
       <div className="mx-auto max-w-420 px-10 max-[850px]:px-6 pt-28 max-[850px]:pt-24 pb-24 max-[850px]:pb-16">
         {/* Breadcrumb */}
         <nav
@@ -47,11 +48,11 @@ export function ProductDetail({
         <div className="mt-10 grid grid-cols-12 gap-12 max-[900px]:grid-cols-1 max-[900px]:gap-8">
           {/* Imagen + documentación + acciones */}
           <div className="col-span-5 max-[900px]:col-span-1">
-            <div className="mx-auto flex aspect-square max-w-100 items-center justify-center overflow-hidden rounded-3xl border border-foreground/8 bg-white p-8 max-[850px]:p-6">
+            <div className="mx-auto flex aspect-square max-w-100 items-center justify-center overflow-hidden rounded-3xl border border-foreground/8 bg-white p-8 max-[850px]:p-6 group">
               <img
                 src={product.image}
                 alt={product.name}
-                className="max-h-full max-w-full object-contain"
+                className="max-h-full max-w-full object-contain md:group-hover:scale-110 transition"
               />
             </div>
 
@@ -82,24 +83,22 @@ export function ProductDetail({
             ) : null}
 
             <div className="mx-auto mt-8 flex max-w-100 flex-wrap items-stretch gap-3">
-              <a
-                href={mailto}
-                className="inline-flex items-center rounded-md bg-accent px-5 py-3 text-xs font-medium uppercase tracking-widest text-accent-foreground transition-opacity hover:opacity-90"
-              >
-                Solicitar cotización
-              </a>
-              <Link
-                href="/contact"
-                className="inline-flex items-center rounded-md border border-foreground/15 px-5 py-3 text-xs font-medium uppercase tracking-widest text-foreground/80 transition-colors hover:border-foreground/30 hover:text-foreground"
-              >
-                Contacto
-              </Link>
+              <Button>
+                <Link href={mailto}>
+                  Solicitar cotización
+                </Link>
+              </Button>
+              <Button variant="secondary">
+                <Link href="/contact">
+                  Contacto
+                </Link>
+              </Button>
             </div>
           </div>
 
           {/* Info */}
           <div className="col-span-7 max-[900px]:col-span-1">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-foreground/45">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-slate-800">
               {subcategory.name}
               {product.brand ? (
                 <>
@@ -109,7 +108,7 @@ export function ProductDetail({
               ) : null}
             </p>
             <h1
-              className="mt-4 text-balance text-[clamp(2rem,4vw,3.25rem)] font-semibold leading-[0.98] tracking-[-0.03em]"
+              className="mt-4 text-primary text-balance text-[clamp(2rem,4vw,3.25rem)] font-semibold leading-[0.98] tracking-[-0.03em]"
             >
               {product.name}
             </h1>
@@ -122,7 +121,7 @@ export function ProductDetail({
             {/* Ficha técnica */}
             {product.specs && product.specs.length > 0 ? (
               <div className="mt-12">
-                <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-foreground/45">
+                <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-foreground/75">
                   Ficha técnica
                 </h2>
                 <dl className="mt-4 divide-y divide-foreground/8 border-t border-foreground/8">

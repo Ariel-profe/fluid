@@ -38,8 +38,8 @@ export default async function SubcategoryPage({ params }: { params: Params }) {
   if (!cat || !sub) notFound();
 
   return (
-    <section className="relative w-full bg-background text-foreground">
-      <div className="mx-auto max-w-420 px-10 max-[850px]:px-6 pt-28 max-[850px]:pt-24 pb-16 max-[850px]:pb-12">
+    <section className="relative w-full text-foreground">
+      <div className="container mx-auto px-3 py-10 lg:py-32">
         <nav
           aria-label="Ruta"
           className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/45"
@@ -62,9 +62,7 @@ export default async function SubcategoryPage({ params }: { params: Params }) {
           <span className="text-foreground/70">{sub.name}</span>
         </nav>
 
-        <h1
-          className="mt-4 text-balance text-[clamp(2.25rem,5vw,4rem)] font-medium leading-[0.98] tracking-tight"
-        >
+         <h1 className="text-3xl md:text-[2.75rem] font-extralight tracking-tight text-foreground mt-10">
           {sub.name}
         </h1>
 

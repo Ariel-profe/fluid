@@ -72,7 +72,7 @@ export function ProductsSection() {
             Productos
           </h2>
         </div>
-        <span className="text-[11px] tracking-[0.15em] text-muted-foreground/50 mt-4 md:mt-0">
+        <span className="text-[11px] tracking-[0.15em] text-slate-800 mt-4 md:mt-0">
           ({String(TILES.length).padStart(2, "0")}) Categorías
         </span>
       </div>
