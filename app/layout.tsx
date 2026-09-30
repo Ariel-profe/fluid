@@ -1,25 +1,36 @@
-import React from "react"
-import type { Metadata, Viewport } from 'next'
-import { Inter, Geist, Roboto, Nunito_Sans } from 'next/font/google'
-import {Navigation} from '@/components/navigation'
-import {Footer} from '@/components/footer'
+import type { Viewport } from "next"
+import { Roboto, Nunito_Sans } from "next/font/google"
+import { Navigation } from "@/components/navigation"
+import { Footer } from "@/components/footer"
+import { baseMetadata } from "@/lib/metadata"
+import { COMPANY } from "@/data/site"
 
-import './globals.css'
-import { cn } from "@/lib/utils";
+import "./globals.css"
+import { cn } from "@/lib/utils"
 
-const nunitoSansHeading = Nunito_Sans({subsets:['latin'],variable:'--font-heading'});
+const nunitoSansHeading = Nunito_Sans({ subsets: ["latin"], variable: "--font-heading" })
+const roboto = Roboto({ subsets: ["latin"], variable: "--font-sans" })
 
-const roboto = Roboto({subsets:['latin'],variable:'--font-sans'});
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
-
-export const metadata: Metadata = {
-  title: 'Fluid - Soluciones Dinámicas',
-  description: 'Tu socio estratégico en productos para control y conducción de fluidos.',
-}
+export const metadata = baseMetadata
 
 export const viewport: Viewport = {
-  themeColor: '#0d0d0d',
+  themeColor: "#263640",
+}
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: COMPANY.legalName,
+  url: "https://fluidsoluciones.com",
+  email: COMPANY.email,
+  telephone: COMPANY.phones[0].label,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Santiago de Chile 2555",
+    addressLocality: "General Pacheco",
+    addressRegion: "Buenos Aires",
+    addressCountry: "AR",
+  },
 }
 
 export default function RootLayout({
@@ -28,10 +39,20 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" className={cn("font-sans bg-[#fafaf9]", roboto.variable, nunitoSansHeading.variable)}>
-      <body className="font-sans antialiased">
+    <html lang="es" className={cn("bg-background font-sans", roboto.variable, nunitoSansHeading.variable)}>
+      <body className="bg-background font-sans text-foreground antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <a
+          href="#contenido"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[100] focus:rounded-sm focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-foreground"
+        >
+          Saltar al contenido
+        </a>
         <Navigation />
-        {children}
+        <main id="contenido">{children}</main>
         <Footer />
       </body>
     </html>

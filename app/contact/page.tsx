@@ -13,13 +13,14 @@ export const metadata: Metadata = createMetadata({
 
 export default function ContactPage() {
     return (
-        <section className="container mx-auto px-3">
+        <>
             <PageHero
                 subtitle="Contacto"
                 title="Trabajemos juntos."
+                image="/common/4.jpg"
             />
             <ContactDetails />
             <Faq />
-        </section>
+        </>
     );
 }

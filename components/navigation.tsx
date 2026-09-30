@@ -1,11 +1,23 @@
 "use client";
 
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { useEffect, useState, type ComponentType } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
-import { Menu, MoveRight, X, Search, ArrowUpRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import {
+  Menu,
+  X,
+  ArrowUpRight,
+  CircleDot,
+  Cog,
+  Cylinder,
+  Gauge,
+  ShieldCheck,
+  Building2,
+  Wrench,
+} from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -14,316 +26,233 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { SearchBar } from "./search-bar";
-import { getProductHref, getSubcategoryName, searchProducts } from "@/data/products";
+import { ProductSearch } from "@/components/product-search";
+import { CATALOG_CATEGORIES, getCategoryHref } from "@/data/catalog-categories";
+import { COMPANY } from "@/data/site";
+import { cn } from "@/lib/utils";
 
-const easeOutExpo = [0.33, 1, 0.68, 1] as const;
+const ease = [0.22, 1, 0.36, 1] as const;
 
-const navigationItems = [
+const categoryIcons: Record<string, ComponentType<{ className?: string; strokeWidth?: number }>> = {
+  valvulas: CircleDot,
+  actuadores: Cog,
+  "canos-bridas": Cylinder,
+  "caudal-presion": Gauge,
+  "areas-clasificadas": ShieldCheck,
+};
+
+const companyLinks = [
   {
-    title: "Productos",
-    description: "Diseñados para mejorar el rendimiento.",
-    items: [
-      {
-        title: "Válvulas",
-        href: "/products/valves",
-      },
-      {
-        title: "Actuadores",
-        href: "/products/actuators",
-      },
-      {
-        title: "Caños - Bridas",
-        href: "/products/pipes-flanges",
-      },
-      {
-        title: "Caudal - Presión",
-        href: "/caudal-pressure",
-      },
-    ],
+    title: "Nosotros",
+    href: "/about",
+    hint: "Equipo, operación y cobertura",
+    icon: Building2,
   },
   {
-    title: "Empresa",
-    description: "Quiénes somos | Socios.",
-    items: [
-      {
-        title: "Nosotros",
-        href: "/about",
-      },
-      {
-        title: "Servicios",
-        href: "/services",
-      }
-    ],
+    title: "Servicios",
+    href: "/services",
+    hint: "Asesoramiento, stock y abastecimiento",
+    icon: Wrench,
   },
 ];
 
-const allLinks = navigationItems.flatMap(category =>
-  category.items.map(item => item)
-);
-
-function MobileNavSearch({onNavigate}: {onNavigate: () => void;}): ReactNode {
-  const [query, setQuery] = useState("");
-  const results = useMemo(() => searchProducts(query).slice(0, 6), [query]);
-  const show = query.trim().length > 0;
-
-  return (
-    <div className="relative w-full">
-      <div className="flex h-13 items-center gap-3 rounded-sm border border-foreground/10 bg-foreground/[0.03] px-4 transition-colors focus-within:border-foreground/25">
-        <Search size={18} className="shrink-0 text-foreground/40" aria-hidden />
-        <input
-          type="search"
-          enterKeyHint="search"
-          autoComplete="off"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Buscar productos…"
-          aria-label="Buscar productos"
-          className="h-full w-full bg-transparent text-base text-foreground outline-none placeholder:text-foreground/40"
-        />
-      </div>
-      {show ? (
-        <div className="absolute left-0 w-full mt-2 rounded-sm border border-foreground/10 bg-background p-2 shadow-xl">
-          {results.length > 0 ? (
-            <ul className="flex flex-col gap-1">
-              {results.map((product) => (
-                <li key={product.id}>
-                  <Link
-                    href={getProductHref(product)}
-                    onClick={onNavigate}
-                    className="flex flex-col rounded-lg px-3 py-2.5 transition-colors hover:bg-foreground/5 active:bg-foreground/10"
-                  >
-                    <span className="text-sm font-medium text-foreground">
-                      {product.name}
-                    </span>
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-foreground/50">
-                      {getSubcategoryName(product)}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="px-3 py-4 text-sm text-foreground/50">
-              Sin resultados para “{query.trim()}”.
-            </p>
-          )}
-        </div>
-      ) : null}
-    </div>
-  );
-}
+const mobileLinks = [
+  { title: "Productos", href: "/products" },
+  { title: "Nosotros", href: "/about" },
+  { title: "Servicios", href: "/services" },
+  { title: "Socios", href: "/partners" },
+  { title: "Contacto", href: "/contact" },
+];
 
 export const Navigation = () => {
-
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false)
-  const [lastScrollY, setLastScrollY] = useState(0)
+  const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentY = window.scrollY
-      setScrolled(currentY > 20)
-      setLastScrollY(currentY)
-    }
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [lastScrollY])
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1024px)");
+    const onChange = () => {
+      if (media.matches) setIsOpen(false);
+    };
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
+  }, []);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-3 ${scrolled ? "bg-zinc-100" : "bg-transparent"}`}>
-      <div className="container relative mx-auto min-h-16 flex gap-4 items-center justify-between">
-        <div className="flex lg:justify-center">
-          <Link href="/" className="size-10 flex items-center gap-x-1 md:hover:opacity-80 transition-all">
-            <img src="/logo.webp" alt="Fluid-logo" />
-          </Link>
-        </div>
-        <div className="justify-start items-center gap-4 lg:flex hidden flex-row">
-          <NavigationMenu className="flex justify-start items-start">
-            <SearchBar />
-            <NavigationMenuList className="flex justify-start gap-4 flex-row">
-              {navigationItems.map((item) => (
-                <NavigationMenuItem key={item.title}>
-                  <>
-                    <NavigationMenuTrigger>
-                      {item.title}
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent className="w-112.5! p-4">
-                      <div className="flex flex-col lg:grid grid-cols-2 gap-4">
-                        <div className="flex flex-col h-full justify-between">
-                          <div className="flex flex-col">
-                            <p className="text-base">{item.title}</p>
-                            <p className="text-muted-foreground text-sm">
-                              {item.description}
-                            </p>
-                          </div>
-                          <Button size="sm" className="mt-10">
-                            Pedir cotización
-                          </Button>
-                        </div>
-                        <div className="flex flex-col text-sm h-full justify-end">
-                          {item.items?.map((subItem) => (
-                            <NavigationMenuLink
-                              href={subItem.href}
-                              key={subItem.title}
-                              className="flex flex-row justify-between items-center hover:bg-muted py-2 px-4 rounded"
-                            >
-                              <span>{subItem.title}</span>
-                              <MoveRight className="w-4 h-4 text-muted-foreground" />
-                            </NavigationMenuLink>
-                          ))}
-                        </div>
-                      </div>
-                    </NavigationMenuContent>
-                  </>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
+    <>
+    <header
+      className={cn(
+        "fixed top-0 right-0 left-0 z-[70]",
+        scrolled || isOpen
+          ? "border-b border-border bg-background"
+          : "border-b border-transparent bg-transparent",
+      )}
+    >
+      <div className="container mx-auto flex min-h-16 items-center justify-between gap-3 px-3">
+        <Link href="/" className="flex min-w-0 shrink-0 items-center transition-opacity duration-200 hover:opacity-80">
+          <img src="/logo.webp" alt="Fluid Soluciones Dinámicas" className="h-8 w-auto md:h-9" />
+        </Link>
 
-            <Button variant="ghost">
-              <Link href="/partners">Socios</Link>
-            </Button>
-            <Button>
-              <Link href="/contact">Contacto</Link>
-            </Button>
-          </NavigationMenu>
-        </div>
-
-        <div className="flex w-12 shrink lg:hidden items-end justify-end">
-          <Button variant="default" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
-          </Button>
-          <AnimatePresence>
-            {isOpen && (
-              <motion.div
-                id="mobile-menu"
-                className="min-[850px]:hidden fixed inset-0 z-40 flex flex-col bg-background pointer-events-auto"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.25, ease: easeOutExpo }}
-              >
-                <div className="flex items-center justify-between border-b border-foreground/8 px-6 py-4">
-                  <Link
-                    href="/"
-                    onClick={() => setIsOpen(false)}
-                    className="inline-flex items-center gap-2.5 text-lg font-medium tracking-tight text-foreground"
-                  >
-                    <img src="/logo.webp" alt="" className="size-7" />
-                    Fluid
-                  </Link>
-                  <div className="flex items-center gap-1">
-                    <button
-                      type="button"
-                      aria-label="Close menu"
-                      onClick={() => setIsOpen(false)}
-                      className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md text-foreground transition-colors hover:bg-foreground/5"
-                    >
-                      <X size={20} />
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex flex-1 flex-col overflow-y-auto px-6 py-6">
-                  <div className="relative z-10">
-                    <MobileNavSearch onNavigate={() => setIsOpen(false)} />
-                  </div>
-
-                  <motion.ul
-                    className="mt-8 flex flex-col gap-y-4"
-                    initial="hidden"
-                    animate="visible"
-                    exit="hidden"
-                    variants={{
-                      hidden: {},
-                      visible: { transition: { staggerChildren: 0.05, delayChildren: 0.05 } },
-                    }}
-                  >
-                    {allLinks.map((l, i) => {
-                      const isActive =
-                        pathname === l.href || pathname.startsWith(`${l.href}/`);
-                      return (
-                        <motion.li
-                          key={l.href}
-                          variants={{
-                            hidden: { opacity: 0, y: 12 },
-                            visible: { opacity: 1, y: 0 },
-                          }}
-                          transition={{ duration: 0.4, ease: easeOutExpo }}
-                        >
-                          <Link
-                            href={l.href}
-                            onClick={() => setIsOpen(false)}
-                            aria-current={isActive ? "page" : undefined}
-                            className="group flex items-center justify-between gap-4 border-b border-foreground/8 py-4"
-                          >
-                            <span className="flex items-baseline gap-4">
-                              <span
-                                className={`font-mono text-xs tabular-nums ${isActive ? "text-accent" : "text-foreground/35"
-                                  }`}
-                              >
-                                {String(i + 1).padStart(2, "0")}
-                              </span>
-                              <span
-                                className={`text-2xl tracking-tight transition-colors group-active:text-accent ${isActive ? "text-accent" : "text-foreground"
-                                  }`}
-                              >
-                                {l.title}
-                              </span>
+        <nav className="hidden flex-1 items-center justify-end gap-1 lg:flex" aria-label="Principal">
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Productos</NavigationMenuTrigger>
+                <NavigationMenuContent className="w-72 p-1.5">
+                  {CATALOG_CATEGORIES.map((tile, i) => {
+                    const Icon = categoryIcons[tile.id] ?? CircleDot;
+                    const href = getCategoryHref(tile.slug) ?? "/products";
+                    return (
+                      <NavigationMenuLink
+                        href={href}
+                        key={tile.id}
+                        className="items-start gap-3 rounded-sm px-2.5 py-2.5"
+                      >
+                        <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-sm border border-border bg-muted">
+                          <Icon className="size-3.5 text-foreground" strokeWidth={1.6} />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="flex items-baseline justify-between gap-3">
+                            <span className="text-sm text-foreground">{tile.title}</span>
+                            <span className="font-mono text-[10px] tabular-nums text-muted-foreground">
+                              {String(i + 1).padStart(2, "0")}
                             </span>
-                            <ArrowUpRight
-                              size={22}
-                              className="text-foreground/25 transition-transform duration-300 group-active:translate-x-1 group-active:-translate-y-1 group-active:text-foreground"
-                              aria-hidden
-                            />
-                          </Link>
-                        </motion.li>
-                      );
-                    })}
-                  </motion.ul>
-
-                  <motion.a
-                    href="/contact"
-                    onClick={() => setIsOpen(false)}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, ease: easeOutExpo, delay: 0.3 }}
-                    className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-sm bg-primary px-4 py-4 text-sm font-medium uppercase tracking-widest text-white"
-                  >
-                    Contacto
-                    <ArrowUpRight size={16} aria-hidden />
-                  </motion.a>
-
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5, ease: easeOutExpo, delay: 0.4 }}
-                    className="mt-auto pt-10"
-                  >
-                    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/40">
-                      Contacto directo
-                    </p>
-                    <a
-                      href="mailto:cotizaciones@fluidsoluciones.com"
-                      className="mt-3 block break-all text-sm text-foreground/80 transition-colors hover:text-foreground"
+                          </span>
+                          <span className="mt-0.5 block truncate text-[11px] leading-snug text-muted-foreground">
+                            {tile.subcategories.slice(0, 4).join(" · ")}
+                          </span>
+                        </span>
+                      </NavigationMenuLink>
+                    );
+                  })}
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Empresa</NavigationMenuTrigger>
+                <NavigationMenuContent className="w-64 p-1.5">
+                  {companyLinks.map((subItem) => (
+                    <NavigationMenuLink
+                      href={subItem.href}
+                      key={subItem.title}
+                      className="items-start gap-3 rounded-sm px-2.5 py-2.5"
                     >
-                      cotizaciones@fluidsoluciones.com
-                    </a>
-                    <a
-                      href="tel:+5493515305318"
-                      className="mt-1 block text-sm text-foreground/80 transition-colors hover:text-foreground"
-                    >
-                      +54 9 351 530-5318
-                    </a>
-                  </motion.div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+                      <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-sm border border-border bg-muted">
+                        <subItem.icon className="size-3.5 text-foreground" strokeWidth={1.6} />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block text-sm text-foreground">{subItem.title}</span>
+                        <span className="mt-0.5 block text-[11px] leading-snug text-muted-foreground">
+                          {subItem.hint}
+                        </span>
+                      </span>
+                    </NavigationMenuLink>
+                  ))}
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+          <Link
+            href="/partners"
+            className="inline-flex h-8 items-center rounded-sm px-2.5 text-sm transition-colors duration-200 hover:bg-hover"
+          >
+            Socios
+          </Link>
+          <div className="mx-2 h-4 w-px bg-border" aria-hidden />
+          <ProductSearch variant="desktop" />
+          <Link href="/contact" className={cn(buttonVariants(), "ml-1")}>
+            Contacto
+          </Link>
+        </nav>
+
+        <button
+          type="button"
+          className={cn(buttonVariants({ variant: "ghost", size: "icon" }), "lg:hidden")}
+          onClick={() => setIsOpen((open) => !open)}
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
+          aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+        >
+          {isOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
       </div>
     </header>
-  );
-}
 
+      {mounted
+        ? createPortal(
+            <AnimatePresence>
+              {isOpen ? (
+                <motion.div
+                  id="mobile-menu"
+                  className="fixed inset-0 z-[60] flex h-dvh w-full flex-col bg-background pt-16 lg:hidden"
+                  style={{ backgroundColor: "var(--background)" }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.18, ease }}
+                >
+                  <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain bg-background px-4 py-6">
+                    <ProductSearch variant="mobile" onNavigate={() => setIsOpen(false)} />
+                    <ul className="mt-8 flex flex-col">
+                      {mobileLinks.map((l, i) => {
+                        const isActive = pathname === l.href || pathname.startsWith(`${l.href}/`);
+                        return (
+                          <li key={l.href} className="min-w-0">
+                            <Link
+                              href={l.href}
+                              onClick={() => setIsOpen(false)}
+                              aria-current={isActive ? "page" : undefined}
+                              className="flex min-w-0 items-center justify-between gap-4 border-b border-border py-4 transition-colors duration-200 hover:bg-hover"
+                            >
+                              <span className="flex min-w-0 items-baseline gap-3">
+                                <span className="font-mono text-xs tabular-nums text-muted-foreground">
+                                  {String(i + 1).padStart(2, "0")}
+                                </span>
+                                <span className="truncate text-xl tracking-tight text-foreground">{l.title}</span>
+                              </span>
+                              <ArrowUpRight size={18} className="shrink-0 text-muted-foreground" aria-hidden />
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                    <p className="mt-auto pt-10 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                      Contacto directo
+                    </p>
+                    <a href={`mailto:${COMPANY.email}`} className="mt-3 block break-all text-sm text-foreground">
+                      {COMPANY.email}
+                    </a>
+                    <a href={COMPANY.phones[0].href} className="mt-1 block text-sm text-foreground">
+                      {COMPANY.phones[0].label}
+                    </a>
+                  </div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>,
+            document.body,
+          )
+        : null}
+    </>
+  );
+};

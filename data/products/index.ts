@@ -56,6 +56,10 @@ export function getSubcategoryName(product: Product): string {
   return subcategory?.name ?? "";
 }
 
+export function getCategoryName(product: Product): string {
+  return categories.find((c) => c.id === product.categoryId)?.name ?? "";
+}
+
 export function searchProducts(query: string): Product[] {
   const q = normalizeSearchText(query.trim());
   if (!q) return [];
@@ -65,6 +69,8 @@ export function searchProducts(query: string): Product[] {
         p.name,
         p.description ?? "",
         p.brand ?? "",
+        getCategoryName(p),
+        getSubcategoryName(p),
         ...(p.specs?.map((s) => `${s.label} ${s.value}`) ?? []),
       ].join(" "),
     );

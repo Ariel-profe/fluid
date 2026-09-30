@@ -33,16 +33,16 @@ function Row({ item, index, open, onToggle, inView }: RowProps): ReactNode {
                 type="button"
                 onClick={onToggle}
                 aria-expanded={open}
-                className="group block w-full cursor-pointer text-left transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-foreground/3"
+                className="group block w-full cursor-pointer text-left transition-colors duration-200 hover:bg-hover"
             >
                 <div className="relative flex items-center gap-6 px-2 py-7 max-[850px]:py-6">
                     <span className="font-mono text-xs uppercase tracking-widest text-foreground/40 tabular-nums shrink-0 w-10 max-[850px]:w-8">
                         {String(index + 1).padStart(2, "0")}
                     </span>
 
-                    <span className="flex-1 text-xl max-[850px]:text-lg font-medium tracking-tight leading-snug">
+                    <h3 className="flex-1 text-lg font-medium leading-snug tracking-tight max-[850px]:text-base md:text-xl">
                         {item.q}
-                    </span>
+                    </h3>
 
                     <span
                         aria-hidden
@@ -99,10 +99,10 @@ export function Faq(): ReactNode {
         <section
             ref={sectionRef}
             id="faq"
-            className="relative w-full text-foreground"
+            className="relative w-full bg-background text-foreground"
             aria-labelledby="faq-heading"
         >
-            <div className="max-w-420 mx-auto px-10 max-[850px]:px-6 py-32 max-[850px]:py-16">
+            <div className="container mx-auto px-3 py-16 lg:py-24">
                 <div className="grid grid-cols-12 gap-x-10 gap-y-6 max-[850px]:grid-cols-1">
                     <div className="col-span-3 max-[1100px]:col-span-12 max-[850px]:col-span-1 pt-2">
                         <motion.span
@@ -116,17 +116,17 @@ export function Faq(): ReactNode {
                     </div>
 
                     <div className="col-span-7 col-start-6 max-w-[40rem] max-[1100px]:col-span-12 max-[1100px]:col-start-1 max-[850px]:col-span-1">
-                        <h1
+                        <h2
                             id="faq-heading"
                             className="text-3xl md:text-[2.75rem] font-extralight tracking-tight text-foreground"
                         >
                             Preguntas frecuentes.
-                        </h1>
+                        </h2>
                         <motion.p
                             initial={{ opacity: 0, y: 8 }}
                             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
                             transition={{ duration: 0.7, ease: easeOutExpo, delay: 0.18 }}
-                            className="mt-6 text-balance text-xl max-[850px]:text-lg font-light leading-snug text-foreground/60"
+                            className="mt-6 text-balance text-xl font-light leading-snug text-muted-foreground max-[850px]:text-lg"
                         >
                             Si necesitás más información, nuestro equipo responde a la
                             brevedad.

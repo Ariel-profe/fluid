@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import Link from "next/link";
+import { SiteBreadcrumb } from "@/components/site-breadcrumb";
 import { CTASection } from "@/components/cta-section";
 import { ProductGrid } from "@/components/products/catalog-views";
 import { categories, getCategoryBySlug } from "@/data/products";
@@ -39,30 +39,17 @@ export default async function SubcategoryPage({ params }: { params: Params }) {
 
   return (
     <section className="relative w-full text-foreground">
-      <div className="container mx-auto px-3 py-10 lg:py-32">
-        <nav
-          aria-label="Ruta"
-          className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/45"
-        >
-          <Link href="/" className="transition-colors hover:text-foreground/80">
-            Inicio
-          </Link>
-          <span aria-hidden className="text-foreground/25">/</span>
-          <Link href="/products" className="transition-colors hover:text-foreground/80">
-            Productos
-          </Link>
-          <span aria-hidden className="text-foreground/25">/</span>
-          <Link
-            href={`/products/${cat.slug}`}
-            className="transition-colors hover:text-foreground/80"
-          >
-            {cat.name}
-          </Link>
-          <span aria-hidden className="text-foreground/25">/</span>
-          <span className="text-foreground/70">{sub.name}</span>
-        </nav>
+      <div className="container mx-auto px-3 pt-24 pb-16 lg:pt-32 lg:pb-24">
+        <SiteBreadcrumb
+          items={[
+            { label: "Inicio", href: "/" },
+            { label: "Productos", href: "/products" },
+            { label: cat.name, href: `/products/${cat.slug}` },
+            { label: sub.name },
+          ]}
+        />
 
-         <h1 className="text-3xl md:text-[2.75rem] font-extralight tracking-tight text-foreground mt-10">
+        <h1 className="mt-8 text-3xl font-extralight tracking-tight text-foreground md:text-[2.75rem]">
           {sub.name}
         </h1>
 

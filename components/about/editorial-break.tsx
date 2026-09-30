@@ -18,7 +18,7 @@ export function EditorialBreak() {
           <img
             src="/group.jpg"
             alt="Architectural detail of modern building with dramatic light and shadow"
-            className="w-full aspect-[16/10] object-cover grayscale-75 hover:grayscale-0 transition-all duration-1000"
+            className="w-full aspect-16/10 object-cover grayscale-75 hover:grayscale-0 transition-all duration-1000"
           />
         </div>
         <div

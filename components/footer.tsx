@@ -1,134 +1,155 @@
 import Link from "next/link";
+import { Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { CATALOG_CATEGORIES, getCategoryHref } from "@/data/catalog-categories";
+import { COMPANY } from "@/data/site";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-interface Footer7Props {
-  logo?: {
-    url: string;
-    src: string;
-    alt: string;
-    title: string;
-  };
-  sections?: Array<{
-    title: string;
-    links: Array<{ name: string; href: string }>;
-  }>;
-  description?: string;
-  socialLinks?: Array<{
-    img: string;
-    href: string;
-    label: string;
-  }>;
-}
+const linkClass = "transition-colors hover:text-foreground";
 
-const defaultSections = [
-  {
-    title: "Productos",
-    links: [
-      { name: "Válvulas", href: "#" },
-      { name: "Actuadores y accesorios", href: "#" },
-      { name: "Caños, bridas y accesorios", href: "#" },
-      { name: "Caudal, presión y temperatura", href: "#" },
-      { name: "Áreas clasificadas", href: "#" },
-    ],
-  },
-  {
-    title: "Empresa",
-    links: [
-      { name: "Nosotros", href: "#" },
-      { name: "Servicios", href: "#" },
-      { name: "Clientes", href: "#" }
-    ],
-  },
-  {
-    title: "Legales",
-    links: [
-      { name: "Términos y condiciones", href: "#" },
-      { name: "Política de privacidad", href: "#" }
-    ],
-  },
-];
-
-const defaultSocialLinks = [
-  { img: "/socials/instagram.svg", href: "https://", label: "Instagram" },
-  { img: "/socials/facebook.svg", href: "https://", label: "Facebook" },
-  { img: "/socials/whatsapp.svg", href: "https://", label: "Whatsapp" },
-];
-
-const defaultLegalLinks = [
-  { name: "Terms and Conditions", href: "#" },
-  { name: "Privacy Policy", href: "#" },
-];
-
-export const Footer = ({
-  logo = {
-    url: "/",
-    src: "/logo.webp",
-    alt: "Fluid-logo",
-    title: "FLUID - Soluciones Dinámicas",
-  },
-  sections = defaultSections,
-  description = "A collection of components for your startup business or side project.",
-  socialLinks = defaultSocialLinks
-}: Footer7Props) => {
-
+export const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <section className="container mx-auto py-16 lg:pt-10 px-3">
-        <div className="flex w-full flex-col justify-between gap-10 lg:flex-row lg:items-start lg:text-left">
-          <div className="flex w-full flex-col justify-between gap-6 lg:items-start">
-            {/* Logo */}
-            <div className="">
-              <Link href={logo.url}>
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  title={logo.title}
-                  className="size-12"
-                />
-              </Link>
-              <h2 className="text-xl font-semibold mt-3">{logo.title}</h2>
-            </div>
-            <p className="max-w-[70%] text-sm text-muted-foreground">
-              {description}
+    <footer className="border-t border-border bg-muted/40">
+      <div className="container mx-auto px-3 py-16 lg:py-20">
+        <div className="grid min-w-0 gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+          <div className="flex min-w-0 flex-col gap-5 sm:col-span-2 lg:col-span-4">
+            <Link href="/" className="inline-flex items-center gap-3">
+              <img src="/logo.webp" alt="" className="size-11" />
+              <span className="text-base font-medium tracking-tight text-foreground">
+                {COMPANY.legalName}
+              </span>
+            </Link>
+            <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
+              {COMPANY.description}
             </p>
-            <ul className="flex items-center space-x-6 text-muted-foreground">
-              {socialLinks.map((social, idx) => (
-                <li key={idx} className="size-7 md:hover:scale-105 transition">
-                  <a href={social.href} aria-label={social.label} >
-                    <img src={social.img} alt={social.label} />
+            <Link href="/contact" className={cn(buttonVariants(), "w-fit")}>
+              Pedir cotización
+            </Link>
+          </div>
+
+          <nav className="min-w-0 lg:col-span-2" aria-label="Productos">
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+              Productos
+            </p>
+            <ul className="space-y-2.5 text-sm text-muted-foreground">
+              {CATALOG_CATEGORIES.map((c) => {
+                const href = getCategoryHref(c.slug);
+                return (
+                  <li key={c.id}>
+                    {href ? (
+                      <Link href={href} className={linkClass}>
+                        {c.title}
+                      </Link>
+                    ) : (
+                      <span className="flex flex-wrap items-baseline gap-2">
+                        {c.title}
+                        <span className="font-mono text-[10px] uppercase tracking-widest">Pronto</span>
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          <nav className="min-w-0 lg:col-span-2" aria-label="Empresa">
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+              Empresa
+            </p>
+            <ul className="space-y-2.5 text-sm text-muted-foreground">
+              <li>
+                <Link href="/about" className={linkClass}>
+                  Nosotros
+                </Link>
+              </li>
+              <li>
+                <Link href="/services" className={linkClass}>
+                  Servicios
+                </Link>
+              </li>
+              <li>
+                <Link href="/partners" className={linkClass}>
+                  Socios
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className={linkClass}>
+                  Contacto
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          <div className="min-w-0 sm:col-span-2 lg:col-span-4">
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+              Contacto
+            </p>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li className="flex gap-2.5">
+                <Mail className="mt-0.5 size-3.5 shrink-0" strokeWidth={1.6} aria-hidden />
+                <a href={`mailto:${COMPANY.email}`} className={cn(linkClass, "break-all")}>
+                  {COMPANY.email}
+                </a>
+              </li>
+              {COMPANY.phones.map((phone) => (
+                <li key={phone.href} className="flex gap-2.5">
+                  <Phone className="mt-0.5 size-3.5 shrink-0" strokeWidth={1.6} aria-hidden />
+                  <a href={phone.href} className={linkClass}>
+                    {phone.label}
                   </a>
                 </li>
               ))}
+              <li className="flex gap-2.5">
+                <MapPin className="mt-0.5 size-3.5 shrink-0" strokeWidth={1.6} aria-hidden />
+                <a
+                  href={COMPANY.address.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={linkClass}
+                >
+                  {COMPANY.address.line}
+                </a>
+              </li>
+              <li className="flex gap-2.5">
+                <Instagram className="mt-0.5 size-3.5 shrink-0" strokeWidth={1.6} aria-hidden />
+                <a
+                  href={COMPANY.instagram.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={linkClass}
+                >
+                  {COMPANY.instagram.handle}
+                </a>
+              </li>
             </ul>
-          </div>
-          <div className="grid w-full gap-6 md:grid-cols-3 lg:gap-20">
-            {sections.map((section, sectionIdx) => (
-              <div key={sectionIdx}>
-                <h3 className="mb-4 ">{section.title}</h3>
-                <ul className="space-y-3 text-sm text-muted-foreground">
-                  {section.links.map((link, linkIdx) => (
-                    <li
-                      key={linkIdx}
-                      className="font-light hover:text-primary"
-                    >
-                      <a href={link.href}>{link.name}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
+              {COMPANY.warehouse.label}: {COMPANY.warehouse.line}
+            </p>
           </div>
         </div>
-        <div className="mt-8 flex flex-col justify-between gap-4 border-t py-8 text-xs font-medium text-muted-foreground md:flex-row md:items-center md:text-left">
-          <p className="order-2 lg:order-1">
-            {`© ${year} Desarrollado por`}
-            <a href="https://amn.com.ar" target="_blank" className="ml-1 text-primary md:hover:opacity-80 transition">AMN Consultora Informática</a>
+
+        <div className="mt-14 flex flex-col justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground md:flex-row md:items-center">
+          <p>
+            © {year} {COMPANY.legalName}
           </p>
-          <p className="order-1 flex flex-col gap-2 md:order-2 md:flex-row">
-            Todos los derechos reservados.
+          <p className="font-mono text-[10px] uppercase tracking-[0.12em]">
+            Pacheco · Córdoba
+          </p>
+          <p>
+            Desarrollo{" "}
+            <a
+              href="https://amn.com.ar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground transition-opacity hover:opacity-70"
+            >
+              AMN Consultora Informática
+            </a>
           </p>
         </div>
-    </section>
+      </div>
+    </footer>
   );
 };
-

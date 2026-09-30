@@ -51,17 +51,17 @@ export function Gallery(): ReactNode {
         >
             <div className="container mx-auto px-3 py-16 lg:py-32">
                 <div className="col-span-7 col-start-6 max-w-160 max-[1100px]:col-span-12 max-[1100px]:col-start-1 max-[850px]:col-span-1">
-                    <h1
+                    <h2
                         id="gallery-heading"
                         className="text-3xl md:text-[2.75rem] font-extralight tracking-tight text-foreground"
                     >
                         El equipo y la operación, en imágenes
-                    </h1>
+                    </h2>
                     <motion.p
                         initial={{ opacity: 0, y: 8 }}
                         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
                         transition={{ duration: 0.7, ease: easeOutExpo, delay: 0.18 }}
-                        className="mt-6 text-balance text-xl max-[850px]:text-lg font-light leading-snug text-foreground/60"
+                        className="mt-6 text-balance text-xl font-light leading-snug text-muted-foreground max-[850px]:text-lg"
                     >
                         Personas, logística y trabajo en planta: la infraestructura real
                         que sostiene cada solución que entregamos.
@@ -90,10 +90,8 @@ export function Gallery(): ReactNode {
                                     >
                                         <figure
                                             className={[
-                                                "group relative aspect-[3/4] w-full overflow-hidden rounded-xl transition-all duration-700 ease-[cubic-bezier(0.33,1,0.68,1)]",
-                                                isActive
-                                                    ? "scale-100 opacity-100"
-                                                    : "scale-[0.94] opacity-55",
+                                                "relative aspect-[3/4] w-full overflow-hidden rounded-sm border border-border",
+                                                isActive ? "opacity-100" : "opacity-70",
                                             ].join(" ")}
                                         >
                                             <Image
@@ -102,12 +100,7 @@ export function Gallery(): ReactNode {
                                                 fill
                                                 sizes="(max-width: 850px) 58vw, (max-width: 1100px) 36vw, 23vw"
                                                 draggable={false}
-                                                className={[
-                                                    "object-cover transition-all duration-700 ease-[cubic-bezier(0.33,1,0.68,1)]",
-                                                    isActive
-                                                        ? "grayscale-0 scale-100"
-                                                        : "grayscale-75 scale-105",
-                                                ].join(" ")}
+                                                className="object-cover"
                                                 loading="lazy"
                                             />
 

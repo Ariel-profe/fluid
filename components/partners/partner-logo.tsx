@@ -7,37 +7,9 @@ import type { Partner } from "@/data/partners";
 
 const easeOutExpo = [0.33, 1, 0.68, 1] as const;
 
-function CornerBrackets(): ReactNode {
-  const base =
-    "absolute h-2.5 w-2.5 border-neutral-900/40 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover/logo:opacity-100";
-  return (
-    <>
-      <span
-        className={`${base} left-2 top-2 border-l border-t group-hover/logo:left-1.5 group-hover/logo:top-1.5`}
-        aria-hidden
-      />
-      <span
-        className={`${base} right-2 top-2 border-r border-t group-hover/logo:right-1.5 group-hover/logo:top-1.5`}
-        aria-hidden
-      />
-      <span
-        className={`${base} bottom-2 left-2 border-b border-l group-hover/logo:bottom-1.5 group-hover/logo:left-1.5`}
-        aria-hidden
-      />
-      <span
-        className={`${base} bottom-2 right-2 border-b border-r group-hover/logo:bottom-1.5 group-hover/logo:right-1.5`}
-        aria-hidden
-      />
-    </>
-  );
-}
-
-// Celda de logo: fondo blanco (los .jpg traen fondo blanco). En reposo se ve
-// atenuada en monocromo; con `active` (spotlight) o en hover pasa a color.
 export function PartnerLogoCell({
   partner,
   className = "",
-  active = false,
   sizes = "(max-width: 560px) 30vw, (max-width: 850px) 22vw, (max-width: 1280px) 16vw, 11vw",
 }: {
   partner: Partner;
@@ -48,9 +20,7 @@ export function PartnerLogoCell({
   return (
     <div
       title={partner.legalName}
-      className={`group/logo relative flex items-center justify-center overflow-hidden rounded-lg bg-white ring-1 transition-all duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] hover:ring-black/15 hover:shadow-[0_14px_34px_-24px_rgba(0,0,0,0.5)] ${
-        active ? "ring-black/10" : "ring-black/5"
-      } ${className}`}
+        className={`group/logo relative flex min-w-0 items-center justify-center overflow-hidden rounded-sm border border-border bg-card ${className}`}
     >
       <Image
         src={partner.logo}
@@ -58,16 +28,7 @@ export function PartnerLogoCell({
         fill
         sizes={sizes}
         draggable={false}
-        className={`object-contain p-4 transition-all duration-700 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover/logo:scale-[1.05] group-hover/logo:opacity-100 group-hover/logo:grayscale-0 max-[850px]:p-3 ${
-          active ? "opacity-100 grayscale-0" : "opacity-100 grayscale-0"
-        }`}
-      />
-      <CornerBrackets />
-      <span
-        aria-hidden
-        className={`pointer-events-none absolute inset-x-0 bottom-0 h-0.5 origin-left bg-accent transition-transform duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover/logo:scale-x-100 ${
-          active ? "scale-x-100" : "scale-x-0"
-        }`}
+        className="object-contain p-4 max-[850px]:p-3"
       />
     </div>
   );
@@ -123,6 +84,7 @@ export function PartnersLogoGrid({
       {partners.map((partner, i) => (
         <motion.div
           key={partner.id}
+          className="min-w-0"
           initial={{ opacity: 0, y: 14 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
           transition={{

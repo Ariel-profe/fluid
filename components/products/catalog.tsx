@@ -1,17 +1,17 @@
 import type { ReactNode } from "react";
 import { CategoryGrid } from "./catalog-views";
+import { SectionHeader } from "@/components/section-header";
 
 export function Catalog(): ReactNode {
   return (
-    <section className="relative w-full text-foreground container mx-auto px-3 py-10 lg:py-32">
-      <p className="font-mono text-xs uppercase tracking-[0.24em] text-foreground/45">
-        Soluciones industriales a medida.
-      </p>
-      <h1 className="text-3xl md:text-[2.75rem] font-extralight tracking-tight text-foreground">
-        Productos
-      </h1>
+    <section className="relative w-full text-foreground container mx-auto px-3 py-10 lg:py-24" aria-labelledby="catalog-heading">
+      <SectionHeader
+        as="h2"
+        title={<span id="catalog-heading">Líneas de suministro</span>}
+        kicker="Portafolio comercial"
+        aside="Una línea publicada · cuatro en preparación"
+      />
       <CategoryGrid />
-
     </section>
   );
 }

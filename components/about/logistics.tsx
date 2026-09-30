@@ -64,19 +64,19 @@ export function Logistics(): ReactNode {
             className="relative w-full bg-background text-foreground"
             aria-labelledby="logistics-heading"
         >
-            <div className="container mx-auto px-3 py:16 lg:py-32">
+            <div className="container mx-auto px-3 py-16 lg:py-32">
                 <div className="col-span-7 col-start-6 max-w-160 max-[1100px]:col-span-12 max-[1100px]:col-start-1 max-[850px]:col-span-1">
-                    <h1
+                    <h2
                         id="logistics-heading"
                         className="text-3xl md:text-[2.75rem] font-extralight tracking-tight text-foreground"
                     >
                         Infraestructura para responder con rapidez.
-                    </h1>
+                    </h2>
                     <motion.p
                         initial={{ opacity: 0, y: 8 }}
                         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
                         transition={{ duration: 0.7, ease: easeOutExpo, delay: 0.18 }}
-                        className="mt-6 text-balance text-xl max-[850px]:text-lg font-light leading-snug text-foreground/60"
+                        className="mt-6 text-balance text-xl font-light leading-snug text-muted-foreground max-[850px]:text-lg"
                     >
                         Una red integrada de almacenamiento y distribución que optimiza la
                         disponibilidad de productos, reduce los tiempos de entrega y brinda
@@ -89,7 +89,7 @@ export function Logistics(): ReactNode {
                         initial={{ opacity: 0, y: 20 }}
                         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         transition={{ duration: 0.9, ease: easeOutExpo, delay: 0.15 }}
-                        className="group relative col-span-5 max-[1100px]:col-span-1 max-[1100px]:mx-auto max-[1100px]:w-full max-[1100px]:max-w-sm overflow-hidden rounded-2xl bg-white ring-1 ring-black/5"
+                        className="group relative col-span-5 max-[1100px]:col-span-1 max-[1100px]:mx-auto max-[1100px]:w-full max-[1100px]:max-w-sm overflow-hidden rounded-sm border border-border bg-card"
                     >
                         <div className="relative h-full w-full max-[1100px]:h-auto max-[1100px]:aspect-[4/5]">
                             <Image
@@ -119,20 +119,20 @@ export function Logistics(): ReactNode {
                                         delay: 0.25 + i * 0.08,
                                     }}
                                     className={[
-                                        "group relative flex flex-col justify-between rounded-2xl p-8 max-[850px]:p-7 min-h-[280px] max-[850px]:min-h-[220px]",
-                                        "transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                                        "group relative flex min-h-[220px] flex-col justify-between rounded-sm border border-border p-8 max-[850px]:p-7",
+                                        "transition-colors",
                                         projected
-                                            ? "border border-dashed border-foreground/15 bg-foreground/[0.02] hover:bg-foreground/4"
-                                            : "bg-foreground/4 hover:bg-foreground/6",
+                                            ? "border-dashed bg-muted"
+                                            : "bg-card",
                                     ].join(" ")}
                                 >
                                     <div className="flex items-start justify-between">
                                         <div
                                             className={[
-                                                "flex h-10 w-10 items-center justify-center rounded-md transition-transform duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:rotate-[-6deg] group-hover:scale-[1.05]",
+                                                "flex h-10 w-10 items-center justify-center rounded-sm",
                                                 projected
-                                                    ? "bg-foreground/8 text-foreground/60"
-                                                    : "bg-accent text-accent-foreground",
+                                                    ? "border border-border text-muted-foreground"
+                                                    : "bg-primary text-primary-foreground",
                                             ].join(" ")}
                                             aria-hidden
                                         >

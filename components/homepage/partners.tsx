@@ -3,10 +3,9 @@
 import { useRef, type ReactNode } from "react";
 import Link from "next/link";
 import { motion, useInView } from "motion/react";
-import { ArrowRight } from "lucide-react";
 import { PartnersLogoGrid } from "@/components/partners/partner-logo";
 import { FEATURED_PARTNERS } from "@/data/partners";
-import { Button } from "../ui/button";
+import { buttonVariants } from "../ui/button";
 
 const easeOutExpo = [0.33, 1, 0.68, 1] as const;
 
@@ -18,7 +17,7 @@ export function Partners(): ReactNode {
         <section
             ref={sectionRef}
             id="clientes"
-            className="relative w-full bg-primary text-accent-foreground rounded-md"
+            className="relative w-full bg-primary text-primary-foreground"
             aria-labelledby="partners-heading"
         >
             <div className="container mx-auto px-3 py-16 lg:py-32">
@@ -28,14 +27,14 @@ export function Partners(): ReactNode {
                         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
                         transition={{ duration: 0.6, ease: easeOutExpo }}
                     >
-                        <h2 className="text-3xl md:text-[2.75rem] font-extralight tracking-tight text-slate-200">
+                        <h2 id="partners-heading" className="text-3xl md:text-[2.75rem] font-extralight tracking-tight text-primary-foreground">
                             Empresas líderes <br /> que confían en nosotros.
                         </h2>
                     </motion.div>
 
-                    <Button variant="outline">
-                        <Link href="/partners">Ver todos</Link>
-                    </Button>
+                    <Link href="/partners" className={buttonVariants({ variant: "inverse" })}>
+                        Ver todos
+                    </Link>
                 </div>
 
                 <div className="mt-10 h-px w-full bg-accent-foreground/15" />

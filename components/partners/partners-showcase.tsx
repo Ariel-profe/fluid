@@ -12,13 +12,16 @@ export function PartnersShowcase(): ReactNode {
     return (
         <section
             ref={sectionRef}
-            className="container mx-auto px-3 py:16 lg:py-32 relative w-full text-foreground"
-            aria-label="Logotipos de clientes"
+            className="container mx-auto px-3 pt-24 pb-16 lg:pt-32 lg:pb-32 relative w-full text-foreground"
+            aria-labelledby="partners-page-heading"
         >
-            <div className="flex items-baseline justify-between gap-6">
-                <h2 className="text-3xl md:text-[2.75rem] font-extralight tracking-tight text-foreground">
+            <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-baseline">
+                <h1
+                    id="partners-page-heading"
+                    className="text-3xl font-extralight tracking-tight text-foreground md:text-[2.75rem]"
+                >
                     Marcas que <br /> confían en nosotros
-                </h2>
+                </h1>
                 <span className="font-mono text-lg uppercase tracking-widest tabular-nums text-foreground/40">
                     {PARTNERS.length} empresas
                 </span>

@@ -66,7 +66,7 @@ function AccordionButton({ item, isOpen, onClick }: AccordionButtonProps) {
     return (
         <Button
             variant="ghost"
-            className={`w-full justify-start rounded-none px-4 py-6 text-left text-zinc-900 transition-all ${isOpen ? "bg-primary/10" : "hover:bg-primary/5"
+            className={`w-full justify-start rounded-none px-4 py-6 text-left text-zinc-900 transition-all ${isOpen ? "bg-hover" : "hover:bg-hover"`
                 }`}
             onClick={onClick}>
             <item.Icon className="mr-3 h-5 w-5" />

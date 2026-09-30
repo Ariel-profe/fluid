@@ -47,17 +47,17 @@ export function Values(): ReactNode {
         >
             <div className="container mx-auto px-3 py-10 lg:py-20">
                 <div className="col-span-7 col-start-6 max-w-[40rem] max-[1100px]:col-span-12 max-[1100px]:col-start-1 max-[850px]:col-span-1">
-                    <h1
+                    <h2
                         id="values-heading"
-                        className="text-3xl md:text-[2.75rem] font-extralight tracking-tight text-zinc-100"
+                        className="text-3xl font-extralight tracking-tight text-primary-foreground md:text-[2.75rem]"
                     >
                         Pasión e innovación en cada proyecto que apoyamos.
-                    </h1>
+                    </h2>
                     <motion.p
                         initial={{ opacity: 0, y: 8 }}
                         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
                         transition={{ duration: 0.7, ease: easeOutExpo, delay: 0.18 }}
-                        className="mt-6 text-balance text-xl max-[850px]:text-lg font-light leading-snug text-zinc-300"
+                        className="mt-6 text-balance text-xl font-light leading-snug text-primary-foreground/80 max-[850px]:text-lg"
                     >
                         Cumplimos con los estándares más exigentes y superamos las expectativas de nuestros clientes. Cada proyecto es una oportunidad para demostrar nuestro compromiso con la calidad y la eficiencia.
                     </motion.p>
@@ -79,19 +79,19 @@ export function Values(): ReactNode {
                             <div
                                 className={[
                                     "group relative flex flex-1 flex-col",
-                                    "rounded-2xl p-10 max-[850px]:p-7",
+                                    "rounded-sm p-10 max-[850px]:p-7",
 
-                                    "bg-foreground/4 hover:bg-foreground/6",
+                                    "bg-primary-foreground/6 hover:bg-hover-inverse",
 
                                     "transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
                                 ].join(" ")}
                             >
                                 <div>
-                                    <h3 className="text-3xl max-[850px]:text-2xl text-zinc-200 font-medium leading-tight tracking-tight">
+                                    <h3 className="text-3xl font-medium leading-tight tracking-tight text-primary-foreground max-[850px]:text-2xl">
                                         {value.name}
                                     </h3>
 
-                                    <p className="mt-6 text-sm leading-relaxed text-zinc-400 max-w-[42ch]">
+                                    <p className="mt-6 max-w-[42ch] text-sm leading-relaxed text-primary-foreground/75">
                                         {value.body}
                                     </p>
                                 </div>
@@ -100,10 +100,10 @@ export function Values(): ReactNode {
                                     {value.features.map((feature) => (
                                         <li
                                             key={feature}
-                                            className="flex items-start gap-3 text-sm text-zinc-200"
+                                            className="flex items-start gap-3 text-sm text-primary-foreground/90"
                                         >
                                             <Check
-                                                className="mt-0.5 h-4 w-4 shrink-0 text-zinc-300"
+                                                className="mt-0.5 h-4 w-4 shrink-0 text-primary-foreground"
                                                 strokeWidth={1.6}
                                                 aria-hidden
                                             />

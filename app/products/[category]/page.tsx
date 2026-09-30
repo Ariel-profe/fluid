@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import { SiteBreadcrumb } from "@/components/site-breadcrumb";
 import { CTASection } from "@/components/cta-section";
 import { SubcategoryGrid, ProductGrid } from "@/components/products/catalog-views";
 import { categories, getCategoryBySlug } from "@/data/products";
@@ -37,25 +37,18 @@ export default async function CategoryPage({ params }: { params: Params }) {
 
   return (
     <section className="relative w-full text-foreground">
-      <div className="container mx-auto px-3 my-10 lg:my-32">
-        <nav
-          aria-label="Ruta"
-          className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/45"
-        >
-          <Link href="/" className="transition-colors hover:text-foreground/80">
-            Inicio
-          </Link>
-          <span aria-hidden className="text-foreground/25">/</span>
-          <Link href="/products" className="transition-colors hover:text-foreground/80">
-            Productos
-          </Link>
-          <span aria-hidden className="text-foreground/25">/</span>
-          <span className="text-foreground/70">{cat.name}</span>
-        </nav>
+      <div className="container mx-auto px-3 pt-24 pb-16 lg:pt-32 lg:pb-24">
+        <SiteBreadcrumb
+          items={[
+            { label: "Inicio", href: "/" },
+            { label: "Productos", href: "/products" },
+            { label: cat.name },
+          ]}
+        />
 
-        <h2 className="text-3xl md:text-[2.75rem] font-extralight tracking-tight text-foreground mt-10">
+        <h1 className="mt-8 text-3xl font-extralight tracking-tight text-foreground md:text-[2.75rem]">
           {cat.name}
-        </h2>
+        </h1>
 
         {cat.subcategories.length > 1 ? (
           <SubcategoryGrid category={cat} />
