@@ -24,24 +24,25 @@ const loopB = [...rowB, ...rowB];
     </div>
     <a
       href="/clientes"
+      data-astro-prefetch
       class="shrink-0 text-sm font-semibold text-fluid-cyan hover:underline"
     >
       Ver todos los clientes →
     </a>
   </div>
 
-  <div class="space-y-4">
+  <div class="space-y-3.5">
     <div class="partners-fade relative overflow-hidden">
-      <div class="partners-track partners-track--ltr flex w-max gap-4 py-1">
+      <div class="partners-track partners-track--ltr flex w-max gap-3.5 py-1">
         {loopA.map((partner, index) => (
           <div
-            class="flex h-[4.5rem] w-36 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-white px-3 shadow-sm dark:border-neutral-700"
-            title={partner.legalName}
+            class="relative aspect-[5/3] h-[4.75rem] shrink-0 overflow-hidden rounded-xl border border-neutral-300/90 bg-white dark:border-white/12"
+            title={partner.name}
           >
             <img
               src={partner.logo}
               alt={partner.name}
-              class="max-h-10 max-w-full object-contain"
+              class="absolute inset-0 m-auto h-[58%] w-[72%] object-contain"
               loading={index < 10 ? 'eager' : 'lazy'}
             />
           </div>
@@ -50,16 +51,16 @@ const loopB = [...rowB, ...rowB];
     </div>
 
     <div class="partners-fade relative overflow-hidden">
-      <div class="partners-track partners-track--rtl flex w-max gap-4 py-1">
+      <div class="partners-track partners-track--rtl flex w-max gap-3.5 py-1">
         {loopB.map((partner, index) => (
           <div
-            class="flex h-[4.5rem] w-36 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-white px-3 shadow-sm dark:border-neutral-700"
-            title={partner.legalName}
+            class="relative aspect-[5/3] h-[4.75rem] shrink-0 overflow-hidden rounded-xl border border-neutral-300/90 bg-white dark:border-white/12"
+            title={partner.name}
           >
             <img
               src={partner.logo}
               alt={partner.name}
-              class="max-h-10 max-w-full object-contain"
+              class="absolute inset-0 m-auto h-[58%] w-[72%] object-contain"
               loading={index < 10 ? 'eager' : 'lazy'}
             />
           </div>

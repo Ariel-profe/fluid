@@ -1,12 +1,13 @@
 import { routes } from '@utils/routes';
 
-export type NavLinkId = 'about' | 'products' | 'services' | 'contact';
+export type NavLinkId = 'about' | 'products' | 'services' | 'clients' | 'contact';
 
-export const navLinks: { id: NavLinkId; path: string }[] = [
-  { id: 'about', path: routes.about },
+/** Primary nav — Contacto se expone como CTA “Ventas”. */
+export const navLinks: { id: Exclude<NavLinkId, 'contact'>; path: string }[] = [
   { id: 'products', path: routes.products },
+  { id: 'about', path: routes.about },
   { id: 'services', path: routes.services },
-  { id: 'contact', path: routes.contact },
+  { id: 'clients', path: routes.clients },
 ];
 
 export type FooterSectionId = 'explore' | 'company';

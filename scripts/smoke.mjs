@@ -1,41 +1,25 @@
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { extname, isAbsolute, relative, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const DIST = resolve(new URL('../dist/', import.meta.url).pathname);
-// Marketing routes exist once per locale (src/pages/ vs src/pages/fr/).
-const LOCALE_PREFIXES = ['', '/fr'];
-const MARKETING_ROUTES = [
-  '/',
-  '/products/',
-  '/products/item-a765/',
-  '/services/',
-  '/blog/',
-  '/blog/post-1/',
-  '/insights/insight-1/',
-  '/contact/',
-];
+const DIST = resolve(fileURLToPath(new URL('../dist/', import.meta.url)));
+
 const ROUTES = [
-  ...LOCALE_PREFIXES.flatMap(prefix =>
-    MARKETING_ROUTES.map(route => `${prefix}${route}`)
-  ),
+  '/',
+  '/productos/',
+  '/servicios/',
+  '/clientes/',
+  '/nosotros/',
+  '/contacto/',
   '/404',
-  '/fr/404/',
 ];
 
-// Cheap content assertions on top of the status check.
 const EXPECTATIONS = {
-  '/fr/': [
-    '<html lang="fr"',
-    '<meta property="og:locale" content="fr_FR"',
-    'hreflang="en" href="https://screwfast.uk"',
-  ],
-  '/': ['<html lang="en"', 'hreflang="fr" href="https://screwfast.uk/fr"'],
-  '/fr/404/': ['<html lang="fr"'],
-  '/contact/': ['data-demo-form', 'data-demo-status'],
-  '/fr/contact/': ['data-demo-form', 'data-demo-status'],
-  '/blog/post-1/': ['"@type":"BlogPosting"'],
-  '/fr/blog/post-1/': ['"inLanguage":"fr"'],
+  '/': ['<html lang="es"', 'Fluid'],
+  '/contacto/': ['data-demo-form', 'data-demo-status'],
+  '/clientes/': ['Clientes y partners'],
+  '/nosotros/': ['Evolución y crecimiento'],
 };
 
 const MIME = {
@@ -89,9 +73,9 @@ async function run() {
     }
   });
 
-  await new Promise((resolve, reject) => {
+  await new Promise((resolveListen, reject) => {
     server.once('error', reject);
-    server.listen(0, '127.0.0.1', resolve);
+    server.listen(0, '127.0.0.1', resolveListen);
   });
 
   const { port } = server.address();

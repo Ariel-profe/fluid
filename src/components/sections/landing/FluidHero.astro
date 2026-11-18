@@ -3,10 +3,10 @@ import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
 import SecondaryCTA from '@components/ui/buttons/SecondaryCTA.astro';
 
 interface Props {
-  eyebrow: string;
   title: string;
+  phrase: string;
   subTitle: string;
-  trustLine: string;
+  trustItems: string[];
   primaryBtn: string;
   primaryBtnURL: string;
   secondaryBtn: string;
@@ -14,10 +14,10 @@ interface Props {
 }
 
 const {
-  eyebrow,
   title,
+  phrase,
   subTitle,
-  trustLine,
+  trustItems,
   primaryBtn,
   primaryBtnURL,
   secondaryBtn,
@@ -33,41 +33,113 @@ const heroSlides = [
 ---
 
 <section
-  class="fluid-hero relative isolate min-h-[min(78vh,44rem)] overflow-hidden rounded-3xl border border-fluid-cyan/20 text-white shadow-[0_40px_120px_-40px_rgba(11,42,74,0.85)]"
+  class="fluid-hero relative isolate min-h-[min(72svh,36rem)] overflow-hidden rounded-2xl border border-fluid-cyan/20 text-white shadow-[0_40px_120px_-40px_rgba(11,42,74,0.85)] sm:min-h-[min(84dvh,48rem)]"
   data-hero-carousel
+  aria-label="FLUID — Soluciones dinámicas"
 >
-  <div class="absolute inset-0">
+  <div class="absolute inset-0" aria-hidden="true">
     {heroSlides.map((slide, index) => (
       <img
         src={slide.src}
         alt=""
         class:list={[
-          'absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms]',
+          'absolute inset-0 h-full w-full object-cover object-[70%_center] transition-opacity duration-[1400ms] ease-out sm:object-center',
           index === 0 ? 'opacity-100' : 'opacity-0',
         ]}
         data-hero-slide
         loading={index === 0 ? 'eager' : 'lazy'}
+        decoding={index === 0 ? 'sync' : 'async'}
       />
     ))}
-    <div class="absolute inset-0 bg-gradient-to-r from-fluid-navy-deep/95 via-fluid-navy/88 to-fluid-navy/45" />
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_25%,rgba(61,183,228,0.2),transparent_45%)]" />
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-fluid-navy-deep from-[8%] via-fluid-navy/82 via-[42%] to-fluid-navy/20 to-[72%] sm:to-transparent"
+    >
+    </div>
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-fluid-navy-deep/70 via-transparent to-fluid-navy-deep/20"
+    >
+    </div>
+    <div
+      class="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,rgba(61,183,228,0.18),transparent_40%)]"
+    >
+    </div>
   </div>
 
-  <div class="relative flex min-h-[min(70vh,40rem)] max-w-3xl flex-col justify-center px-5 py-12 sm:min-h-[min(78vh,44rem)] sm:px-10 lg:px-14 lg:py-20">
-    <p class="hero-eyebrow mb-4 text-sm font-medium tracking-[0.18em] text-fluid-cyan-soft uppercase">
-      {eyebrow}
-    </p>
-    <h1 class="hero-title text-3xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl xl:text-7xl">
-      <Fragment set:html={title} />
-    </h1>
-    <p class="hero-sub mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:mt-6 sm:text-xl">
-      {subTitle}
-    </p>
-    <div class="hero-cta mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:items-center">
-      <PrimaryCTA title={primaryBtn} url={primaryBtnURL} variant="cyan" />
-      <SecondaryCTA title={secondaryBtn} url={secondaryBtnURL} />
+  <div
+    class="relative flex min-h-[min(72svh,36rem)] flex-col justify-end px-5 pt-14 pb-[max(2rem,env(safe-area-inset-bottom))] sm:min-h-[min(84dvh,48rem)] sm:justify-center sm:px-10 sm:py-14 lg:px-16 lg:py-16"
+  >
+    <div class="max-w-3xl">
+      <h1 class="hero-title">
+        <span
+          class="block text-[clamp(2.75rem,11vw,6.75rem)] leading-[0.92] font-semibold tracking-[-0.04em] text-white"
+        >
+          {title}
+        </span>
+        <span
+          class="hero-phrase mt-2.5 block text-[clamp(1.2rem,3.4vw,2.35rem)] leading-tight font-medium tracking-tight text-fluid-cyan-soft sm:mt-4"
+        >
+          {phrase}
+        </span>
+      </h1>
+
+      <div
+        class="hero-rule mt-5 hidden h-px w-16 bg-gradient-to-r from-fluid-cyan to-transparent sm:mt-7 sm:block sm:w-20"
+        aria-hidden="true"
+      >
+      </div>
+
+      <p
+        class="hero-sub mt-4 hidden max-w-xl text-base leading-relaxed text-white/78 sm:mt-6 sm:block sm:text-lg"
+      >
+        {subTitle}
+      </p>
+
+      <div class="hero-cta mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:items-center">
+        <PrimaryCTA title={primaryBtn} url={primaryBtnURL} variant="cyan" />
+        <span class="hidden sm:inline-flex">
+          <SecondaryCTA title={secondaryBtn} url={secondaryBtnURL} icon="chatBubble" />
+        </span>
+      </div>
+
+      {
+        trustItems.length > 0 && (
+          <ul
+            class="hero-trust mt-8 hidden flex-wrap gap-2 sm:mt-10 sm:flex"
+            aria-label="Confianza"
+          >
+            {trustItems.map((item) => (
+              <li class="rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-sm tracking-wide text-white/70">
+                {item}
+              </li>
+            ))}
+          </ul>
+        )
+      }
     </div>
-    <p class="hero-trust mt-6 text-sm text-white/60 sm:mt-8">{trustLine}</p>
+
+    <div
+      class="hero-dots absolute right-5 bottom-[max(1rem,env(safe-area-inset-bottom))] hidden items-center gap-2 sm:right-8 sm:bottom-8 sm:flex"
+      role="tablist"
+      aria-label="Imágenes del hero"
+    >
+      {
+        heroSlides.map((_, index) => (
+          <button
+            type="button"
+            class:list={[
+              'h-1.5 rounded-full transition-[width,background-color] duration-300',
+              index === 0
+                ? 'w-7 bg-fluid-cyan'
+                : 'w-1.5 bg-white/35 hover:bg-white/55',
+            ]}
+            data-hero-dot
+            data-index={index}
+            aria-label={`Ver imagen ${index + 1}`}
+            aria-selected={index === 0 ? 'true' : 'false'}
+          />
+        ))
+      }
+    </div>
   </div>
 </section>
 
@@ -75,29 +147,64 @@ const heroSlides = [
   import { gsap } from 'gsap';
 
   const root = document.querySelector('.fluid-hero');
-  if (root && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const w = window as Window & { __fluidHeroReady?: boolean };
-    if (!w.__fluidHeroReady) {
-      w.__fluidHeroReady = true;
+  if (root) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-hero-slide]'));
+    const dots = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-hero-dot]'));
+    let index = 0;
+    let timer: number | undefined;
+
+    const setActive = (next: number) => {
+      if (!slides.length) return;
+      slides[index]?.classList.remove('opacity-100');
+      slides[index]?.classList.add('opacity-0');
+      dots[index]?.classList.remove('w-7', 'bg-fluid-cyan');
+      dots[index]?.classList.add('w-1.5', 'bg-white/35');
+      dots[index]?.setAttribute('aria-selected', 'false');
+
+      index = next;
+
+      slides[index]?.classList.remove('opacity-0');
+      slides[index]?.classList.add('opacity-100');
+      dots[index]?.classList.remove('w-1.5', 'bg-white/35');
+      dots[index]?.classList.add('w-7', 'bg-fluid-cyan');
+      dots[index]?.setAttribute('aria-selected', 'true');
+    };
+
+    const startTimer = () => {
+      if (reduceMotion || slides.length < 2) return;
+      window.clearInterval(timer);
+      timer = window.setInterval(() => setActive((index + 1) % slides.length), 5500);
+    };
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const next = Number(dot.dataset.index ?? 0);
+        setActive(next);
+        startTimer();
+      });
+    });
+
+    if (!reduceMotion && !root.hasAttribute('data-entered')) {
+      root.setAttribute('data-entered', '');
+      const title = root.querySelector('.hero-title');
+      const rule = root.querySelector('.hero-rule');
+      const sub = root.querySelector('.hero-sub');
+      const cta = root.querySelector('.hero-cta');
+      const trust = root.querySelector('.hero-trust');
+      const dotsEl = root.querySelector('.hero-dots');
+      const targets = [title, rule, sub, cta, trust, dotsEl].filter(Boolean);
+      gsap.set(targets, { autoAlpha: 0, y: 14 });
       gsap
         .timeline({ defaults: { ease: 'power2.out' } })
-        .from('.hero-eyebrow', { y: 10, autoAlpha: 0, duration: 0.35 })
-        .from('.hero-title', { y: 14, autoAlpha: 0, duration: 0.4 }, '-=0.15')
-        .from('.hero-sub', { y: 10, autoAlpha: 0, duration: 0.35 }, '-=0.2')
-        .from('.hero-cta', { y: 8, autoAlpha: 0, duration: 0.3 }, '-=0.18')
-        .from('.hero-trust', { y: 6, autoAlpha: 0, duration: 0.28 }, '-=0.15');
+        .to(title, { y: 0, autoAlpha: 1, duration: 0.45 })
+        .to(rule, { y: 0, autoAlpha: 1, duration: 0.3 }, '-=0.2')
+        .to(sub, { y: 0, autoAlpha: 1, duration: 0.35 }, '-=0.18')
+        .to(cta, { y: 0, autoAlpha: 1, duration: 0.32 }, '-=0.16')
+        .to(trust, { y: 0, autoAlpha: 1, duration: 0.3 }, '-=0.14')
+        .to(dotsEl, { y: 0, autoAlpha: 1, duration: 0.28 }, '-=0.2');
     }
 
-    const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-hero-slide]'));
-    if (slides.length > 1) {
-      let index = 0;
-      window.setInterval(() => {
-        slides[index].classList.remove('opacity-100');
-        slides[index].classList.add('opacity-0');
-        index = (index + 1) % slides.length;
-        slides[index].classList.remove('opacity-0');
-        slides[index].classList.add('opacity-100');
-      }, 5500);
-    }
+    startTimer();
   }
 </script>

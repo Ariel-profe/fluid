@@ -1,47 +1,46 @@
 ---
-// Destructure the properties from Astro.props
-const { url, name } = Astro.props;
+import Icon from '@components/ui/icons/Icon.astro';
+import type { IconName } from '@components/ui/icons/icons';
 
-// Define TypeScript interface for the properties
 interface Props {
   url: string;
   name: string;
+  icon?: IconName;
 }
+
+const { url, name, icon } = Astro.props;
+
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
+const target = url.replace(/\/$/, '') || '/';
+const isActive =
+  target === '/'
+    ? pathname === '/'
+    : pathname === target || pathname.startsWith(`${target}/`);
 ---
 
-{/*
-Re-usable link component for navigation bar. Highlights the active link
-by comparing the current URL with the href of each link.
-We assign an ID matching the URL for easy reference in our script.
-If URL is '/' (home page), assign ID as 'home' 
-*/}
 <a
-  id={url.replace('/', '')}
   href={url}
   data-astro-prefetch
-  class="rounded-lg text-base font-medium text-neutral-600 ring-zinc-500 outline-hidden hover:text-neutral-500 focus-visible:ring-3 md:py-3 md:text-sm 2xl:text-base dark:text-neutral-400 dark:ring-zinc-200 dark:hover:text-neutral-500 dark:focus:outline-hidden"
+  data-nav-link
+  aria-current={isActive ? 'page' : undefined}
+  class:list={[
+    'nav-link group relative inline-flex items-center gap-2.5 px-3.5 py-2.5 text-sm font-medium tracking-wide outline-hidden transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-fluid-cyan/60 md:px-4 md:py-3',
+    isActive
+      ? 'text-fluid-cyan dark:text-fluid-cyan-soft'
+      : 'text-neutral-600 hover:text-fluid-cyan dark:text-white/70 dark:hover:text-fluid-cyan-soft',
+  ]}
 >
+  {
+    icon && (
+      <Icon
+        name={icon}
+        class={`h-4 w-4 shrink-0 transition-colors duration-300 ${
+          isActive
+            ? 'text-fluid-cyan dark:text-fluid-cyan-soft'
+            : 'text-neutral-400 group-hover:text-fluid-cyan dark:text-white/40'
+        }`}
+      />
+    )
+  }
   {name}
 </a>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    let url = window.location.pathname;
-    let navId;
-
-    navId = url.replace('/', '');
-
-    let nav = document.getElementById(navId);
-
-    if (nav) {
-      nav.classList.remove(
-        'text-neutral-600',
-        'dark:text-neutral-400',
-        'hover:text-neutral-500',
-        'dark:hover:text-neutral-500'
-      );
-      nav.classList.add('text-fluid-cyan', 'dark:text-fluid-cyan-soft');
-      nav.setAttribute('aria-current', 'page');
-    }
-  });
-</script>

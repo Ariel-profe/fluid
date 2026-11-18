@@ -26,6 +26,17 @@
   --color-fluid-steel: #e8eef4;
   --color-fluid-ink: #0f172a;
 
+  /*
+   * Industrial radius scale — soft, not pill-like.
+   * Controls → md/lg · cards → xl/2xl · hero/nav shells → 2xl/3xl
+   */
+  --radius-sm: 0.375rem; /* 6px */
+  --radius-md: 0.5rem; /* 8px */
+  --radius-lg: 0.625rem; /* 10px */
+  --radius-xl: 0.75rem; /* 12px */
+  --radius-2xl: 1rem; /* 16px */
+  --radius-3xl: 1rem; /* capped with 2xl for industrial surfaces */
+
   --color-gray-50: oklch(0.985 0.002 247.839);
   --color-gray-100: oklch(0.967 0.003 264.542);
   --color-gray-200: oklch(0.928 0.006 264.531);

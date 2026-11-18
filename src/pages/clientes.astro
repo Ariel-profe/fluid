@@ -20,26 +20,27 @@ import { PARTNERS } from '../../data/partners';
       Esta es la nómina completa de clientes destacados en nuestro manual institucional.
     </p>
 
-    <div class="mt-12 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" data-reveal-group>
-      {PARTNERS.map((partner) => (
-        <article
-          class="flex flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-[border-color,box-shadow] hover:border-fluid-cyan/35 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-900"
-          data-reveal-item
-        >
-          <div class="flex h-28 items-center justify-center bg-white px-4 py-5">
-            <img
-              src={partner.logo}
-              alt={partner.name}
-              class="mx-auto max-h-16 max-w-full object-contain"
-              loading="lazy"
-            />
-          </div>
-          <div class="border-t border-neutral-100 px-4 py-3 dark:border-neutral-800">
-            <h2 class="text-sm font-semibold text-fluid-navy dark:text-white">{partner.name}</h2>
-            <p class="mt-1 line-clamp-2 text-xs text-neutral-500 dark:text-neutral-400">{partner.legalName}</p>
-          </div>
-        </article>
-      ))}
-    </div>
+    <ul
+      class="mt-12 grid list-none grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+      data-reveal-group
+    >
+      {
+        PARTNERS.map((partner) => (
+          <li data-reveal-item>
+            <article
+              class="partner-tile group relative aspect-[5/3] overflow-hidden rounded-xl border border-neutral-300/90 bg-white transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-fluid-cyan/45 hover:shadow-[0_14px_36px_-28px_rgba(11,42,74,0.55)] dark:border-white/12 dark:bg-white dark:hover:border-fluid-cyan/50"
+              title={partner.name}
+            >
+              <img
+                src={partner.logo}
+                alt={partner.name}
+                class="absolute inset-0 m-auto h-[58%] w-[72%] object-contain opacity-[0.92] transition-[opacity,transform] duration-300 group-hover:scale-[1.03] group-hover:opacity-100"
+                loading="lazy"
+              />
+            </article>
+          </li>
+        ))
+      }
+    </ul>
   </section>
 </MainLayout>

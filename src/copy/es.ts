@@ -27,10 +27,15 @@ export const es = {
   },
 
   nav: {
+    brand: 'FLUID',
+    cta: 'Ventas',
+    searchTitle: 'Buscá un producto',
+    searchHint: 'Válvulas, actuadores, cañerías…',
     labels: {
       about: 'Nosotros',
       products: 'Productos',
       services: 'Servicios',
+      clients: 'Clientes',
       contact: 'Contacto',
     },
     footer: {
@@ -40,10 +45,10 @@ export const es = {
       },
       links: {
         products: 'Productos',
-        services: 'Servicios',
         about: 'Nosotros',
-        contact: 'Contacto',
+        services: 'Servicios',
         clients: 'Clientes',
+        contact: 'Contacto',
       },
       hiringBadge: '',
       stayUpToDate: 'Cotizaciones',
@@ -160,27 +165,29 @@ export const es = {
   home: {
     banner: '',
     hero: {
-      title:
-        'Soluciones industriales <span class="text-fluid-cyan">para procesos que no se detienen</span>',
+      title: 'FLUID',
+      phrase: 'Soluciones dinámicas',
       subTitle:
-        'Válvulas, actuadores, cañerías, bridas, accesorios e instrumentos de medición, con asesoramiento técnico y cobertura nacional.',
+        'Somos tu socio estratégico en la provisión de productos para control y conducción de fluidos.',
       primaryBtn: 'Ver productos',
-      secondaryBtn: 'Hablar con ventas',
-      rating: '',
-      reviews: '',
+      secondaryBtn: 'Ventas',
       imageAlt: 'Soluciones Fluid para control y conducción de fluidos',
-      eyebrow: 'Fluid Soluciones Dinámicas',
-      trustLine: 'Más de 20 años de experiencia industrial · Origen Córdoba · Cobertura nacional',
+      trustItems: [
+        'Más de 20 años',
+        'Origen Córdoba',
+        'Cobertura nacional',
+        'Stock estratégico',
+      ],
     },
     clients: {
-      title: 'Empresas que confían en Fluid',
+      title: 'Empresas que confían en nosotros',
       subTitle:
         'Acompañamos a distintos sectores productivos con productos de calidad y un servicio ágil.',
     },
     categories: {
       title: 'Catálogo industrial',
       subTitle:
-        'Una cartera amplia para control, conducción e instrumentación. Empezá por válvulas — el resto se habilita a medida que completamos el catálogo.',
+        'Una cartera amplia para control, conducción e instrumentación. Explorá y encontrá el producto que necesitas.',
     },
     value: {
       title: 'Un aliado estratégico para la industria',
@@ -342,7 +349,7 @@ export const es = {
       benefits: [
         'Asesoramiento técnico-comercial especializado.',
         'Stock estratégico para respuesta ágil.',
-        'Documentación y fichas técnicas disponibles en válvulas.',
+        'Documentación y fichas técnicas disponibles.',
       ],
     },
   },

@@ -16,7 +16,7 @@ const copy = getCopy(locale).contact;
 
 <MainLayout title={copy.title} description={copy.metaDescription} ogTitle={copy.ogTitle}>
   <section class="w-full py-12 lg:py-16">
-    <div class="mb-10 overflow-hidden rounded-3xl border border-neutral-300 dark:border-neutral-700">
+    <div class="mb-10 overflow-hidden rounded-2xl border border-neutral-300 dark:border-neutral-700">
       <div class="relative aspect-[21/8] min-h-48">
         <img
           src="/hero6.webp"
@@ -34,55 +34,79 @@ const copy = getCopy(locale).contact;
       </div>
     </div>
 
-    <div class="mt-12 grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-      <div class="space-y-4">
-        <div class="overflow-hidden rounded-2xl border border-neutral-300 dark:border-neutral-700">
-          <img
-            src="/action-group/2.jpg"
-            alt="Atención comercial Fluid"
-            class="aspect-[16/9] w-full object-cover"
-            loading="lazy"
-          />
+    {/* Canales: card entera clickeable */}
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        CHANNELS.map((channel) => {
+          const primary = channel.actions[0];
+          if (!primary) return null;
+          return (
+            <a
+              href={primary.href}
+              target={primary.external ? '_blank' : undefined}
+              rel={primary.external ? 'noopener noreferrer' : undefined}
+              class="group flex flex-col rounded-2xl border border-neutral-300 bg-white p-5 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-fluid-cyan/40 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:hover:border-fluid-cyan/35"
+            >
+              <div class="flex items-center gap-3">
+                <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-fluid-steel text-fluid-navy transition-colors duration-300 group-hover:bg-fluid-cyan/15 group-hover:text-fluid-cyan dark:bg-neutral-800 dark:text-fluid-cyan-soft">
+                  <Icon name={channel.icon} class="h-5 w-5" />
+                </span>
+                <h2 class="font-semibold text-fluid-navy dark:text-white">{channel.label}</h2>
+              </div>
+              <p class="mt-4 text-sm text-neutral-600 transition-colors duration-300 group-hover:text-fluid-cyan dark:text-neutral-300 dark:group-hover:text-fluid-cyan-soft">
+                {primary.text}
+              </p>
+              {
+                channel.actions.length > 1 && (
+                  <ul class="mt-2 space-y-1">
+                    {channel.actions.slice(1).map((action) => (
+                      <li class="text-sm text-neutral-500 dark:text-neutral-400">{action.text}</li>
+                    ))}
+                  </ul>
+                )
+              }
+            </a>
+          );
+        })
+      }
+    </div>
+    <p class="mt-4 text-sm text-neutral-500">{CONTACT.warehouseNote}</p>
+
+    {/* Formulario: bloque principal con altura natural */}
+    <div
+      class="mt-10 overflow-hidden rounded-3xl border border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-900 lg:grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]"
+    >
+      <div class="relative hidden min-h-72 lg:block">
+        <img
+          src="/action-group/2.jpg"
+          alt="Atención comercial Fluid"
+          class="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-fluid-navy-deep/80 via-fluid-navy/20 to-transparent" />
+        <div class="absolute inset-x-0 bottom-0 p-8">
+          <p class="text-sm font-medium tracking-wide text-fluid-cyan-soft uppercase">
+            Respuesta comercial
+          </p>
+          <p class="mt-2 max-w-sm text-lg font-semibold text-white">
+            Contanos el proyecto y te armamos una propuesta a medida.
+          </p>
         </div>
-        {CHANNELS.map((channel) => (
-          <article class="rounded-2xl border border-neutral-300 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-900">
-            <div class="flex items-center gap-3">
-              <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-fluid-steel text-fluid-navy dark:bg-neutral-800 dark:text-fluid-cyan-soft">
-                <Icon name={channel.icon} class="h-5 w-5" />
-              </span>
-              <h2 class="font-semibold text-fluid-navy dark:text-white">{channel.label}</h2>
-            </div>
-            <ul class="mt-4 space-y-2">
-              {channel.actions.map((action) => (
-                <li>
-                  <a
-                    href={action.href}
-                    target={action.external ? '_blank' : undefined}
-                    rel={action.external ? 'noopener noreferrer' : undefined}
-                    class="text-sm text-neutral-700 underline-offset-2 hover:text-fluid-cyan hover:underline dark:text-neutral-300"
-                  >
-                    {action.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
-        <p class="text-sm text-neutral-500">{CONTACT.warehouseNote}</p>
       </div>
 
-      <div class="rounded-3xl border border-neutral-300 bg-white p-6 sm:p-8 dark:border-neutral-700 dark:bg-neutral-900">
+      <div class="p-6 sm:p-8 lg:p-10">
         <h2 class="text-2xl font-semibold text-fluid-navy dark:text-white">{copy.formTitle}</h2>
         <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">{copy.formSubTitle}</p>
 
-        <DemoForm successMessage={copy.demoMessage}>
-          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        <DemoForm successMessage={copy.demoMessage} class="mt-6">
+          <div class="grid gap-4 sm:grid-cols-2">
             <label class="block text-sm">
               <span class="mb-1.5 block text-neutral-700 dark:text-neutral-300">{copy.firstName}</span>
               <input
                 type="text"
                 name="firstName"
-                class="w-full rounded-xl border border-neutral-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-fluid-cyan focus:ring-2 focus:ring-fluid-cyan/30 dark:border-neutral-600 dark:bg-neutral-950"
+                autocomplete="given-name"
+                class="w-full rounded-xl border border-neutral-300 bg-white px-3 py-2.5 text-sm text-fluid-ink outline-none focus:border-fluid-cyan focus:ring-2 focus:ring-fluid-cyan/30 dark:border-white/12 dark:bg-white/5 dark:text-neutral-100"
               />
             </label>
             <label class="block text-sm">
@@ -90,7 +114,8 @@ const copy = getCopy(locale).contact;
               <input
                 type="text"
                 name="lastName"
-                class="w-full rounded-xl border border-neutral-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-fluid-cyan focus:ring-2 focus:ring-fluid-cyan/30 dark:border-neutral-600 dark:bg-neutral-950"
+                autocomplete="family-name"
+                class="w-full rounded-xl border border-neutral-300 bg-white px-3 py-2.5 text-sm text-fluid-ink outline-none focus:border-fluid-cyan focus:ring-2 focus:ring-fluid-cyan/30 dark:border-white/12 dark:bg-white/5 dark:text-neutral-100"
               />
             </label>
           </div>
@@ -100,21 +125,23 @@ const copy = getCopy(locale).contact;
               type="email"
               name="email"
               required
-              class="w-full rounded-xl border border-neutral-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-fluid-cyan focus:ring-2 focus:ring-fluid-cyan/30 dark:border-neutral-600 dark:bg-neutral-950"
+              autocomplete="email"
+              class="w-full rounded-xl border border-neutral-300 bg-white px-3 py-2.5 text-sm text-fluid-ink outline-none focus:border-fluid-cyan focus:ring-2 focus:ring-fluid-cyan/30 dark:border-white/12 dark:bg-white/5 dark:text-neutral-100"
             />
           </label>
           <label class="mt-4 block text-sm">
             <span class="mb-1.5 block text-neutral-700 dark:text-neutral-300">{copy.details}</span>
             <textarea
               name="details"
-              rows="5"
-              class="w-full rounded-xl border border-neutral-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-fluid-cyan focus:ring-2 focus:ring-fluid-cyan/30 dark:border-neutral-600 dark:bg-neutral-950"
+              rows="4"
+              class="w-full resize-y rounded-xl border border-neutral-300 bg-white px-3 py-2.5 text-sm text-fluid-ink outline-none focus:border-fluid-cyan focus:ring-2 focus:ring-fluid-cyan/30 dark:border-white/12 dark:bg-white/5 dark:text-neutral-100"
             ></textarea>
           </label>
           <button
             type="submit"
-            class="mt-6 inline-flex rounded-full bg-fluid-navy px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-fluid-cyan"
+            class="mt-5 inline-flex items-center gap-2 rounded-lg bg-fluid-navy px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-fluid-cyan"
           >
+            <Icon name="chatBubble" class="h-4 w-4 shrink-0" />
             {copy.send}
           </button>
         </DemoForm>

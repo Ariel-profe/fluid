@@ -1,31 +1,40 @@
 ---
 import Icon from '@components/ui/icons/Icon.astro';
 
-/** Hamburger / close button that collapses the navbar on small screens. */
-interface Props {
-  /** id of the `.hs-collapse` element it toggles. */
-  target: string;
-}
-
-const { target } = Astro.props;
 const { copy: t } = Astro.locals;
 ---
 
-<div class="mr-5 ml-auto md:hidden">
-  <button
-    type="button"
-    class="hs-collapse-toggle flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold text-neutral-600 transition duration-300 hover:bg-neutral-200 disabled:pointer-events-none disabled:opacity-50 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus:outline-hidden"
-    data-hs-collapse={`#${target}`}
-    aria-controls={target}
-    aria-label={t.layout.toggleNavigation}
-  >
-    <Icon
-      name="menu"
-      class="hs-collapse-open:hidden h-[1.25rem] w-[1.25rem] shrink-0"
-    />
-    <Icon
-      name="close"
-      class="hs-collapse-open:block hidden h-[1.25rem] w-[1.25rem] shrink-0"
-    />
-  </button>
-</div>
+<button
+  type="button"
+  class="navbar-toggle flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-300/80 text-fluid-navy transition duration-300 hover:border-fluid-cyan/50 hover:bg-fluid-cyan/10 hover:text-fluid-navy md:hidden dark:border-white/15 dark:text-white/85 dark:hover:border-fluid-cyan/50 dark:hover:bg-fluid-cyan/10 dark:hover:text-fluid-cyan-soft"
+  data-navbar-toggle
+  aria-controls="fluid-mobile-menu"
+  aria-expanded="false"
+  aria-label={t.layout.toggleNavigation}
+>
+  <span class="navbar-toggle__icon navbar-toggle__icon--open" aria-hidden="true">
+    <Icon name="menu" class="h-5 w-5 shrink-0" />
+  </span>
+  <span class="navbar-toggle__icon navbar-toggle__icon--close" aria-hidden="true">
+    <Icon name="close" class="h-5 w-5 shrink-0" />
+  </span>
+</button>
+
+<style>
+  .navbar-toggle__icon {
+    display: none;
+    line-height: 0;
+  }
+
+  .navbar-toggle__icon--open {
+    display: inline-flex;
+  }
+
+  .navbar-toggle[aria-expanded='true'] .navbar-toggle__icon--open {
+    display: none;
+  }
+
+  .navbar-toggle[aria-expanded='true'] .navbar-toggle__icon--close {
+    display: inline-flex;
+  }
+</style>

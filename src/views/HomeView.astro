@@ -38,10 +38,10 @@ const valueImages = ['/common/1.jpg', '/common/2.jpg', '/common/3.jpg'];
 <MainLayout>
   <div class="pt-4 sm:pt-6">
     <FluidHero
-      eyebrow={copy.hero.eyebrow}
       title={copy.hero.title}
+      phrase={copy.hero.phrase}
       subTitle={copy.hero.subTitle}
-      trustLine={copy.hero.trustLine}
+      trustItems={copy.hero.trustItems}
       primaryBtn={copy.hero.primaryBtn}
       primaryBtnURL={localePath(locale, routes.products)}
       secondaryBtn={copy.hero.secondaryBtn}
@@ -115,7 +115,7 @@ const valueImages = ['/common/1.jpg', '/common/2.jpg', '/common/3.jpg'];
   <FAQ title={copy.faqTitle} faqs={t.data.faqs} />
 
   <section class="w-full py-14 lg:pb-20" data-reveal>
-    <div class="relative overflow-hidden rounded-3xl border border-neutral-300 dark:border-neutral-700">
+    <div class="relative overflow-hidden rounded-2xl border border-neutral-300 dark:border-neutral-700">
       <img
         src="/common/5.jpg"
         alt=""
@@ -128,7 +128,13 @@ const valueImages = ['/common/1.jpg', '/common/2.jpg', '/common/3.jpg'];
         <p class="mx-auto mt-3 max-w-2xl text-sm text-white/75 sm:text-base">{copy.heroAlt.subTitle}</p>
         <p class="mt-2 text-sm text-white/50">{company.legalName}</p>
         <div class="mt-8 flex justify-center">
-          <PrimaryCTA title={copy.heroAlt.btn} url={localePath(locale, routes.contact)} variant="cyan" />
+          <PrimaryCTA
+            title={copy.heroAlt.btn}
+            url={localePath(locale, routes.contact)}
+            variant="cyan"
+            icon="chatBubble"
+            noArrow
+          />
         </div>
       </div>
     </div>

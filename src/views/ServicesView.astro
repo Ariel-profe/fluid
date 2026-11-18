@@ -42,7 +42,13 @@ const slides = [
         </h1>
         <p class="mt-5 max-w-3xl text-lg text-white/75">{copy.intro.subTitle}</p>
         <div class="mt-8">
-          <PrimaryCTA title={copy.intro.cta} url={localePath(locale, routes.contact)} variant="cyan" />
+          <PrimaryCTA
+            title={copy.intro.cta}
+            url={localePath(locale, routes.contact)}
+            variant="cyan"
+            icon="chatBubble"
+            noArrow
+          />
         </div>
       </div>
     </div>

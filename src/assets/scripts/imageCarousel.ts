@@ -5,8 +5,9 @@ export function initImageCarousel(root: HTMLElement): void {
   const slides = Array.from(
     root.querySelectorAll<HTMLElement>('[data-carousel-slide]')
   );
-  const captions = Array.from(
-    root.querySelectorAll<HTMLElement>('[data-carousel-caption]')
+  const caption = root.querySelector<HTMLElement>('[data-carousel-caption]');
+  const captionSources = Array.from(
+    root.querySelectorAll<HTMLElement>('[data-carousel-caption-source]')
   );
   const dots = Array.from(
     root.querySelectorAll<HTMLButtonElement>('[data-carousel-dot]')
@@ -20,10 +21,22 @@ export function initImageCarousel(root: HTMLElement): void {
   let index = 0;
   let timer: number | undefined;
 
-  const pulseImage = (slide: HTMLElement, active: boolean) => {
+  const startZoom = (slide: HTMLElement) => {
     const img = slide.querySelector<HTMLElement>('[data-carousel-image]');
     if (!img || reduced) return;
-    img.style.transform = active ? 'scale(1.04)' : 'scale(1)';
+    img.style.transition = 'none';
+    img.style.transform = 'scale(1)';
+    // Reflow so the next transition always starts from 1.
+    void img.offsetWidth;
+    img.style.transition = 'transform 7s linear';
+    img.style.transform = 'scale(1.045)';
+  };
+
+  const resetZoom = (slide: HTMLElement) => {
+    const img = slide.querySelector<HTMLElement>('[data-carousel-image]');
+    if (!img) return;
+    img.style.transition = 'none';
+    img.style.transform = 'scale(1)';
   };
 
   const show = (nextIndex: number) => {
@@ -33,13 +46,15 @@ export function initImageCarousel(root: HTMLElement): void {
       slide.classList.toggle('opacity-100', active);
       slide.classList.toggle('opacity-0', !active);
       slide.setAttribute('aria-hidden', active ? 'false' : 'true');
-      pulseImage(slide, active);
+      if (active) startZoom(slide);
+      else resetZoom(slide);
     });
-    captions.forEach((caption, i) => {
-      const active = i === index;
-      caption.classList.toggle('block', active);
-      caption.classList.toggle('hidden', !active);
-    });
+
+    const source = captionSources[index];
+    if (caption && source) {
+      caption.textContent = source.textContent?.trim() || '';
+    }
+
     dots.forEach((dot, i) => {
       const active = i === index;
       dot.classList.toggle('bg-fluid-cyan', active);
@@ -76,7 +91,6 @@ export function initImageCarousel(root: HTMLElement): void {
   root.addEventListener('mouseenter', stop);
   root.addEventListener('mouseleave', start);
 
-  // Start active slide zoom gently.
   show(0);
   start();
 }

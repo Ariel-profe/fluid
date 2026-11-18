@@ -3,57 +3,323 @@ import ThemeIcon from '@components/ThemeIcon.astro';
 import NavLink from '@components/ui/links/NavLink.astro';
 import NavbarToggle from '@components/ui/buttons/NavbarToggle.astro';
 import ProductSearch from '@components/ui/ProductSearch.astro';
+import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
+import Icon from '@components/ui/icons/Icon.astro';
 import { navLinks } from '@data/navigation';
 import { localePath } from '@utils/locale';
+import { routes } from '@utils/routes';
+import type { IconName } from '@components/ui/icons/icons';
 
 const { locale, copy: t } = Astro.locals;
+const ctaUrl = localePath(locale, routes.contact);
+
+const navIcons: Record<(typeof navLinks)[number]['id'], IconName> = {
+  products: 'dashboard',
+  about: 'community',
+  services: 'tools',
+  clients: 'earth',
+};
+
+const mobileHints: Record<(typeof navLinks)[number]['id'], string> = {
+  products: 'Catálogo industrial',
+  about: 'Empresa y trayectoria',
+  services: 'Asesoramiento y soporte',
+  clients: 'Marcas y partners',
+};
+
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 
-<header class="sticky inset-x-0 top-4 z-50 flex w-full flex-wrap text-sm md:flex-nowrap md:justify-start">
+<header class="fluid-navbar sticky inset-x-0 top-0 z-50 pt-[max(0.75rem,env(safe-area-inset-top))] sm:pt-[max(1rem,env(safe-area-inset-top))]" data-navbar>
   <nav
-    class="relative mx-2 w-full rounded-[28px] border border-fluid-cyan/20 bg-white/80 px-4 py-3 shadow-[0_10px_40px_-24px_rgba(11,42,74,0.45)] backdrop-blur-md md:flex md:items-center md:justify-between md:px-6 md:py-0 lg:px-8 xl:mx-auto dark:border-neutral-700/50 dark:bg-neutral-900/80"
+    class="fluid-navbar__shell relative z-[70] mx-auto w-full max-w-(--breakpoint-2xl) rounded-2xl border border-neutral-300/70 bg-neutral-100/90 px-3 py-2.5 shadow-[0_12px_40px_-28px_rgba(15,23,42,0.28)] backdrop-blur-xl sm:px-4 md:grid md:grid-cols-[minmax(0,1.1fr)_auto_minmax(0,1.1fr)] md:items-center md:gap-4 md:px-5 md:py-2 lg:gap-6 lg:px-6 dark:border-white/10 dark:bg-neutral-900/90 dark:shadow-[0_16px_48px_-28px_rgba(0,0,0,0.55)]"
     aria-label="Global"
   >
-    <div class="flex items-center justify-between gap-3">
+    <div class="flex items-center justify-between gap-3 md:justify-self-start">
       <a
-        class="flex items-center gap-2 rounded-lg text-xl font-bold ring-fluid-cyan outline-hidden focus-visible:ring-3"
+        class="group flex shrink-0 items-center gap-2.5 rounded-xl ring-fluid-cyan outline-hidden focus-visible:ring-2"
         href={localePath(locale)}
-        aria-label="Fluid"
+        aria-label="FLUID"
       >
-        <img src="/logo.webp" class="h-10 w-10 object-contain" alt="" />
-        <span class="hidden text-base font-semibold tracking-tight text-fluid-navy sm:inline dark:text-white">
-          Fluid
+        <img
+          src="/logo.webp"
+          class="h-9 w-9 object-contain transition-transform duration-300 group-hover:scale-[1.04] sm:h-10 sm:w-10"
+          alt=""
+        />
+        <span class="flex flex-col leading-none">
+          <span
+            class="text-sm font-semibold tracking-[0.14em] text-fluid-navy uppercase sm:text-[0.95rem] dark:text-white"
+          >
+            {t.nav.brand}
+          </span>
+          <span class="mt-0.5 hidden text-[0.65rem] tracking-wide text-fluid-navy sm:inline dark:text-fluid-cyan-soft">
+            Soluciones dinámicas
+          </span>
         </span>
       </a>
+
       <div class="flex items-center gap-2 md:hidden">
         <ThemeIcon />
-        <NavbarToggle target="navbar-collapse-with-animation" />
+        <NavbarToggle />
       </div>
     </div>
 
-    <div class="mt-4 hidden grow md:mt-0 md:block">
-      <div class="flex flex-row items-center justify-end gap-x-5 lg:gap-x-7">
-        <ProductSearch />
-        {navLinks.map((link) => (
-          <NavLink url={localePath(locale, link.path)} name={t.nav.labels[link.id]} />
-        ))}
-        <ThemeIcon />
-      </div>
+    <div class="hidden items-center justify-center gap-2 md:flex lg:gap-3 xl:gap-4">
+      {
+        navLinks.map((link) => (
+          <NavLink
+            url={localePath(locale, link.path)}
+            name={t.nav.labels[link.id]}
+            icon={navIcons[link.id]}
+          />
+        ))
+      }
     </div>
 
-    <div
-      id="navbar-collapse-with-animation"
-      class="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 md:hidden"
-    >
-      <div class="mt-5 flex flex-col gap-4">
-        <ProductSearch />
-        {navLinks.map((link) => (
-          <NavLink url={localePath(locale, link.path)} name={t.nav.labels[link.id]} />
-        ))}
-      </div>
+    <div class="hidden items-center justify-end gap-2.5 md:flex lg:gap-3">
+      <ProductSearch variant="nav" />
+      <ThemeIcon />
+      <PrimaryCTA
+        title={t.nav.cta}
+        url={ctaUrl}
+        variant="cyan"
+        size="sm"
+        icon="chatBubble"
+        noArrow
+      />
     </div>
   </nav>
+
+  <div
+    id="fluid-mobile-menu"
+    class="pointer-events-none fixed inset-0 z-[60] md:hidden"
+    data-mobile-menu
+    aria-hidden="true"
+  >
+    <div
+      class="absolute inset-0 flex h-[100dvh] max-h-[100dvh] min-h-0 flex-col bg-neutral-100 supports-[height:100svh]:h-[100svh] supports-[height:100svh]:max-h-[100svh] dark:bg-neutral-900"
+      data-mobile-panel
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menú de navegación"
+    >
+      <div
+        class="h-[calc(4.25rem+env(safe-area-inset-top))] shrink-0 sm:h-[calc(4.75rem+env(safe-area-inset-top))]"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div class="flex min-h-0 flex-1 flex-col px-5 pt-1">
+        <nav
+          class="flex min-h-0 flex-1 flex-col justify-center gap-1 overflow-y-auto overscroll-contain"
+          aria-label="Secciones"
+        >
+          {
+            navLinks.map((link) => {
+              const href = localePath(locale, link.path);
+              const target = href.replace(/\/$/, '') || '/';
+              const isActive =
+                pathname === target || pathname.startsWith(`${target}/`);
+              return (
+                <a
+                  href={href}
+                  data-astro-prefetch
+                  data-mobile-item
+                  aria-current={isActive ? 'page' : undefined}
+                  class:list={[
+                    'group flex min-h-14 items-center gap-4 rounded-xl px-2 py-3.5 transition-colors duration-300',
+                    isActive
+                      ? 'bg-fluid-cyan/10'
+                      : 'hover:bg-fluid-cyan/8 dark:hover:bg-fluid-cyan/10',
+                  ]}
+                >
+                  <span
+                    class:list={[
+                      'flex h-11 w-11 shrink-0 items-center justify-center rounded-lg transition-colors duration-300',
+                      isActive
+                        ? 'bg-fluid-cyan/20 text-fluid-cyan dark:text-fluid-cyan-soft'
+                        : 'bg-fluid-cyan/10 text-fluid-cyan group-hover:bg-fluid-cyan/20 dark:bg-fluid-cyan/15 dark:text-fluid-cyan-soft',
+                    ]}
+                  >
+                    <Icon name={navIcons[link.id]} class="h-5 w-5" />
+                  </span>
+                  <span class="flex min-w-0 flex-col gap-0.5">
+                    <span class="text-lg font-semibold tracking-tight text-fluid-ink dark:text-white">
+                      {t.nav.labels[link.id]}
+                    </span>
+                    <span class="text-sm text-neutral-500 dark:text-white/45">
+                      {mobileHints[link.id]}
+                    </span>
+                  </span>
+                  <Icon
+                    name="arrowRight"
+                    class="ml-auto h-4 w-4 shrink-0 text-neutral-300 transition-colors duration-300 group-hover:text-fluid-cyan dark:text-white/25 dark:group-hover:text-fluid-cyan"
+                  />
+                </a>
+              );
+            })
+          }
+        </nav>
+
+        <div
+          class="mt-4 shrink-0 border-t border-neutral-200/80 pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] dark:border-white/10"
+          data-mobile-item
+        >
+          <ProductSearch
+            variant="panel"
+            label={t.nav.searchTitle}
+            hintPlaceholder={t.nav.searchHint}
+          />
+          <div class="mt-4">
+            <PrimaryCTA
+              title={t.nav.cta}
+              url={ctaUrl}
+              variant="cyan"
+              icon="chatBubble"
+              noArrow
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>
+
+<style>
+  .fluid-navbar.is-scrolled .fluid-navbar__shell {
+    border-color: color-mix(in oklab, var(--color-fluid-cyan) 22%, transparent);
+    background-color: color-mix(in oklab, var(--color-neutral-100) 94%, transparent);
+    box-shadow: 0 14px 44px -24px rgba(15, 23, 42, 0.35);
+  }
+
+  :global(.dark) .fluid-navbar.is-scrolled .fluid-navbar__shell {
+    border-color: color-mix(in oklab, var(--color-fluid-cyan) 24%, transparent);
+    background-color: color-mix(in oklab, var(--color-neutral-900) 94%, transparent);
+    box-shadow: 0 18px 50px -24px rgba(0, 0, 0, 0.65);
+  }
+
+  :global(.nav-link)::after {
+    content: '';
+    position: absolute;
+    left: 0.85rem;
+    right: 0.85rem;
+    bottom: 0.35rem;
+    height: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: linear-gradient(90deg, var(--color-fluid-cyan), transparent);
+    transition: transform 0.28s ease;
+  }
+
+  :global(.nav-link:hover)::after,
+  :global(.nav-link:focus-visible)::after,
+  :global(.nav-link[aria-current='page'])::after {
+    transform: scaleX(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.nav-link)::after {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  const header = document.querySelector<HTMLElement>('[data-navbar]');
+  if (header && header.dataset.menuReady !== '1') {
+    header.dataset.menuReady = '1';
+
+    const toggle = header.querySelector<HTMLButtonElement>('[data-navbar-toggle]');
+    const menu = header.querySelector<HTMLElement>('[data-mobile-menu]');
+    const panel = header.querySelector<HTMLElement>('[data-mobile-panel]');
+    const items = panel ? panel.querySelectorAll<HTMLElement>('[data-mobile-item]') : [];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let tween: gsap.core.Timeline | null = null;
+
+    const isOpen = () => header.dataset.menuOpen === '1';
+
+    const syncScroll = () => {
+      header.classList.toggle('is-scrolled', window.scrollY > 10);
+    };
+    syncScroll();
+    window.addEventListener('scroll', syncScroll, { passive: true });
+
+    if (menu && panel) {
+      gsap.set(menu, { autoAlpha: 0 });
+      gsap.set(panel, { y: 24, autoAlpha: 0 });
+      gsap.set(items, { y: 12, autoAlpha: 0 });
+    }
+
+    const setExpanded = (value: boolean) => {
+      header.dataset.menuOpen = value ? '1' : '0';
+      toggle?.setAttribute('aria-expanded', String(value));
+      menu?.setAttribute('aria-hidden', String(!value));
+    };
+
+    const openMenu = () => {
+      if (!menu || !panel || isOpen()) return;
+      setExpanded(true);
+      menu.classList.remove('pointer-events-none');
+      document.documentElement.style.overflow = 'hidden';
+      tween?.kill();
+
+      if (reduceMotion) {
+        gsap.set(menu, { autoAlpha: 1 });
+        gsap.set([panel, items], { autoAlpha: 1, y: 0 });
+        return;
+      }
+
+      tween = gsap
+        .timeline({ defaults: { ease: 'power2.out' } })
+        .set(menu, { autoAlpha: 1 })
+        .to(panel, { y: 0, autoAlpha: 1, duration: 0.38 }, 0)
+        .to(items, { y: 0, autoAlpha: 1, duration: 0.3, stagger: 0.06 }, 0.1);
+    };
+
+    const closeMenu = () => {
+      if (!menu || !panel || !isOpen()) return;
+      setExpanded(false);
+      document.documentElement.style.overflow = '';
+      tween?.kill();
+
+      if (reduceMotion) {
+        gsap.set([menu, panel, items], { autoAlpha: 0, y: 24 });
+        menu.classList.add('pointer-events-none');
+        return;
+      }
+
+      tween = gsap
+        .timeline({
+          defaults: { ease: 'power2.in' },
+          onComplete: () => {
+            menu.classList.add('pointer-events-none');
+            gsap.set(menu, { autoAlpha: 0 });
+            gsap.set(items, { y: 12, autoAlpha: 0 });
+          },
+        })
+        .to(items, { y: 8, autoAlpha: 0, duration: 0.16, stagger: 0.02 }, 0)
+        .to(panel, { y: 18, autoAlpha: 0, duration: 0.24 }, 0.04);
+    };
+
+    toggle?.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (isOpen()) closeMenu();
+      else openMenu();
+    });
+
+    menu?.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => closeMenu());
+    });
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && isOpen()) closeMenu();
+    });
+    window.addEventListener('resize', () => {
+      if (window.matchMedia('(min-width: 768px)').matches && isOpen()) closeMenu();
+    });
+  }
+</script>
 
 <script is:inline>
   const HSThemeAppearance = {
