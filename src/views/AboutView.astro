@@ -1,0 +1,220 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import { company, timeline, logistics, orgChart, type OrgNode } from '../../data/company';
+import { getCopy } from '@/copy';
+import type { MarketingLocale } from '@utils/locale';
+
+interface Props {
+  locale: MarketingLocale;
+}
+
+const { locale } = Astro.props;
+const copy = getCopy(locale).about;
+
+function flattenOrg(node: OrgNode, depth = 0): { node: OrgNode; depth: number }[] {
+  return [{ node, depth }, ...(node.children?.flatMap((child) => flattenOrg(child, depth + 1)) ?? [])];
+}
+
+const orgRows = flattenOrg(orgChart);
+---
+
+<MainLayout title={copy.title} description={copy.metaDescription} ogTitle={copy.ogTitle}>
+  <section class="w-full py-12 lg:py-16" data-reveal>
+    <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <div>
+        <p class="text-sm font-medium tracking-[0.16em] text-fluid-cyan uppercase">Institucional</p>
+        <h1 class="mt-3 max-w-4xl text-4xl font-semibold tracking-tight text-fluid-ink sm:text-5xl dark:text-white">
+          {copy.heading}
+        </h1>
+        <p class="mt-5 max-w-3xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
+          {company.summary}
+        </p>
+        <p class="mt-4 max-w-3xl text-neutral-600 dark:text-neutral-400">{copy.intro}</p>
+      </div>
+      <div class="overflow-hidden rounded-3xl border border-neutral-300 dark:border-neutral-700">
+        <img
+          src="/group.jpg"
+          alt="Equipo Fluid Soluciones Dinámicas"
+          class="aspect-[4/3] h-full w-full object-cover"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="grid w-full gap-4 py-8 sm:gap-6 md:grid-cols-3" data-reveal-group>
+    <article class="rounded-2xl border border-neutral-300 bg-white p-6 dark:border-neutral-700 dark:bg-neutral-900" data-reveal-item>
+      <h2 class="text-lg font-semibold text-fluid-navy dark:text-white">Misión</h2>
+      <p class="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">{company.mission}</p>
+    </article>
+    <article class="rounded-2xl border border-neutral-300 bg-white p-6 dark:border-neutral-700 dark:bg-neutral-900" data-reveal-item>
+      <h2 class="text-lg font-semibold text-fluid-navy dark:text-white">Visión</h2>
+      <p class="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">{company.vision}</p>
+    </article>
+    <article class="rounded-2xl border border-neutral-300 bg-white p-6 dark:border-neutral-700 dark:bg-neutral-900" data-reveal-item>
+      <h2 class="text-lg font-semibold text-fluid-navy dark:text-white">Valores</h2>
+      <p class="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">{company.values}</p>
+    </article>
+  </section>
+
+  {/* Compact year-tab timeline: one panel at a time, no long vertical scroll */}
+  <section class="w-full py-12" data-timeline-tabs data-reveal>
+    <h2 class="text-3xl font-semibold tracking-tight text-fluid-ink dark:text-white">
+      Evolución y crecimiento
+    </h2>
+    <p class="mt-3 max-w-2xl text-neutral-600 dark:text-neutral-400">
+      Seleccioná un año para ver los hitos clave de esa etapa.
+    </p>
+
+    <div
+      class="mt-8 flex gap-2 overflow-x-auto pb-2"
+      role="tablist"
+      aria-label="Años de evolución"
+      data-lenis-prevent
+    >
+      {timeline.map((entry, index) => (
+        <button
+          type="button"
+          role="tab"
+          id={`timeline-tab-${entry.year}`}
+          aria-selected={index === 0 ? 'true' : 'false'}
+          aria-controls={`timeline-panel-${entry.year}`}
+          data-timeline-tab
+          data-year={entry.year}
+          class:list={[
+            'shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition',
+            index === 0
+              ? 'bg-fluid-navy text-white'
+              : 'border border-neutral-300 bg-white text-fluid-navy hover:border-fluid-cyan/50 dark:border-neutral-600 dark:bg-neutral-900 dark:text-white',
+          ]}
+        >
+          {entry.year}
+        </button>
+      ))}
+    </div>
+
+    <div class="mt-6 min-h-[14rem] rounded-3xl border border-neutral-300 bg-white p-6 sm:p-8 dark:border-neutral-700 dark:bg-neutral-900">
+      {timeline.map((entry, index) => (
+        <div
+          id={`timeline-panel-${entry.year}`}
+          role="tabpanel"
+          aria-labelledby={`timeline-tab-${entry.year}`}
+          data-timeline-panel
+          data-year={entry.year}
+          class:list={[index === 0 ? 'block' : 'hidden']}
+          hidden={index !== 0}
+        >
+          <p class="text-sm font-medium tracking-wide text-fluid-cyan uppercase">{entry.year}</p>
+          <h3 class="mt-2 text-2xl font-semibold text-fluid-navy dark:text-white">{entry.title}</h3>
+          <ul class="mt-5 grid gap-2 sm:grid-cols-2">
+            {entry.items.map((item) => (
+              <li class="flex gap-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+                <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-fluid-cyan" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="w-full py-12" data-reveal>
+    <h2 class="text-3xl font-semibold tracking-tight text-fluid-ink dark:text-white">Organigrama</h2>
+    <p class="mt-3 max-w-2xl text-neutral-600 dark:text-neutral-400">
+      Estructura organizacional moderna y dinámica para responder con rapidez a las demandas del mercado.
+    </p>
+
+    <div class="mt-10 grid gap-4 lg:grid-cols-3">
+      {orgRows.map(({ node, depth }) => (
+        <article
+          class:list={[
+            'rounded-2xl border p-5 transition',
+            depth === 0
+              ? 'border-fluid-cyan/40 bg-fluid-navy text-white lg:col-span-3'
+              : depth === 1
+                ? 'border-fluid-cyan/25 bg-white dark:border-neutral-700 dark:bg-neutral-900'
+                : 'border-neutral-300 bg-fluid-steel/60 dark:border-neutral-700 dark:bg-neutral-900/70',
+          ]}
+          style={depth > 1 ? `margin-left: ${Math.min(depth - 1, 2) * 0.5}rem` : undefined}
+        >
+          <p class:list={['text-xs tracking-wide uppercase', depth === 0 ? 'text-fluid-cyan-soft' : 'text-fluid-cyan']}>
+            {node.title}
+          </p>
+          {node.name && (
+            <h3 class:list={['mt-2 text-lg font-semibold', depth === 0 ? 'text-white' : 'text-fluid-ink dark:text-white']}>
+              {node.name}
+            </h3>
+          )}
+          {node.description && (
+            <p class:list={['mt-2 text-sm leading-relaxed', depth === 0 ? 'text-white/70' : 'text-neutral-600 dark:text-neutral-400']}>
+              {node.description}
+            </p>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="w-full py-12 lg:pb-20" data-reveal>
+    <div class="mb-8 overflow-hidden rounded-3xl border border-neutral-300 dark:border-neutral-700">
+      <img
+        src="/map.jpg"
+        alt="Red logística Fluid en Argentina"
+        class="aspect-[21/9] max-h-64 w-full object-cover sm:max-h-72"
+        loading="lazy"
+      />
+    </div>
+    <h2 class="text-3xl font-semibold tracking-tight text-fluid-ink dark:text-white">{logistics.title}</h2>
+    <p class="mt-3 max-w-3xl text-neutral-600 dark:text-neutral-400">{logistics.description}</p>
+    <div class="mt-8 grid gap-4 md:grid-cols-2">
+      {logistics.hubs.map((hub) => (
+        <article class="rounded-2xl border border-neutral-300 bg-white p-6 dark:border-neutral-700 dark:bg-neutral-900">
+          <p class="text-sm text-fluid-cyan">{hub.location}</p>
+          <h3 class="mt-2 text-xl font-semibold text-fluid-navy dark:text-white">{hub.name}</h3>
+          <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">{hub.detail}</p>
+        </article>
+      ))}
+    </div>
+    <div class="mt-6 grid gap-4 md:grid-cols-2">
+      {logistics.planned.map((hub) => (
+        <article class="rounded-2xl border border-dashed border-fluid-cyan/40 bg-fluid-steel/40 p-6 dark:bg-neutral-900/50">
+          <p class="text-xs font-medium tracking-wide text-fluid-cyan uppercase">Proyectado</p>
+          <h3 class="mt-2 text-lg font-semibold text-fluid-navy dark:text-white">{hub.name}</h3>
+          <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">{hub.detail}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</MainLayout>
+
+<script>
+  const root = document.querySelector('[data-timeline-tabs]');
+  if (root instanceof HTMLElement) {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[data-timeline-tab]')];
+    const panels = [...root.querySelectorAll<HTMLElement>('[data-timeline-panel]')];
+
+    const activate = (year: string) => {
+      tabs.forEach((tab) => {
+        const active = tab.dataset.year === year;
+        tab.setAttribute('aria-selected', active ? 'true' : 'false');
+        tab.classList.toggle('bg-fluid-navy', active);
+        tab.classList.toggle('text-white', active);
+        tab.classList.toggle('border', !active);
+        tab.classList.toggle('border-neutral-300', !active);
+        tab.classList.toggle('bg-white', !active);
+        tab.classList.toggle('text-fluid-navy', !active);
+      });
+      panels.forEach((panel) => {
+        const active = panel.dataset.year === year;
+        panel.classList.toggle('hidden', !active);
+        panel.classList.toggle('block', active);
+        panel.hidden = !active;
+      });
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => activate(tab.dataset.year || ''));
+    });
+  }
+</script>

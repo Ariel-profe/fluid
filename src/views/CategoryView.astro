@@ -1,0 +1,66 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import ProductCard from '@components/ui/cards/ProductCard.astro';
+import {
+  getSubcategoryCover,
+  getSubcategoryHref,
+  type Category,
+} from '../../data/products';
+import { routes } from '@utils/routes';
+import { getCopy } from '@/copy';
+import type { MarketingLocale } from '@utils/locale';
+
+interface Props {
+  locale: MarketingLocale;
+  category: Category;
+}
+
+const { locale, category } = Astro.props;
+const t = getCopy(locale);
+---
+
+<MainLayout
+  title={category.name}
+  description={category.description}
+  ogTitle={`${category.name} | Fluid`}
+  kind={{ type: 'Product' }}
+>
+  <section class="w-full py-10 sm:py-12" data-reveal>
+    <a href={routes.products} class="text-sm font-medium text-fluid-cyan hover:underline dark:text-fluid-cyan-soft">
+      ← {t.products.backToProducts}
+    </a>
+    <h1 class="mt-4 text-3xl font-semibold tracking-tight text-fluid-ink sm:text-4xl md:text-5xl dark:text-white">
+      {category.name}
+    </h1>
+    {category.description && (
+      <p class="mt-4 max-w-3xl text-base text-neutral-600 sm:text-lg dark:text-neutral-400">
+        {category.description}
+      </p>
+    )}
+  </section>
+
+  <section class="w-full pb-16 sm:pb-20">
+    <div class="mb-8 max-w-2xl" data-reveal>
+      <h2 class="text-2xl font-semibold text-fluid-navy dark:text-white">Familias</h2>
+      <p class="mt-2 text-neutral-600 dark:text-neutral-400">
+        Elegí una tipología para ver los modelos disponibles.
+      </p>
+    </div>
+
+    <div
+      class="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+      data-reveal-group
+    >
+      {category.subcategories.map((sub) => (
+        <ProductCard
+          name={sub.name}
+          image={getSubcategoryCover(sub) || '/categories/valvulas.webp'}
+          imageFit="cover"
+          href={getSubcategoryHref(category, sub)}
+          meta={`${sub.products.length} modelo${sub.products.length === 1 ? '' : 's'}`}
+          cta="Ver modelos →"
+        />
+      ))}
+    </div>
+  </section>
+</MainLayout>

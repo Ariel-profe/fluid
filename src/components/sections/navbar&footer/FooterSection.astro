@@ -1,0 +1,102 @@
+---
+import Icon from '@components/ui/icons/Icon.astro';
+import { SITE } from '@data/constants';
+import { footerSections, socialLinks } from '@data/navigation';
+import { CONTACT } from '../../../../data/contact-details';
+import { localePath } from '@utils/locale';
+
+const { locale, copy: t } = Astro.locals;
+const footer = t.nav.footer;
+---
+
+<footer class="w-full border-t border-neutral-300/80 bg-fluid-navy text-white dark:border-neutral-800">
+  <div class="mx-auto w-full max-w-(--breakpoint-2xl) px-4 py-12 sm:px-6 lg:px-8 lg:pt-16">
+    <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+      <div class="lg:col-span-1">
+        <a href={localePath(locale)} class="inline-flex items-center gap-3">
+          <img src="/logo.webp" alt="" class="h-12 w-12 object-contain" />
+          <div>
+            <p class="text-lg font-semibold">{SITE.title}</p>
+            <p class="text-sm text-white/60">{SITE.tagline}</p>
+          </div>
+        </a>
+        <p class="mt-4 text-sm leading-relaxed text-white/65">
+          {SITE.description_short}
+        </p>
+      </div>
+
+      {footerSections.map((section) => (
+        <div>
+          <h3 class="font-semibold text-white">{footer.sectionTitles[section.id]}</h3>
+          <ul class="mt-4 space-y-3">
+            {section.links.map((link) => (
+              <li>
+                <a
+                  href={localePath(locale, link.path)}
+                  class="text-sm text-white/65 transition hover:text-fluid-cyan-soft"
+                >
+                  {footer.links[link.id]}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+
+      <div>
+        <h3 class="font-semibold text-white">{footer.stayUpToDate}</h3>
+        <p class="mt-4 text-sm text-white/65">{footer.stayUpToDateContent}</p>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <a
+            href={socialLinks.email}
+            class="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-2 text-sm text-white/80 hover:border-fluid-cyan/40 hover:text-fluid-cyan-soft"
+          >
+            <Icon name="envelopeOpen" class="h-4 w-4" />
+            Email
+          </a>
+          <a
+            href={socialLinks.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-2 text-sm text-white/80 hover:border-fluid-cyan/40 hover:text-fluid-cyan-soft"
+          >
+            <Icon name="whatsapp" class="h-4 w-4" />
+            WhatsApp
+          </a>
+          <a
+            href={socialLinks.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-2 text-sm text-white/80 hover:border-fluid-cyan/40 hover:text-fluid-cyan-soft"
+          >
+            <Icon name="instagram" class="h-4 w-4" />
+            Instagram
+          </a>
+        </div>
+        <p class="mt-4 text-xs text-white/45">{CONTACT.address}</p>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-sm text-white/50">
+        © <span id="current-year"></span> {SITE.title}. {SITE.author}.
+      </p>
+      <p class="text-sm text-white/45">
+        {footer.craftedBy}{' '}
+        <a
+          class="underline underline-offset-2 hover:text-fluid-cyan-soft"
+          href="https://amn.com.ar"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          AMN Consultora Informática
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script is:inline>
+  const year = document.getElementById('current-year');
+  if (year) year.textContent = String(new Date().getFullYear());
+</script>

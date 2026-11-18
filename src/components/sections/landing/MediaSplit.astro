@@ -1,0 +1,72 @@
+---
+import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
+
+interface Props {
+  title: string;
+  body: string;
+  imageSrc: string;
+  imageAlt: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  reverse?: boolean;
+  eyebrow?: string;
+  compact?: boolean;
+}
+
+const {
+  title,
+  body,
+  imageSrc,
+  imageAlt,
+  ctaLabel,
+  ctaHref,
+  reverse = false,
+  eyebrow,
+  compact = false,
+} = Astro.props;
+---
+
+<section class="w-full py-10 lg:py-14">
+  <div
+    class:list={[
+      'grid items-center gap-0 overflow-hidden rounded-3xl border border-neutral-300/80 bg-white dark:border-neutral-700 dark:bg-neutral-900 lg:grid-cols-2',
+      reverse && 'lg:[&>*:first-child]:order-2',
+    ]}
+    data-reveal
+  >
+    <div
+      class:list={[
+        'media-reveal',
+        compact
+          ? 'aspect-[16/10] max-h-56 sm:max-h-64 lg:max-h-72 lg:aspect-auto lg:h-full'
+          : 'aspect-[4/3] sm:aspect-[16/11] lg:aspect-auto lg:h-full lg:min-h-[16rem] lg:max-h-[20rem]',
+      ]}
+    >
+      <img
+        src={imageSrc}
+        alt={imageAlt}
+        class="h-full w-full object-cover"
+        loading="lazy"
+        data-reveal-media
+      />
+    </div>
+    <div class="px-5 py-7 sm:px-8 sm:py-9 lg:px-10">
+      {eyebrow && (
+        <p class="text-sm font-medium tracking-[0.16em] text-fluid-cyan uppercase dark:text-fluid-cyan-soft">
+          {eyebrow}
+        </p>
+      )}
+      <h2 class="mt-3 text-2xl font-semibold tracking-tight text-fluid-ink sm:text-3xl dark:text-white">
+        {title}
+      </h2>
+      <p class="mt-4 text-sm leading-relaxed text-neutral-600 sm:text-base dark:text-neutral-400">
+        {body}
+      </p>
+      {ctaLabel && ctaHref && (
+        <div class="mt-7">
+          <PrimaryCTA title={ctaLabel} url={ctaHref} />
+        </div>
+      )}
+    </div>
+  </div>
+</section>

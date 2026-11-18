@@ -1,0 +1,10 @@
+---
+import { categoryPath } from '@utils/routes';
+
+export function getStaticPaths() {
+  return [{ params: { category: 'valvulas' } }];
+}
+
+const { category } = Astro.params;
+return Astro.redirect(categoryPath(category ?? 'valvulas'), 301);
+---

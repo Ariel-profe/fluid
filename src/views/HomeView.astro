@@ -1,0 +1,136 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import FluidHero from '@components/sections/landing/FluidHero.astro';
+import CategoryGrid from '@components/sections/landing/CategoryGrid.astro';
+import PartnersMarquee from '@components/sections/landing/PartnersMarquee.astro';
+import ImageCarousel from '@components/sections/landing/ImageCarousel.astro';
+import MediaSplit from '@components/sections/landing/MediaSplit.astro';
+import FAQ from '@components/sections/misc/FAQ.astro';
+import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
+import { company, logistics } from '../../data/company';
+import { getCopy } from '@/copy';
+import { localePath, type MarketingLocale } from '@utils/locale';
+import { routes } from '@utils/routes';
+
+interface Props {
+  locale: MarketingLocale;
+}
+
+const { locale } = Astro.props;
+const t = getCopy(locale);
+const copy = t.home;
+
+const gallerySlides = [
+  { src: '/action-group/1.jpg', alt: 'Equipo y operación Fluid', caption: 'Equipo comercial y técnico en campo' },
+  { src: '/action-group/2.jpg', alt: 'Operaciones Fluid', caption: 'Acompañamiento en plantas industriales' },
+  { src: '/action-group/3.jpg', alt: 'Logística Fluid', caption: 'Respuesta ágil desde nuestra red logística' },
+  { src: '/action-group/4.jpg', alt: 'Productos industriales', caption: 'Stock estratégico de válvulas y accesorios' },
+  { src: '/action-group/5.jpg', alt: 'Asesoramiento técnico', caption: 'Asesoramiento técnico-comercial especializado' },
+  { src: '/action-group/6.jpg', alt: 'Infraestructura Fluid', caption: 'Infraestructura operativa en expansión' },
+  { src: '/action-group/7.jpg', alt: 'Proyectos industriales', caption: 'Proyectos y soluciones especiales' },
+  { src: '/action-group/8.jpg', alt: 'Clientes industriales', caption: 'Alianza con sectores productivos del país' },
+  { src: '/action-group/9.jpg', alt: 'Fluid en operación', caption: 'Compromiso con la industria argentina' },
+];
+
+const valueImages = ['/common/1.jpg', '/common/2.jpg', '/common/3.jpg'];
+---
+
+<MainLayout>
+  <div class="pt-4 sm:pt-6">
+    <FluidHero
+      eyebrow={copy.hero.eyebrow}
+      title={copy.hero.title}
+      subTitle={copy.hero.subTitle}
+      trustLine={copy.hero.trustLine}
+      primaryBtn={copy.hero.primaryBtn}
+      primaryBtnURL={localePath(locale, routes.products)}
+      secondaryBtn={copy.hero.secondaryBtn}
+      secondaryBtnURL={localePath(locale, routes.contact)}
+    />
+  </div>
+
+  <PartnersMarquee title={copy.clients.title} subTitle={copy.clients.subTitle} />
+
+  <CategoryGrid title={copy.categories.title} subTitle={copy.categories.subTitle} />
+
+  <ImageCarousel
+    title="Fluid en acción"
+    subTitle="Imágenes de nuestra operación, equipo y acompañamiento a la industria."
+    slides={gallerySlides}
+  />
+
+  <section class="w-full py-14 lg:py-20" data-reveal-group>
+    <div class="mb-10 max-w-3xl" data-reveal-item>
+      <h2 class="text-3xl font-semibold tracking-tight text-fluid-ink sm:text-4xl dark:text-white">
+        {copy.value.title}
+      </h2>
+      <p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">{copy.value.subTitle}</p>
+    </div>
+    <div class="grid gap-4 sm:gap-6 md:grid-cols-3">
+      {copy.value.items.map((item, index) => (
+        <article
+          class="overflow-hidden rounded-2xl border border-neutral-300/80 bg-white dark:border-neutral-700 dark:bg-neutral-900"
+          data-reveal-item
+        >
+          <div class="media-reveal aspect-[16/10]">
+            <img
+              src={valueImages[index] ?? '/common/4.jpg'}
+              alt=""
+              class="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
+              loading="lazy"
+              data-reveal-media
+            />
+          </div>
+          <div class="p-5 sm:p-6">
+            <h3 class="text-lg font-semibold text-fluid-navy dark:text-white">{item.title}</h3>
+            <p class="mt-3 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">{item.body}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <MediaSplit
+    compact
+    eyebrow="Red logística"
+    title={copy.logistics.title}
+    body={`${copy.logistics.subTitle} ${logistics.description}`}
+    imageSrc="/map.jpg"
+    imageAlt="Cobertura logística Fluid en Argentina"
+    ctaLabel={copy.logistics.cta}
+    ctaHref={localePath(locale, routes.about)}
+  />
+
+  <MediaSplit
+    reverse
+    eyebrow="Equipo"
+    title="Personas detrás de cada solución"
+    body={`${company.summary} Trabajamos con orientación al cliente, mejora continua e innovación.`}
+    imageSrc="/group.jpg"
+    imageAlt="Equipo Fluid Soluciones Dinámicas"
+    ctaLabel="Conocer la empresa"
+    ctaHref={localePath(locale, routes.about)}
+  />
+
+  <FAQ title={copy.faqTitle} faqs={t.data.faqs} />
+
+  <section class="w-full py-14 lg:pb-20" data-reveal>
+    <div class="relative overflow-hidden rounded-3xl border border-neutral-300 dark:border-neutral-700">
+      <img
+        src="/common/5.jpg"
+        alt=""
+        class="absolute inset-0 h-full w-full object-cover"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-fluid-navy/85" />
+      <div class="relative px-5 py-10 text-center text-white sm:px-10 sm:py-12">
+        <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">{copy.heroAlt.title}</h2>
+        <p class="mx-auto mt-3 max-w-2xl text-sm text-white/75 sm:text-base">{copy.heroAlt.subTitle}</p>
+        <p class="mt-2 text-sm text-white/50">{company.legalName}</p>
+        <div class="mt-8 flex justify-center">
+          <PrimaryCTA title={copy.heroAlt.btn} url={localePath(locale, routes.contact)} variant="cyan" />
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>

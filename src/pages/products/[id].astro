@@ -1,0 +1,9 @@
+---
+import { routes } from '@utils/routes';
+
+export function getStaticPaths() {
+  return [];
+}
+
+return Astro.redirect(routes.products, 301);
+---

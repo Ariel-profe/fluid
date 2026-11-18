@@ -1,0 +1,127 @@
+---
+import { PARTNERS } from '../../../../data/partners';
+
+interface Props {
+  title: string;
+  subTitle: string;
+}
+
+const { title, subTitle } = Astro.props;
+const midpoint = Math.ceil(PARTNERS.length / 2);
+const rowA = PARTNERS.slice(0, midpoint);
+const rowB = PARTNERS.slice(midpoint);
+const loopA = [...rowA, ...rowA];
+const loopB = [...rowB, ...rowB];
+---
+
+<section id="clientes" class="w-full py-14 lg:py-16">
+  <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <div class="max-w-3xl">
+      <h2 class="text-3xl font-semibold tracking-tight text-fluid-ink sm:text-4xl dark:text-white">
+        {title}
+      </h2>
+      <p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">{subTitle}</p>
+    </div>
+    <a
+      href="/clientes"
+      class="shrink-0 text-sm font-semibold text-fluid-cyan hover:underline"
+    >
+      Ver todos los clientes →
+    </a>
+  </div>
+
+  <div class="space-y-4">
+    <div class="partners-fade relative overflow-hidden">
+      <div class="partners-track partners-track--ltr flex w-max gap-4 py-1">
+        {loopA.map((partner, index) => (
+          <div
+            class="flex h-[4.5rem] w-36 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-white px-3 shadow-sm dark:border-neutral-700"
+            title={partner.legalName}
+          >
+            <img
+              src={partner.logo}
+              alt={partner.name}
+              class="max-h-10 max-w-full object-contain"
+              loading={index < 10 ? 'eager' : 'lazy'}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="partners-fade relative overflow-hidden">
+      <div class="partners-track partners-track--rtl flex w-max gap-4 py-1">
+        {loopB.map((partner, index) => (
+          <div
+            class="flex h-[4.5rem] w-36 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-white px-3 shadow-sm dark:border-neutral-700"
+            title={partner.legalName}
+          >
+            <img
+              src={partner.logo}
+              alt={partner.name}
+              class="max-h-10 max-w-full object-contain"
+              loading={index < 10 ? 'eager' : 'lazy'}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .partners-fade {
+    /* Match page background so edges dissolve cleanly */
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    );
+  }
+
+  .partners-track--ltr {
+    animation: partners-scroll-ltr 55s linear infinite;
+  }
+
+  .partners-track--rtl {
+    animation: partners-scroll-rtl 60s linear infinite;
+  }
+
+  .partners-fade:hover .partners-track {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .partners-track--ltr,
+    .partners-track--rtl {
+      animation: none;
+    }
+  }
+
+  @keyframes partners-scroll-ltr {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes partners-scroll-rtl {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+</style>

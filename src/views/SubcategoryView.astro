@@ -1,0 +1,69 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import ProductCard from '@components/ui/cards/ProductCard.astro';
+import {
+  getCategoryHref,
+  getProductHref,
+  type Category,
+  type Subcategory,
+} from '../../data/products';
+import { getCopy } from '@/copy';
+import type { MarketingLocale } from '@utils/locale';
+
+interface Props {
+  locale: MarketingLocale;
+  category: Category;
+  subcategory: Subcategory;
+}
+
+const { locale, category, subcategory } = Astro.props;
+const t = getCopy(locale);
+---
+
+<MainLayout
+  title={`${subcategory.name} | ${category.name}`}
+  description={category.description}
+  ogTitle={`${subcategory.name} | Fluid`}
+  kind={{ type: 'Product' }}
+>
+  <section class="w-full py-10 sm:py-12" data-reveal>
+    <a
+      href={getCategoryHref(category)}
+      class="text-sm font-medium text-fluid-cyan hover:underline dark:text-fluid-cyan-soft"
+    >
+      ← {category.name}
+    </a>
+    <p class="mt-4 text-sm font-medium tracking-wide text-fluid-cyan uppercase dark:text-fluid-cyan-soft">
+      {category.name}
+    </p>
+    <h1 class="mt-2 text-3xl font-semibold tracking-tight text-fluid-ink sm:text-4xl md:text-5xl dark:text-white">
+      {subcategory.name}
+    </h1>
+    <p class="mt-4 max-w-2xl text-neutral-600 dark:text-neutral-400">
+      {subcategory.products.length} modelo{subcategory.products.length === 1 ? '' : 's'} disponibles en esta familia.
+    </p>
+  </section>
+
+  <section class="w-full pb-16 sm:pb-20">
+    <div
+      class="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+      data-reveal-group
+    >
+      {subcategory.products.map((product) => (
+        <ProductCard
+          name={product.name}
+          description={product.description}
+          image={product.image}
+          href={getProductHref(product)}
+          cta="Ver detalle →"
+        />
+      ))}
+    </div>
+
+    {subcategory.products.length === 0 && (
+      <p class="rounded-2xl border border-dashed border-neutral-300 bg-white px-6 py-10 text-center text-neutral-600 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400">
+        {t.products.backToCategory}: aún no hay modelos publicados en esta familia.
+      </p>
+    )}
+  </section>
+</MainLayout>

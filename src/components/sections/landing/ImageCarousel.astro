@@ -1,0 +1,113 @@
+---
+interface Slide {
+  src: string;
+  alt: string;
+  caption?: string;
+}
+
+interface Props {
+  title: string;
+  subTitle?: string;
+  slides: Slide[];
+  intervalMs?: number;
+}
+
+const { title, subTitle, slides, intervalMs = 4500 } = Astro.props;
+---
+
+<section
+  class="w-full py-14 lg:py-20"
+  data-image-carousel
+  data-interval={intervalMs}
+>
+  <div class="mb-8 max-w-3xl" data-reveal>
+    <h2 class="text-3xl font-semibold tracking-tight text-fluid-ink sm:text-4xl dark:text-white">
+      {title}
+    </h2>
+    {subTitle && (
+      <p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">{subTitle}</p>
+    )}
+  </div>
+
+  <div class="overflow-hidden rounded-3xl border border-neutral-300/80 bg-fluid-navy shadow-[0_30px_80px_-40px_rgba(11,42,74,0.55)] dark:border-neutral-700" data-reveal>
+    <div class="relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-[21/9]">
+      {slides.map((slide, index) => (
+        <figure
+          class:list={[
+            'absolute inset-0 transition-opacity duration-500',
+            index === 0 ? 'opacity-100' : 'opacity-0',
+          ]}
+          data-carousel-slide
+          aria-hidden={index === 0 ? 'false' : 'true'}
+        >
+          <img
+            src={slide.src}
+            alt={slide.alt}
+            class="h-full w-full object-cover transition-transform duration-[5500ms] ease-out will-change-transform"
+            data-carousel-image
+            loading={index === 0 ? 'eager' : 'lazy'}
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-fluid-navy-deep/50 via-transparent to-transparent" />
+        </figure>
+      ))}
+
+      <div class="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 p-3 sm:p-4">
+        <div class="pointer-events-auto flex gap-2 rounded-full bg-black/35 px-2.5 py-2 backdrop-blur-sm" data-carousel-dots>
+          {slides.map((_, index) => (
+            <button
+              type="button"
+              class:list={[
+                'h-2.5 w-2.5 rounded-full transition-colors',
+                index === 0 ? 'bg-fluid-cyan' : 'bg-white/45 hover:bg-white/75',
+              ]}
+              aria-label={`Ir a imagen ${index + 1}`}
+              data-carousel-dot
+              data-index={index}
+            />
+          ))}
+        </div>
+        <div class="pointer-events-auto flex gap-2">
+          <button
+            type="button"
+            class="rounded-full border border-white/25 bg-black/35 px-3 py-1.5 text-sm text-white backdrop-blur hover:bg-black/55"
+            data-carousel-prev
+            aria-label="Imagen anterior"
+          >
+            ←
+          </button>
+          <button
+            type="button"
+            class="rounded-full border border-white/25 bg-black/35 px-3 py-1.5 text-sm text-white backdrop-blur hover:bg-black/55"
+            data-carousel-next
+            aria-label="Imagen siguiente"
+          >
+            →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 bg-fluid-navy-deep/95 px-4 py-3.5 sm:px-6 sm:py-4">
+      {slides.map((slide, index) => (
+        <p
+          class:list={[
+            'text-sm leading-relaxed text-white/90 sm:text-base',
+            index === 0 ? 'block' : 'hidden',
+          ]}
+          data-carousel-caption
+          data-index={index}
+        >
+          {slide.caption ?? slide.alt}
+        </p>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initImageCarousel } from '@scripts/imageCarousel';
+
+  document.querySelectorAll('[data-image-carousel]').forEach((root) => {
+    if (root instanceof HTMLElement) initImageCarousel(root);
+  });
+</script>

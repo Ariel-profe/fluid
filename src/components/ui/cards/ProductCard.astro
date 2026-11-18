@@ -1,0 +1,97 @@
+---
+interface Props {
+  name: string;
+  description?: string;
+  image: string;
+  href?: string;
+  /** e.g. "7 modelos" for category/family cards */
+  meta?: string;
+  cta?: string;
+  imageFit?: 'contain' | 'cover';
+  badge?: string;
+  badgeTone?: 'available' | 'soon';
+}
+
+const {
+  name,
+  description,
+  image,
+  href,
+  meta,
+  cta = 'Ver detalle →',
+  imageFit = 'contain',
+  badge,
+  badgeTone = 'available',
+} = Astro.props;
+
+const Wrapper = href ? 'a' : 'div';
+---
+
+<Wrapper
+  href={href}
+  class:list={[
+    'group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-[border-color,box-shadow] duration-300 dark:border-neutral-700 dark:bg-neutral-900',
+    href
+      ? 'hover:border-fluid-cyan/45 hover:shadow-[0_18px_40px_-28px_rgba(11,42,74,0.4)] dark:hover:border-fluid-cyan/35'
+      : 'opacity-90',
+  ]}
+  data-reveal-item
+>
+  <div class="relative border-b border-neutral-100 bg-white dark:border-neutral-800">
+    {badge && (
+      <span
+        class:list={[
+          'absolute top-2 right-2 z-10 rounded-full px-2 py-0.5 text-[0.65rem] font-medium sm:top-3 sm:right-3 sm:px-2.5 sm:py-1 sm:text-xs',
+          badgeTone === 'available'
+            ? 'bg-fluid-cyan/15 text-fluid-navy dark:bg-fluid-cyan/20 dark:text-fluid-cyan-soft'
+            : 'bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400',
+        ]}
+      >
+        {badge}
+      </span>
+    )}
+
+    {imageFit === 'cover' ? (
+      <div class="media-reveal aspect-[4/3]">
+        <img
+          src={image}
+          alt={name}
+          class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+          loading="lazy"
+          data-reveal-media
+        />
+      </div>
+    ) : (
+      <div class="media-reveal flex aspect-[4/3] items-center justify-center px-2.5 py-3 sm:px-3 sm:py-4 md:px-4 md:py-5 lg:px-3 lg:py-4 xl:px-4 xl:py-5">
+        <img
+          src={image}
+          alt={name}
+          class="mx-auto h-full max-h-24 w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.04] sm:max-h-28 md:max-h-32 lg:max-h-36 xl:max-h-40"
+          loading="lazy"
+          data-reveal-media
+        />
+      </div>
+    )}
+  </div>
+
+  <div class="flex flex-1 flex-col p-3 sm:p-3.5 md:p-4 lg:p-3.5 xl:p-5">
+    <h3 class="line-clamp-2 text-sm leading-snug font-semibold text-fluid-navy sm:text-base dark:text-white xl:text-lg">
+      {name}
+    </h3>
+    {meta && (
+      <p class="mt-1.5 text-[0.65rem] font-medium tracking-wide text-neutral-500 uppercase sm:mt-2 sm:text-xs">
+        {meta}
+      </p>
+    )}
+    {description && (
+      <p class="mt-1.5 line-clamp-2 text-xs leading-relaxed text-neutral-600 sm:mt-2 sm:line-clamp-3 sm:text-sm dark:text-neutral-400">
+        {description}
+      </p>
+    )}
+    {href && (
+      <p class="mt-auto pt-3 text-xs font-medium text-fluid-cyan sm:pt-4 sm:text-sm dark:text-fluid-cyan-soft">
+        {cta}
+      </p>
+    )}
+  </div>
+</Wrapper>

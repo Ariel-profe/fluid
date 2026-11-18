@@ -1,0 +1,36 @@
+---
+import SubcategoryView from '@views/SubcategoryView.astro';
+import {
+  categories,
+  getCategoryBySlug,
+  isCategoryNavigable,
+} from '../../../../../data/products';
+import { routes } from '@utils/routes';
+
+export function getStaticPaths() {
+  return categories
+    .filter((category) => isCategoryNavigable(category.id))
+    .flatMap((category) =>
+      category.subcategories.map((subcategory) => ({
+        params: {
+          category: category.slug,
+          subcategory: subcategory.slug,
+        },
+        props: { category, subcategory },
+      }))
+    );
+}
+
+const { category: categorySlug, subcategory: subcategorySlug } = Astro.params;
+const category =
+  Astro.props.category ?? getCategoryBySlug(categorySlug ?? '');
+const subcategory =
+  Astro.props.subcategory ??
+  category?.subcategories.find((s) => s.slug === subcategorySlug);
+
+if (!category || !subcategory || !isCategoryNavigable(category.id)) {
+  return Astro.redirect(routes.products);
+}
+---
+
+<SubcategoryView locale="es" category={category} subcategory={subcategory} />

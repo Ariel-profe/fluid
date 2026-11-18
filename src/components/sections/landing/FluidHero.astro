@@ -1,0 +1,103 @@
+---
+import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
+import SecondaryCTA from '@components/ui/buttons/SecondaryCTA.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  subTitle: string;
+  trustLine: string;
+  primaryBtn: string;
+  primaryBtnURL: string;
+  secondaryBtn: string;
+  secondaryBtnURL: string;
+}
+
+const {
+  eyebrow,
+  title,
+  subTitle,
+  trustLine,
+  primaryBtn,
+  primaryBtnURL,
+  secondaryBtn,
+  secondaryBtnURL,
+} = Astro.props;
+
+/** Solo slider de fondo: más impacto atmosférico, sin grilla que se solape. */
+const heroSlides = [
+  { src: '/hero.webp', alt: 'Operación industrial Fluid' },
+  { src: '/hero1.webp', alt: 'Soluciones para control de fluidos' },
+  { src: '/hero6.webp', alt: 'Infraestructura y productos industriales' },
+];
+---
+
+<section
+  class="fluid-hero relative isolate min-h-[min(78vh,44rem)] overflow-hidden rounded-3xl border border-fluid-cyan/20 text-white shadow-[0_40px_120px_-40px_rgba(11,42,74,0.85)]"
+  data-hero-carousel
+>
+  <div class="absolute inset-0">
+    {heroSlides.map((slide, index) => (
+      <img
+        src={slide.src}
+        alt=""
+        class:list={[
+          'absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms]',
+          index === 0 ? 'opacity-100' : 'opacity-0',
+        ]}
+        data-hero-slide
+        loading={index === 0 ? 'eager' : 'lazy'}
+      />
+    ))}
+    <div class="absolute inset-0 bg-gradient-to-r from-fluid-navy-deep/95 via-fluid-navy/88 to-fluid-navy/45" />
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_25%,rgba(61,183,228,0.2),transparent_45%)]" />
+  </div>
+
+  <div class="relative flex min-h-[min(70vh,40rem)] max-w-3xl flex-col justify-center px-5 py-12 sm:min-h-[min(78vh,44rem)] sm:px-10 lg:px-14 lg:py-20">
+    <p class="hero-eyebrow mb-4 text-sm font-medium tracking-[0.18em] text-fluid-cyan-soft uppercase">
+      {eyebrow}
+    </p>
+    <h1 class="hero-title text-3xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl xl:text-7xl">
+      <Fragment set:html={title} />
+    </h1>
+    <p class="hero-sub mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:mt-6 sm:text-xl">
+      {subTitle}
+    </p>
+    <div class="hero-cta mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:items-center">
+      <PrimaryCTA title={primaryBtn} url={primaryBtnURL} variant="cyan" />
+      <SecondaryCTA title={secondaryBtn} url={secondaryBtnURL} />
+    </div>
+    <p class="hero-trust mt-6 text-sm text-white/60 sm:mt-8">{trustLine}</p>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+
+  const root = document.querySelector('.fluid-hero');
+  if (root && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const w = window as Window & { __fluidHeroReady?: boolean };
+    if (!w.__fluidHeroReady) {
+      w.__fluidHeroReady = true;
+      gsap
+        .timeline({ defaults: { ease: 'power2.out' } })
+        .from('.hero-eyebrow', { y: 10, autoAlpha: 0, duration: 0.35 })
+        .from('.hero-title', { y: 14, autoAlpha: 0, duration: 0.4 }, '-=0.15')
+        .from('.hero-sub', { y: 10, autoAlpha: 0, duration: 0.35 }, '-=0.2')
+        .from('.hero-cta', { y: 8, autoAlpha: 0, duration: 0.3 }, '-=0.18')
+        .from('.hero-trust', { y: 6, autoAlpha: 0, duration: 0.28 }, '-=0.15');
+    }
+
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-hero-slide]'));
+    if (slides.length > 1) {
+      let index = 0;
+      window.setInterval(() => {
+        slides[index].classList.remove('opacity-100');
+        slides[index].classList.add('opacity-0');
+        index = (index + 1) % slides.length;
+        slides[index].classList.remove('opacity-0');
+        slides[index].classList.add('opacity-100');
+      }, 5500);
+    }
+  }
+</script>

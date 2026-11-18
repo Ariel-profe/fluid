@@ -1,0 +1,45 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import { PARTNERS } from '../../data/partners';
+---
+
+<MainLayout
+  title="Clientes y partners"
+  description="Empresas e industrias que confían en Fluid Soluciones Dinámicas para sus operaciones de control y conducción de fluidos."
+  ogTitle="Clientes | Fluid"
+>
+  <section class="w-full py-12 lg:py-16">
+    <p class="text-sm font-medium tracking-[0.16em] text-fluid-cyan uppercase dark:text-fluid-cyan-soft">
+      Red de clientes
+    </p>
+    <h1 class="mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-fluid-ink sm:text-5xl dark:text-white">
+      Clientes y partners
+    </h1>
+    <p class="mt-4 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
+      Más de {PARTNERS.length} empresas de industria, agro, energía y minería confían en Fluid.
+      Esta es la nómina completa de clientes destacados en nuestro manual institucional.
+    </p>
+
+    <div class="mt-12 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" data-reveal-group>
+      {PARTNERS.map((partner) => (
+        <article
+          class="flex flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition-[border-color,box-shadow] hover:border-fluid-cyan/35 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-900"
+          data-reveal-item
+        >
+          <div class="flex h-28 items-center justify-center bg-white px-4 py-5">
+            <img
+              src={partner.logo}
+              alt={partner.name}
+              class="mx-auto max-h-16 max-w-full object-contain"
+              loading="lazy"
+            />
+          </div>
+          <div class="border-t border-neutral-100 px-4 py-3 dark:border-neutral-800">
+            <h2 class="text-sm font-semibold text-fluid-navy dark:text-white">{partner.name}</h2>
+            <p class="mt-1 line-clamp-2 text-xs text-neutral-500 dark:text-neutral-400">{partner.legalName}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</MainLayout>

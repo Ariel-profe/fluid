@@ -1,0 +1,52 @@
+---
+import { subcategoryPath } from '@utils/routes';
+
+interface Props {
+  title: string;
+  subTitle?: string;
+}
+
+const { title, subTitle } = Astro.props;
+
+const items = [
+  { src: '/common/valvula-mariposa.jpg', name: 'Mariposa', href: subcategoryPath('valvulas', 'mariposa') },
+  { src: '/common/valvula-esferica.jpg', name: 'Esféricas', href: subcategoryPath('valvulas', 'esfericas') },
+  { src: '/common/valvula-de-retencion.jpg', name: 'Retención', href: subcategoryPath('valvulas', 'retencion') },
+  { src: '/common/valvula-guillotina.jpg', name: 'Guillotina', href: subcategoryPath('valvulas', 'guillotina-y-compuertas') },
+  { src: '/common/valvula-esclusa.jpg', name: 'Esclusas', href: subcategoryPath('valvulas', 'esclusas') },
+  { src: '/common/valvula-de-aire.webp', name: 'Aire', href: subcategoryPath('valvulas', 'aire') },
+];
+---
+
+<section class="w-full py-8 lg:py-10" data-reveal>
+  <div class="mb-6 max-w-3xl">
+    <h2 class="text-2xl font-semibold tracking-tight text-fluid-ink sm:text-3xl dark:text-white">
+      {title}
+    </h2>
+    {subTitle && (
+      <p class="mt-2 text-neutral-600 dark:text-neutral-400">{subTitle}</p>
+    )}
+  </div>
+
+  <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+    {items.map((item) => (
+      <a
+        href={item.href}
+        class="group overflow-hidden rounded-2xl border border-neutral-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-fluid-cyan/40 hover:shadow-lg dark:border-neutral-700 dark:bg-neutral-900"
+      >
+        <div class="aspect-[16/11] overflow-hidden bg-white">
+          <img
+            src={item.src}
+            alt={item.name}
+            class="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+            loading="lazy"
+          />
+        </div>
+        <div class="flex items-center justify-between px-3 py-2.5">
+          <span class="text-sm font-semibold text-fluid-navy dark:text-white">{item.name}</span>
+          <span class="text-xs text-fluid-cyan transition group-hover:translate-x-0.5 dark:text-fluid-cyan-soft">Ver →</span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

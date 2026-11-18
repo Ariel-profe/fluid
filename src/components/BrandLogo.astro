@@ -1,0 +1,9 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = 'h-10 w-auto' } = Astro.props;
+---
+
+<img src="/logo.webp" alt="Fluid" class={className} width="96" height="40" />

@@ -1,0 +1,123 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
+import {
+  getCategoryHref,
+  getSubcategoryHref,
+  getSubcategoryName,
+  type Category,
+  type Product,
+} from '../../data/products';
+import { CONTACT } from '../../data/contact-details';
+import { routes } from '@utils/routes';
+import { getCopy } from '@/copy';
+import type { MarketingLocale } from '@utils/locale';
+
+interface Props {
+  locale: MarketingLocale;
+  category: Category;
+  product: Product;
+}
+
+const { locale, category, product } = Astro.props;
+const t = getCopy(locale);
+const subcategoryName = getSubcategoryName(product);
+const subcategory = category.subcategories.find((s) => s.id === product.subcategoryId);
+const backHref = subcategory
+  ? getSubcategoryHref(category, subcategory)
+  : getCategoryHref(category);
+---
+
+<MainLayout
+  title={product.name}
+  description={product.description}
+  ogTitle={`${product.name} | Fluid`}
+  kind={{ type: 'Product' }}
+>
+  <section class="w-full py-8 lg:py-12">
+    <a href={backHref} class="text-sm font-medium text-fluid-cyan hover:underline dark:text-fluid-cyan-soft">
+      ← {subcategoryName || category.name}
+    </a>
+
+    <div class="mt-6 grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start lg:gap-10">
+      <aside class="lg:sticky lg:top-28" data-reveal>
+        <div class="overflow-hidden rounded-3xl border border-neutral-200 bg-white dark:border-neutral-700 dark:bg-white">
+          <div class="media-reveal relative aspect-[4/3] w-full bg-white">
+            <img
+              src={product.image}
+              alt={product.name}
+              class="absolute inset-0 m-auto h-[78%] w-[78%] object-contain object-center"
+              data-reveal-media
+            />
+          </div>
+        </div>
+
+        <div class="mt-5 rounded-2xl border border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-900">
+          <p class="text-sm text-neutral-600 dark:text-neutral-400">
+            ¿Necesitás disponibilidad, alternativas o una cotización a medida?
+          </p>
+          <div class="mt-4 flex flex-col gap-3">
+            <PrimaryCTA title={t.products.requestQuote} url={routes.contact} />
+            <a
+              class="inline-flex items-center justify-center rounded-full border border-neutral-300 px-4 py-2.5 text-sm font-semibold text-fluid-navy transition hover:border-fluid-cyan/50 dark:border-neutral-600 dark:text-white dark:hover:border-fluid-cyan/40"
+              href={`mailto:${CONTACT.email}?subject=${encodeURIComponent(`Consulta: ${product.name}`)}`}
+            >
+              Escribir a {CONTACT.email}
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <div data-reveal>
+        <p class="text-sm text-fluid-cyan dark:text-fluid-cyan-soft">{subcategoryName}</p>
+        <h1 class="mt-2 text-3xl font-semibold tracking-tight text-fluid-ink sm:text-4xl dark:text-white">
+          {product.name}
+        </h1>
+        {product.description && (
+          <p class="mt-4 text-base leading-relaxed text-neutral-600 dark:text-neutral-400 sm:text-lg">
+            {product.description}
+          </p>
+        )}
+
+        {product.specs && product.specs.length > 0 && (
+          <section class="mt-8">
+            <h2 class="text-xl font-semibold text-fluid-navy dark:text-white">{t.products.specs}</h2>
+            <dl class="mt-4 grid gap-3 sm:grid-cols-2">
+              {product.specs.map((spec) => (
+                <div class="rounded-xl border border-neutral-200 border-l-4 border-l-fluid-cyan bg-white px-4 py-3 dark:border-neutral-700 dark:border-l-fluid-cyan dark:bg-neutral-900">
+                  <dt class="text-xs tracking-wide text-neutral-500 uppercase dark:text-neutral-400">
+                    {spec.label}
+                  </dt>
+                  <dd class="mt-1 text-sm font-medium leading-snug text-fluid-ink dark:text-neutral-200">
+                    {spec.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        )}
+
+        {product.docs && product.docs.length > 0 && (
+          <section class="mt-8 mb-6">
+            <h2 class="text-xl font-semibold text-fluid-navy dark:text-white">{t.products.docs}</h2>
+            <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+              {product.docs.map((doc) => (
+                <li>
+                  <a
+                    href={doc.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center justify-between gap-3 rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm font-medium text-fluid-navy transition hover:border-fluid-cyan/50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:hover:border-fluid-cyan/40"
+                  >
+                    <span class="line-clamp-2">{doc.label}</span>
+                    <span class="shrink-0 text-fluid-cyan dark:text-fluid-cyan-soft">PDF ↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </div>
+    </div>
+  </section>
+</MainLayout>

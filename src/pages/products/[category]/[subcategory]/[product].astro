@@ -1,0 +1,26 @@
+---
+import { productPath, routes } from '@utils/routes';
+import { categories, isCategoryNavigable } from '../../../../../data/products';
+
+export function getStaticPaths() {
+  return categories
+    .filter((category) => isCategoryNavigable(category.id))
+    .flatMap((category) =>
+      category.subcategories.flatMap((subcategory) =>
+        subcategory.products.map((product) => ({
+          params: {
+            category: category.slug,
+            subcategory: subcategory.slug,
+            product: product.slug,
+          },
+        }))
+      )
+    );
+}
+
+const { category, subcategory, product } = Astro.params;
+if (!category || !subcategory || !product) {
+  return Astro.redirect(routes.products, 301);
+}
+return Astro.redirect(productPath(category, subcategory, product), 301);
+---

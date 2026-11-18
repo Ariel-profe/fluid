@@ -1,0 +1,40 @@
+---
+import CatalogProductView from '@views/CatalogProductView.astro';
+import {
+  categories,
+  getCategoryBySlug,
+  getProductBySlugs,
+  isCategoryNavigable,
+} from '../../../../../data/products';
+import { routes } from '@utils/routes';
+
+export function getStaticPaths() {
+  return categories
+    .filter((category) => isCategoryNavigable(category.id))
+    .flatMap((category) =>
+      category.subcategories.flatMap((subcategory) =>
+        subcategory.products.map((product) => ({
+          params: {
+            category: category.slug,
+            subcategory: subcategory.slug,
+            product: product.slug,
+          },
+          props: { category, product },
+        }))
+      )
+    );
+}
+
+const { category: categorySlug, subcategory, product: productSlug } = Astro.params;
+const category =
+  Astro.props.category ?? getCategoryBySlug(categorySlug ?? '');
+const product =
+  Astro.props.product ??
+  getProductBySlugs(categorySlug ?? '', subcategory ?? '', productSlug ?? '');
+
+if (!category || !product || !isCategoryNavigable(category.id)) {
+  return Astro.redirect(routes.products);
+}
+---
+
+<CatalogProductView locale="es" category={category} product={product} />

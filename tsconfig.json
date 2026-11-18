@@ -1,0 +1,36 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@content/*": ["./src/content/*"],
+      "@data/*": ["./src/data_files/*"],
+      "@company/*": ["./data/*"],
+      "@lib/*": ["./lib/*"],
+      "@images/*": ["./src/images/*"],
+      "@scripts/*": ["./src/assets/scripts/*"],
+      "@styles/*": ["./src/assets/styles/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@views/*": ["./src/views/*"]
+    }
+  },
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": [
+    "dist",
+    "node_modules",
+    ".agents",
+    "lib/metadata.ts",
+    "lib/motion.tsx",
+    "src/views/BlogIndexView.astro",
+    "src/views/BlogPostView.astro",
+    "src/views/InsightView.astro",
+    "src/components/sections/insights",
+    "src/components/ui/avatars/AvatarBlog.astro",
+    "src/components/ui/avatars/AvatarBlogLarge.astro",
+    "src/components/ui/cards/CardBlog.astro",
+    "src/components/ui/cards/CardBlogRecent.astro",
+    "src/components/ui/cards/CardInsight.astro",
+    "src/components/ui/cards/CardRelated.astro"
+  ]
+}

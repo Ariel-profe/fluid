@@ -1,0 +1,89 @@
+---
+import ThemeIcon from '@components/ThemeIcon.astro';
+import NavLink from '@components/ui/links/NavLink.astro';
+import NavbarToggle from '@components/ui/buttons/NavbarToggle.astro';
+import ProductSearch from '@components/ui/ProductSearch.astro';
+import { navLinks } from '@data/navigation';
+import { localePath } from '@utils/locale';
+
+const { locale, copy: t } = Astro.locals;
+---
+
+<header class="sticky inset-x-0 top-4 z-50 flex w-full flex-wrap text-sm md:flex-nowrap md:justify-start">
+  <nav
+    class="relative mx-2 w-full rounded-[28px] border border-fluid-cyan/20 bg-white/80 px-4 py-3 shadow-[0_10px_40px_-24px_rgba(11,42,74,0.45)] backdrop-blur-md md:flex md:items-center md:justify-between md:px-6 md:py-0 lg:px-8 xl:mx-auto dark:border-neutral-700/50 dark:bg-neutral-900/80"
+    aria-label="Global"
+  >
+    <div class="flex items-center justify-between gap-3">
+      <a
+        class="flex items-center gap-2 rounded-lg text-xl font-bold ring-fluid-cyan outline-hidden focus-visible:ring-3"
+        href={localePath(locale)}
+        aria-label="Fluid"
+      >
+        <img src="/logo.webp" class="h-10 w-10 object-contain" alt="" />
+        <span class="hidden text-base font-semibold tracking-tight text-fluid-navy sm:inline dark:text-white">
+          Fluid
+        </span>
+      </a>
+      <div class="flex items-center gap-2 md:hidden">
+        <ThemeIcon />
+        <NavbarToggle target="navbar-collapse-with-animation" />
+      </div>
+    </div>
+
+    <div class="mt-4 hidden grow md:mt-0 md:block">
+      <div class="flex flex-row items-center justify-end gap-x-5 lg:gap-x-7">
+        <ProductSearch />
+        {navLinks.map((link) => (
+          <NavLink url={localePath(locale, link.path)} name={t.nav.labels[link.id]} />
+        ))}
+        <ThemeIcon />
+      </div>
+    </div>
+
+    <div
+      id="navbar-collapse-with-animation"
+      class="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 md:hidden"
+    >
+      <div class="mt-5 flex flex-col gap-4">
+        <ProductSearch />
+        {navLinks.map((link) => (
+          <NavLink url={localePath(locale, link.path)} name={t.nav.labels[link.id]} />
+        ))}
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script is:inline>
+  const HSThemeAppearance = {
+    init() {
+      const defaultTheme = 'default';
+      let theme = localStorage.getItem('hs_theme') || defaultTheme;
+      if (document.querySelector('html').classList.contains('dark')) return;
+      this.setAppearance(theme);
+    },
+    _resetStylesOnLoad() {
+      const $resetStyles = document.createElement('style');
+      $resetStyles.innerText = `*{transition: unset !important;}`;
+      $resetStyles.setAttribute('data-hs-appearance-onload-styles', '');
+      document.head.appendChild($resetStyles);
+      return $resetStyles;
+    },
+    setAppearance(theme, saveInStore = true, dispatchEvent = true) {
+      const $resetStylesEl = this._resetStylesOnLoad();
+      if (saveInStore) localStorage.setItem('hs_theme', theme);
+      if (theme === 'dark') document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
+      setTimeout(() => $resetStylesEl.remove());
+      if (dispatchEvent) {
+        window.dispatchEvent(new CustomEvent('on-hs-appearance-change', { detail: theme }));
+      }
+    },
+    getAppearance() {
+      return localStorage.getItem('hs_theme') || 'default';
+    },
+  };
+  HSThemeAppearance.init();
+  window.HSThemeAppearance = HSThemeAppearance;
+</script>
