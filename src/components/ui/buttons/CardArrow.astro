@@ -1,0 +1,98 @@
+---
+/**
+ * Circular arrow affordance for linked cards.
+ * Animates on parent `.group:hover` — keep the card as the interactive target.
+ */
+interface Props {
+  class?: string;
+  size?: 'sm' | 'md';
+}
+
+const { class: className = '', size = 'md' } = Astro.props;
+
+const sizes = {
+  sm: 'h-7 w-7 sm:h-8 sm:w-8',
+  md: 'h-8 w-8 sm:h-9 sm:w-9',
+};
+
+const iconSizes = {
+  sm: 'h-3.5 w-3.5',
+  md: 'h-3.5 w-3.5 sm:h-4 sm:w-4',
+};
+---
+
+<span
+  class:list={[
+    'card-arrow inline-flex shrink-0 items-center justify-center rounded-full',
+    sizes[size],
+    className,
+  ]}
+  aria-hidden="true"
+>
+  <svg
+    class:list={['card-arrow__icon', iconSizes[size]]}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M5 12h14"></path>
+    <path d="m13 6 6 6-6 6"></path>
+  </svg>
+</span>
+
+<style>
+  .card-arrow {
+    color: var(--color-fluid-navy);
+    background: color-mix(in oklab, var(--color-fluid-steel) 80%, white);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-fluid-navy) 10%, transparent);
+    transition:
+      transform 300ms ease,
+      background-color 300ms ease,
+      color 300ms ease,
+      box-shadow 300ms ease;
+  }
+
+  .card-arrow__icon {
+    transition: transform 300ms ease;
+  }
+
+  :global(.group:hover) .card-arrow,
+  :global(.group:focus-visible) .card-arrow {
+    color: white;
+    background: var(--color-fluid-navy);
+    box-shadow: inset 0 0 0 1px transparent;
+    transform: translateX(1px);
+  }
+
+  :global(.group:hover) .card-arrow__icon,
+  :global(.group:focus-visible) .card-arrow__icon {
+    transform: translateX(1.5px);
+  }
+
+  :global(.group:active) .card-arrow {
+    transform: scale(0.97);
+  }
+
+  :global(.dark) .card-arrow {
+    color: var(--color-fluid-cyan-soft);
+    background: color-mix(in oklab, var(--color-fluid-cyan) 12%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-fluid-cyan) 22%, transparent);
+  }
+
+  :global(.dark .group:hover) .card-arrow,
+  :global(.dark .group:focus-visible) .card-arrow {
+    color: var(--color-fluid-navy);
+    background: var(--color-fluid-cyan);
+    box-shadow: inset 0 0 0 1px transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-arrow,
+    .card-arrow__icon {
+      transition: none;
+    }
+  }
+</style>

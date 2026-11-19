@@ -1,0 +1,131 @@
+- generic [active] [ref=f2e1]:
+  - link "Saltar al contenido" [ref=f2e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f2e3]:
+    - banner [ref=f2e4]:
+      - navigation "Global" [ref=f2e5]:
+        - link "FLUID" [ref=f2e7] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f2e8]:
+            - generic [ref=f2e9]: FLUID
+            - generic [ref=f2e10]: Soluciones dinámicas
+        - generic [ref=f2e11]:
+          - link "Productos" [ref=f2e12] [cursor=pointer]:
+            - /url: /productos
+          - link "Nosotros" [ref=f2e15] [cursor=pointer]:
+            - /url: /nosotros
+          - link "Servicios" [ref=f2e18] [cursor=pointer]:
+            - /url: /servicios
+          - link "Clientes" [ref=f2e21] [cursor=pointer]:
+            - /url: /clientes
+        - generic [ref=f2e24]:
+          - generic [ref=f2e25]:
+            - generic [ref=f2e26]: Buscar productos…
+            - searchbox "Buscar productos…" [ref=f2e28]
+          - button "Activar tema oscuro" [ref=f2e29] [cursor=pointer]
+          - link "Ventas" [ref=f2e32] [cursor=pointer]:
+            - /url: /contacto
+    - main [ref=f2e35]:
+      - generic [ref=f2e36]:
+        - link "← Válvulas" [ref=f2e37] [cursor=pointer]:
+          - /url: /productos/valvulas
+        - paragraph [ref=f2e38]: Válvulas
+        - heading "Válvulas Mariposa" [level=1] [ref=f2e39]
+        - paragraph [ref=f2e40]: 7 modelos disponibles en esta familia.
+      - generic [ref=f2e42]:
+        - link [ref=f2e43] [cursor=pointer]:
+          - /url: /productos/valvulas/mariposa/vxs
+          - img "VXS" [ref=f2e46]
+          - generic [ref=f2e47]:
+            - heading "VXS" [level=3] [ref=f2e50]
+            - paragraph [ref=f2e54]: Válvula mariposa de asiento elástico tipo cartucho.
+        - link [ref=f2e55] [cursor=pointer]:
+          - /url: /productos/valvulas/mariposa/serie-20-21
+          - img "Serie 20-21" [ref=f2e58]
+          - generic [ref=f2e59]:
+            - heading "Serie 20-21" [level=3] [ref=f2e62]
+            - paragraph [ref=f2e66]: Válvula mariposa para servicios corrosivos.
+        - link [ref=f2e67] [cursor=pointer]:
+          - /url: /productos/valvulas/mariposa/serie-22-23
+          - img "Serie 22-23" [ref=f2e70]
+          - generic [ref=f2e71]:
+            - heading "Serie 22-23" [level=3] [ref=f2e74]
+            - paragraph [ref=f2e78]: Válvulas mariposa para servicios corrosivos y abrasivos.
+        - link [ref=f2e79] [cursor=pointer]:
+          - /url: /productos/valvulas/mariposa/serie-30-31
+          - img "Serie 30-31" [ref=f2e82]
+          - generic [ref=f2e83]:
+            - heading "Serie 30-31" [level=3] [ref=f2e86]
+            - paragraph [ref=f2e90]: Válvulas mariposa de asiento resiliente.
+        - link [ref=f2e91] [cursor=pointer]:
+          - /url: /productos/valvulas/mariposa/serie-32-33-35-36
+          - img "Serie 32-33-35-36" [ref=f2e94]
+          - generic [ref=f2e95]:
+            - heading "Serie 32-33-35-36" [level=3] [ref=f2e98]
+            - paragraph [ref=f2e102]: Válvulas mariposa de asiento resiliente.
+        - link [ref=f2e103] [cursor=pointer]:
+          - /url: /productos/valvulas/mariposa/doble-excentricidad
+          - img "Doble Excentricidad" [ref=f2e106]
+          - generic [ref=f2e107]:
+            - heading "Doble Excentricidad" [level=3] [ref=f2e110]
+            - paragraph [ref=f2e114]: Válvula mariposa de doble excentricidad.
+        - link [ref=f2e115] [cursor=pointer]:
+          - /url: /productos/valvulas/mariposa/triple-excentricidad
+          - img "Triple Excentricidad" [ref=f2e118]
+          - generic [ref=f2e119]:
+            - heading "Triple Excentricidad" [level=3] [ref=f2e122]
+            - paragraph [ref=f2e126]: Válvula mariposa de triple excentricidad.
+  - contentinfo [ref=f2e127]:
+    - generic [ref=f2e128]:
+      - generic [ref=f2e129]:
+        - generic [ref=f2e130]:
+          - link [ref=f2e131] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f2e132]:
+              - paragraph [ref=f2e133]: Fluid
+              - paragraph [ref=f2e134]: Soluciones Dinámicas
+          - paragraph [ref=f2e135]: Soluciones industriales para control y conducción de fluidos.
+        - generic [ref=f2e136]:
+          - generic [ref=f2e137]:
+            - heading "Explorar" [level=3] [ref=f2e138]
+            - list [ref=f2e139]:
+              - listitem [ref=f2e140]:
+                - link "Productos" [ref=f2e141] [cursor=pointer]:
+                  - /url: /productos
+              - listitem [ref=f2e142]:
+                - link "Servicios" [ref=f2e143] [cursor=pointer]:
+                  - /url: /servicios
+          - generic [ref=f2e144]:
+            - heading "Empresa" [level=3] [ref=f2e145]
+            - list [ref=f2e146]:
+              - listitem [ref=f2e147]:
+                - link "Nosotros" [ref=f2e148] [cursor=pointer]:
+                  - /url: /nosotros
+              - listitem [ref=f2e149]:
+                - link "Contacto" [ref=f2e150] [cursor=pointer]:
+                  - /url: /contacto
+              - listitem [ref=f2e151]:
+                - link "Clientes" [ref=f2e152] [cursor=pointer]:
+                  - /url: /clientes
+        - generic [ref=f2e153]:
+          - heading "Cotizaciones" [level=3] [ref=f2e154]
+          - paragraph [ref=f2e155]: Escribinos a cotizaciones@fluidsoluciones.com y te respondemos con una propuesta a medida.
+          - generic [ref=f2e156]:
+            - link "Email" [ref=f2e157] [cursor=pointer]:
+              - /url: mailto:cotizaciones@fluidsoluciones.com
+            - link "WhatsApp" [ref=f2e160] [cursor=pointer]:
+              - /url: https://wa.me/5491176094341
+            - link "Instagram" [ref=f2e163] [cursor=pointer]:
+              - /url: https://www.instagram.com/fluidsoluciones
+          - paragraph [ref=f2e166]: Santiago de Chile 2555, General Pacheco, Buenos Aires
+      - generic [ref=f2e167]:
+        - paragraph [ref=f2e168]: © 2026 Fluid. Fluid Soluciones Dinámicas S.A..
+        - paragraph [ref=f2e169]:
+          - text: Desarrollado por
+          - link "AMN Consultora Informática" [ref=f2e170] [cursor=pointer]:
+            - /url: https://amn.com.ar
+  - generic [ref=f2e173]:
+    - button "Menu" [ref=f2e174]
+    - button "Inspect" [ref=f2e180]
+    - button "Audit" [ref=f2e184]
+    - button "Settings" [ref=f2e189]

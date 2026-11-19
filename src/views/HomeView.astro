@@ -69,15 +69,18 @@ const valueImages = ['/common/1.jpg', '/common/2.jpg', '/common/3.jpg'];
     <div class="grid gap-4 sm:gap-6 md:grid-cols-3">
       {copy.value.items.map((item, index) => (
         <article
-          class="overflow-hidden rounded-2xl border border-neutral-300/80 bg-white dark:border-neutral-700 dark:bg-neutral-900"
+          class="group overflow-hidden rounded-2xl border border-neutral-300/80 bg-white transition-[border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-0.5 hover:border-fluid-cyan/40 hover:shadow-[0_14px_36px_-28px_rgba(11,42,74,0.45)] dark:border-zinc-700 dark:bg-zinc-900 dark:hover:border-fluid-cyan/35"
           data-reveal-item
         >
           <div class="media-reveal aspect-[16/10]">
             <img
               src={valueImages[index] ?? '/common/4.jpg'}
               alt=""
-              class="h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
+              class="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03]"
               loading="lazy"
+              decoding="async"
+              width="1600"
+              height="1067"
               data-reveal-media
             />
           </div>
@@ -92,6 +95,7 @@ const valueImages = ['/common/1.jpg', '/common/2.jpg', '/common/3.jpg'];
 
   <MediaSplit
     compact
+    imageFit="contain"
     eyebrow="Red logística"
     title={copy.logistics.title}
     body={`${copy.logistics.subTitle} ${logistics.description}`}

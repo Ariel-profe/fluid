@@ -1,4 +1,5 @@
 ---
+import CardArrow from '@components/ui/buttons/CardArrow.astro';
 import { subcategoryPath } from '@utils/routes';
 
 interface Props {
@@ -32,19 +33,22 @@ const items = [
     {items.map((item) => (
       <a
         href={item.href}
-        class="group overflow-hidden rounded-2xl border border-neutral-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-fluid-cyan/40 hover:shadow-lg dark:border-neutral-700 dark:bg-neutral-900"
+        class="group overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-[border-color,box-shadow] duration-300 ease-out hover:border-fluid-navy/25 hover:shadow-[0_10px_28px_-22px_rgba(11,42,74,0.35)] dark:border-zinc-700 dark:bg-zinc-900 dark:hover:border-fluid-cyan/30"
       >
-        <div class="aspect-[16/11] overflow-hidden bg-white">
+        <div class="flex aspect-square items-center justify-center overflow-hidden bg-white">
           <img
             src={item.src}
             alt={item.name}
-            class="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+            width="800"
+            height="800"
+            class="h-[80%] w-[80%] object-contain transition-transform duration-300 ease-out group-hover:scale-[1.02]"
             loading="lazy"
+            decoding="async"
           />
         </div>
-        <div class="flex items-center justify-between px-3 py-2.5">
+        <div class="flex items-center justify-between gap-2 px-3 py-2.5">
           <span class="text-sm font-semibold text-fluid-navy dark:text-white">{item.name}</span>
-          <span class="text-xs text-fluid-cyan transition group-hover:translate-x-0.5 dark:text-fluid-cyan-soft">Ver →</span>
+          <CardArrow size="sm" />
         </div>
       </a>
     ))}

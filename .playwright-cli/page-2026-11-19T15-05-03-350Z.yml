@@ -1,0 +1,131 @@
+- generic [active] [ref=f3e1]:
+  - link "Saltar al contenido" [ref=f3e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f3e3]:
+    - banner [ref=f3e4]:
+      - navigation "Global" [ref=f3e5]:
+        - link "FLUID" [ref=f3e7] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f3e8]:
+            - generic [ref=f3e9]: FLUID
+            - generic [ref=f3e10]: Soluciones dinámicas
+        - generic [ref=f3e11]:
+          - link "Productos" [ref=f3e12] [cursor=pointer]:
+            - /url: /productos
+          - link "Nosotros" [ref=f3e15] [cursor=pointer]:
+            - /url: /nosotros
+          - link "Servicios" [ref=f3e18] [cursor=pointer]:
+            - /url: /servicios
+          - link "Clientes" [ref=f3e21] [cursor=pointer]:
+            - /url: /clientes
+        - generic [ref=f3e24]:
+          - generic [ref=f3e25]:
+            - generic [ref=f3e26]: Buscar productos…
+            - searchbox "Buscar productos…" [ref=f3e28]
+          - button "Activar tema oscuro" [ref=f3e29] [cursor=pointer]
+          - link "Ventas" [ref=f3e32] [cursor=pointer]:
+            - /url: /contacto
+    - main [ref=f3e35]:
+      - generic [ref=f3e36]:
+        - link "← Válvulas" [ref=f3e37] [cursor=pointer]:
+          - /url: /productos/valvulas
+        - paragraph [ref=f3e38]: Válvulas
+        - heading "Válvulas Esféricas" [level=1] [ref=f3e39]
+        - paragraph [ref=f3e40]: 7 modelos disponibles en esta familia.
+      - generic [ref=f3e42]:
+        - link [ref=f3e43] [cursor=pointer]:
+          - /url: /productos/valvulas/esfericas/bridadas
+          - img "Bridadas" [ref=f3e46]
+          - generic [ref=f3e47]:
+            - heading "Bridadas" [level=3] [ref=f3e50]
+            - paragraph [ref=f3e54]: Válvula esférica bridada.
+        - link [ref=f3e55] [cursor=pointer]:
+          - /url: /productos/valvulas/esfericas/cuerpo-3-piezas-7000-8000
+          - img "Cuerpo en Tres Piezas 7000-8000" [ref=f3e58]
+          - generic [ref=f3e59]:
+            - heading "Cuerpo en Tres Piezas 7000-8000" [level=3] [ref=f3e62]
+            - paragraph [ref=f3e66]: Válvula esférica floating con cuerpo en 3 piezas.
+        - link [ref=f3e67] [cursor=pointer]:
+          - /url: /productos/valvulas/esfericas/cuerpo-3-piezas-triad
+          - img "Cuerpo en Tres Piezas TRIAD" [ref=f3e70]
+          - generic [ref=f3e71]:
+            - heading "Cuerpo en Tres Piezas TRIAD" [level=3] [ref=f3e74]
+            - paragraph [ref=f3e78]: Válvula esférica floating con cuerpo en 3 piezas.
+        - link [ref=f3e79] [cursor=pointer]:
+          - /url: /productos/valvulas/esfericas/servicios-severos
+          - img "Servicios Severos" [ref=f3e82]
+          - generic [ref=f3e83]:
+            - heading "Servicios Severos" [level=3] [ref=f3e86]
+            - paragraph [ref=f3e90]: Válvula esférica para servicios severos.
+        - link [ref=f3e91] [cursor=pointer]:
+          - /url: /productos/valvulas/esfericas/esfera-segmentada
+          - img "Esfera Segmentada" [ref=f3e94]
+          - generic [ref=f3e95]:
+            - heading "Esfera Segmentada" [level=3] [ref=f3e98]
+            - paragraph [ref=f3e102]: Válvula de esfera segmentada.
+        - link [ref=f3e103] [cursor=pointer]:
+          - /url: /productos/valvulas/esfericas/multipuerto
+          - img "Multipuerto" [ref=f3e106]
+          - generic [ref=f3e107]:
+            - heading "Multipuerto" [level=3] [ref=f3e110]
+            - paragraph [ref=f3e114]: Válvulas multi-puerto 3-4 vías.
+        - link [ref=f3e115] [cursor=pointer]:
+          - /url: /productos/valvulas/esfericas/trunnion
+          - img "Trunnion" [ref=f3e118]
+          - generic [ref=f3e119]:
+            - heading "Trunnion" [level=3] [ref=f3e122]
+            - paragraph [ref=f3e126]: Válvula esférica trunnion.
+  - contentinfo [ref=f3e127]:
+    - generic [ref=f3e128]:
+      - generic [ref=f3e129]:
+        - generic [ref=f3e130]:
+          - link [ref=f3e131] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f3e132]:
+              - paragraph [ref=f3e133]: Fluid
+              - paragraph [ref=f3e134]: Soluciones Dinámicas
+          - paragraph [ref=f3e135]: Soluciones industriales para control y conducción de fluidos.
+        - generic [ref=f3e136]:
+          - generic [ref=f3e137]:
+            - heading "Explorar" [level=3] [ref=f3e138]
+            - list [ref=f3e139]:
+              - listitem [ref=f3e140]:
+                - link "Productos" [ref=f3e141] [cursor=pointer]:
+                  - /url: /productos
+              - listitem [ref=f3e142]:
+                - link "Servicios" [ref=f3e143] [cursor=pointer]:
+                  - /url: /servicios
+          - generic [ref=f3e144]:
+            - heading "Empresa" [level=3] [ref=f3e145]
+            - list [ref=f3e146]:
+              - listitem [ref=f3e147]:
+                - link "Nosotros" [ref=f3e148] [cursor=pointer]:
+                  - /url: /nosotros
+              - listitem [ref=f3e149]:
+                - link "Contacto" [ref=f3e150] [cursor=pointer]:
+                  - /url: /contacto
+              - listitem [ref=f3e151]:
+                - link "Clientes" [ref=f3e152] [cursor=pointer]:
+                  - /url: /clientes
+        - generic [ref=f3e153]:
+          - heading "Cotizaciones" [level=3] [ref=f3e154]
+          - paragraph [ref=f3e155]: Escribinos a cotizaciones@fluidsoluciones.com y te respondemos con una propuesta a medida.
+          - generic [ref=f3e156]:
+            - link "Email" [ref=f3e157] [cursor=pointer]:
+              - /url: mailto:cotizaciones@fluidsoluciones.com
+            - link "WhatsApp" [ref=f3e160] [cursor=pointer]:
+              - /url: https://wa.me/5491176094341
+            - link "Instagram" [ref=f3e163] [cursor=pointer]:
+              - /url: https://www.instagram.com/fluidsoluciones
+          - paragraph [ref=f3e166]: Santiago de Chile 2555, General Pacheco, Buenos Aires
+      - generic [ref=f3e167]:
+        - paragraph [ref=f3e168]: © 2026 Fluid. Fluid Soluciones Dinámicas S.A..
+        - paragraph [ref=f3e169]:
+          - text: Desarrollado por
+          - link "AMN Consultora Informática" [ref=f3e170] [cursor=pointer]:
+            - /url: https://amn.com.ar
+  - generic [ref=f3e173]:
+    - button "Menu" [ref=f3e174]
+    - button "Inspect" [ref=f3e180]
+    - button "Audit" [ref=f3e184]
+    - button "Settings" [ref=f3e189]

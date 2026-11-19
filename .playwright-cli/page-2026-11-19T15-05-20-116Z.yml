@@ -1,0 +1,134 @@
+- generic [active] [ref=f4e1]:
+  - link "Saltar al contenido" [ref=f4e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=f4e3]:
+    - banner [ref=f4e4]:
+      - navigation "Global" [ref=f4e5]:
+        - link "FLUID" [ref=f4e7] [cursor=pointer]:
+          - /url: /
+          - generic [ref=f4e8]:
+            - generic [ref=f4e9]: FLUID
+            - generic [ref=f4e10]: Soluciones dinámicas
+        - generic [ref=f4e11]:
+          - link "Productos" [ref=f4e12] [cursor=pointer]:
+            - /url: /productos
+          - link "Nosotros" [ref=f4e15] [cursor=pointer]:
+            - /url: /nosotros
+          - link "Servicios" [ref=f4e18] [cursor=pointer]:
+            - /url: /servicios
+          - link "Clientes" [ref=f4e21] [cursor=pointer]:
+            - /url: /clientes
+        - generic [ref=f4e24]:
+          - generic [ref=f4e25]:
+            - generic [ref=f4e26]: Buscar productos…
+            - searchbox "Buscar productos…" [ref=f4e28]
+          - button "Activar tema oscuro" [ref=f4e29] [cursor=pointer]
+          - link "Ventas" [ref=f4e32] [cursor=pointer]:
+            - /url: /contacto
+    - main [ref=f4e35]:
+      - generic [ref=f4e36]:
+        - link "← Volver a productos" [ref=f4e37] [cursor=pointer]:
+          - /url: /productos
+        - heading "Válvulas" [level=1] [ref=f4e38]
+        - paragraph [ref=f4e39]: Mariposas, esféricas, de retención, esclusas, de aire, guillotina y compuertas, y aplicaciones especiales.
+      - generic [ref=f4e40]:
+        - generic [ref=f4e41]:
+          - heading "Familias" [level=2] [ref=f4e42]
+          - paragraph [ref=f4e43]: Elegí una tipología para ver los modelos disponibles.
+        - generic [ref=f4e44]:
+          - link [ref=f4e45] [cursor=pointer]:
+            - /url: /productos/valvulas/mariposa
+            - img "Válvulas Mariposa" [ref=f4e48]
+            - generic [ref=f4e51]:
+              - heading "Válvulas Mariposa" [level=3] [ref=f4e52]
+              - paragraph [ref=f4e53]: 7 modelos
+          - link [ref=f4e57] [cursor=pointer]:
+            - /url: /productos/valvulas/esfericas
+            - img "Válvulas Esféricas" [ref=f4e60]
+            - generic [ref=f4e63]:
+              - heading "Válvulas Esféricas" [level=3] [ref=f4e64]
+              - paragraph [ref=f4e65]: 7 modelos
+          - link [ref=f4e69] [cursor=pointer]:
+            - /url: /productos/valvulas/retencion
+            - img "Válvulas de Retención" [ref=f4e72]
+            - generic [ref=f4e75]:
+              - heading "Válvulas de Retención" [level=3] [ref=f4e76]
+              - paragraph [ref=f4e77]: 5 modelos
+          - link [ref=f4e81] [cursor=pointer]:
+            - /url: /productos/valvulas/guillotina-y-compuertas
+            - img "Válvulas Guillotina y Compuertas" [ref=f4e84]
+            - generic [ref=f4e87]:
+              - heading "Válvulas Guillotina y Compuertas" [level=3] [ref=f4e88]
+              - paragraph [ref=f4e89]: 1 modelo
+          - link [ref=f4e93] [cursor=pointer]:
+            - /url: /productos/valvulas/aplicaciones-especiales
+            - img "Válvulas para Aplicaciones Especiales" [ref=f4e96]
+            - generic [ref=f4e99]:
+              - heading "Válvulas para Aplicaciones Especiales" [level=3] [ref=f4e100]
+              - paragraph [ref=f4e101]: 2 modelos
+          - link [ref=f4e105] [cursor=pointer]:
+            - /url: /productos/valvulas/esclusas
+            - img "Válvulas Esclusas" [ref=f4e108]
+            - generic [ref=f4e111]:
+              - heading "Válvulas Esclusas" [level=3] [ref=f4e112]
+              - paragraph [ref=f4e113]: 3 modelos
+          - link [ref=f4e117] [cursor=pointer]:
+            - /url: /productos/valvulas/aire
+            - img "Válvulas de Aire" [ref=f4e120]
+            - generic [ref=f4e123]:
+              - heading "Válvulas de Aire" [level=3] [ref=f4e124]
+              - paragraph [ref=f4e125]: 1 modelo
+  - contentinfo [ref=f4e129]:
+    - generic [ref=f4e130]:
+      - generic [ref=f4e131]:
+        - generic [ref=f4e132]:
+          - link [ref=f4e133] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f4e134]:
+              - paragraph [ref=f4e135]: Fluid
+              - paragraph [ref=f4e136]: Soluciones Dinámicas
+          - paragraph [ref=f4e137]: Soluciones industriales para control y conducción de fluidos.
+        - generic [ref=f4e138]:
+          - generic [ref=f4e139]:
+            - heading "Explorar" [level=3] [ref=f4e140]
+            - list [ref=f4e141]:
+              - listitem [ref=f4e142]:
+                - link "Productos" [ref=f4e143] [cursor=pointer]:
+                  - /url: /productos
+              - listitem [ref=f4e144]:
+                - link "Servicios" [ref=f4e145] [cursor=pointer]:
+                  - /url: /servicios
+          - generic [ref=f4e146]:
+            - heading "Empresa" [level=3] [ref=f4e147]
+            - list [ref=f4e148]:
+              - listitem [ref=f4e149]:
+                - link "Nosotros" [ref=f4e150] [cursor=pointer]:
+                  - /url: /nosotros
+              - listitem [ref=f4e151]:
+                - link "Contacto" [ref=f4e152] [cursor=pointer]:
+                  - /url: /contacto
+              - listitem [ref=f4e153]:
+                - link "Clientes" [ref=f4e154] [cursor=pointer]:
+                  - /url: /clientes
+        - generic [ref=f4e155]:
+          - heading "Cotizaciones" [level=3] [ref=f4e156]
+          - paragraph [ref=f4e157]: Escribinos a cotizaciones@fluidsoluciones.com y te respondemos con una propuesta a medida.
+          - generic [ref=f4e158]:
+            - link "Email" [ref=f4e159] [cursor=pointer]:
+              - /url: mailto:cotizaciones@fluidsoluciones.com
+            - link "WhatsApp" [ref=f4e162] [cursor=pointer]:
+              - /url: https://wa.me/5491176094341
+            - link "Instagram" [ref=f4e165] [cursor=pointer]:
+              - /url: https://www.instagram.com/fluidsoluciones
+          - paragraph [ref=f4e168]: Santiago de Chile 2555, General Pacheco, Buenos Aires
+      - generic [ref=f4e169]:
+        - paragraph [ref=f4e170]: © 2026 Fluid. Fluid Soluciones Dinámicas S.A..
+        - paragraph [ref=f4e171]:
+          - text: Desarrollado por
+          - link "AMN Consultora Informática" [ref=f4e172] [cursor=pointer]:
+            - /url: https://amn.com.ar
+  - generic [ref=f4e175]:
+    - button "Menu" [ref=f4e176]
+    - button "Inspect" [ref=f4e182]
+    - button "Audit" [ref=f4e186]
+    - button "Settings" [ref=f4e191]

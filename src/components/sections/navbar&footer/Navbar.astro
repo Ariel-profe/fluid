@@ -32,7 +32,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 
 <header class="fluid-navbar sticky inset-x-0 top-0 z-50 pt-[max(0.75rem,env(safe-area-inset-top))] sm:pt-[max(1rem,env(safe-area-inset-top))]" data-navbar>
   <nav
-    class="fluid-navbar__shell relative z-[70] mx-auto w-full max-w-(--breakpoint-2xl) rounded-2xl border border-neutral-300/70 bg-neutral-100/90 px-3 py-2.5 shadow-[0_12px_40px_-28px_rgba(15,23,42,0.28)] backdrop-blur-xl sm:px-4 md:grid md:grid-cols-[minmax(0,1.1fr)_auto_minmax(0,1.1fr)] md:items-center md:gap-4 md:px-5 md:py-2 lg:gap-6 lg:px-6 dark:border-white/10 dark:bg-neutral-900/90 dark:shadow-[0_16px_48px_-28px_rgba(0,0,0,0.55)]"
+    class="fluid-navbar__shell relative z-[70] mx-auto w-full max-w-(--breakpoint-2xl) rounded-2xl border border-neutral-300/70 bg-neutral-100/90 px-3 py-2.5 shadow-[0_12px_40px_-28px_rgba(15,23,42,0.28)] backdrop-blur-xl sm:px-4 md:grid md:grid-cols-[minmax(0,1.1fr)_auto_minmax(0,1.1fr)] md:items-center md:gap-4 md:px-5 md:py-2 lg:gap-6 lg:px-6 dark:border-white/10 dark:bg-zinc-900/90 dark:shadow-[0_16px_48px_-28px_rgba(0,0,0,0.55)]"
     aria-label="Global"
   >
     <div class="flex items-center justify-between gap-3 md:justify-self-start">
@@ -43,8 +43,11 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
       >
         <img
           src="/logo.webp"
-          class="h-9 w-9 object-contain transition-transform duration-300 group-hover:scale-[1.04] sm:h-10 sm:w-10"
+          class="h-9 w-9 object-contain sm:h-10 sm:w-10"
+          width="40"
+          height="40"
           alt=""
+          decoding="async"
         />
         <span class="flex flex-col leading-none">
           <span
@@ -97,7 +100,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
     aria-hidden="true"
   >
     <div
-      class="absolute inset-0 flex h-[100dvh] max-h-[100dvh] min-h-0 flex-col bg-neutral-100 supports-[height:100svh]:h-[100svh] supports-[height:100svh]:max-h-[100svh] dark:bg-neutral-900"
+      class="absolute inset-0 flex h-[100dvh] max-h-[100dvh] min-h-0 flex-col bg-neutral-100 supports-[height:100svh]:h-[100svh] supports-[height:100svh]:max-h-[100svh] dark:bg-zinc-900"
       data-mobile-panel
       role="dialog"
       aria-modal="true"
@@ -129,16 +132,16 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
                   class:list={[
                     'group flex min-h-14 items-center gap-4 rounded-xl px-2 py-3.5 transition-colors duration-300',
                     isActive
-                      ? 'bg-fluid-cyan/10'
-                      : 'hover:bg-fluid-cyan/8 dark:hover:bg-fluid-cyan/10',
+                      ? 'bg-fluid-navy/6 dark:bg-fluid-cyan/10'
+                      : 'hover:bg-fluid-navy/5 dark:hover:bg-fluid-cyan/10',
                   ]}
                 >
                   <span
                     class:list={[
                       'flex h-11 w-11 shrink-0 items-center justify-center rounded-lg transition-colors duration-300',
                       isActive
-                        ? 'bg-fluid-cyan/20 text-fluid-cyan dark:text-fluid-cyan-soft'
-                        : 'bg-fluid-cyan/10 text-fluid-cyan group-hover:bg-fluid-cyan/20 dark:bg-fluid-cyan/15 dark:text-fluid-cyan-soft',
+                        ? 'bg-fluid-navy/10 text-fluid-navy dark:bg-fluid-cyan/20 dark:text-fluid-cyan-soft'
+                        : 'bg-fluid-navy/6 text-fluid-navy group-hover:bg-fluid-navy/10 dark:bg-fluid-cyan/15 dark:text-fluid-cyan-soft',
                     ]}
                   >
                     <Icon name={navIcons[link.id]} class="h-5 w-5" />
@@ -153,7 +156,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
                   </span>
                   <Icon
                     name="arrowRight"
-                    class="ml-auto h-4 w-4 shrink-0 text-neutral-300 transition-colors duration-300 group-hover:text-fluid-cyan dark:text-white/25 dark:group-hover:text-fluid-cyan"
+                    class="ml-auto h-4 w-4 shrink-0 text-neutral-300 transition-colors duration-300 group-hover:text-fluid-navy dark:text-white/25 dark:group-hover:text-fluid-cyan"
                   />
                 </a>
               );
@@ -207,8 +210,12 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
     height: 2px;
     transform: scaleX(0);
     transform-origin: left;
+    background: linear-gradient(90deg, var(--color-fluid-navy), transparent);
+    transition: transform 0.28s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  :global(.dark .nav-link)::after {
     background: linear-gradient(90deg, var(--color-fluid-cyan), transparent);
-    transition: transform 0.28s ease;
   }
 
   :global(.nav-link:hover)::after,

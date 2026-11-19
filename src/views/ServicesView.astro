@@ -56,13 +56,16 @@ const slides = [
 
   <section class="grid w-full gap-4 pb-10 md:grid-cols-2 lg:grid-cols-3">
     {services.map((service, index) => (
-      <article class="overflow-hidden rounded-2xl border border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-900">
+      <article class="group overflow-hidden rounded-2xl border border-neutral-300 bg-white transition-[border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-0.5 hover:border-fluid-cyan/40 hover:shadow-[0_14px_36px_-28px_rgba(11,42,74,0.45)] dark:border-zinc-700 dark:bg-zinc-900 dark:hover:border-fluid-cyan/35">
         <div class="aspect-[16/10] overflow-hidden">
           <img
             src={serviceImages[index] ?? '/common/1.jpg'}
             alt=""
-            class="h-full w-full object-cover"
+            class="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03]"
             loading="lazy"
+            decoding="async"
+            width="1600"
+            height="1067"
           />
         </div>
         <div class="p-6">
@@ -83,6 +86,7 @@ const slides = [
   />
 
   <MediaSplit
+    imageFit="contain"
     eyebrow="Cobertura"
     title={copy.stats.title}
     body={copy.stats.subTitle}
@@ -95,7 +99,7 @@ const slides = [
   <section class="w-full py-10 lg:pb-20">
     <div class="grid gap-4 sm:grid-cols-3">
       {copy.stats.stats.map((item) => (
-        <div class="rounded-2xl border border-neutral-300 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-900">
+        <div class="rounded-2xl border border-neutral-300 bg-white p-5 dark:border-zinc-700 dark:bg-zinc-900">
           <p class="text-2xl font-semibold text-fluid-navy dark:text-fluid-cyan-soft">{item.stat}</p>
           <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">{item.description}</p>
         </div>

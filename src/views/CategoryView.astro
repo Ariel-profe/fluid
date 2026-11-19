@@ -55,10 +55,8 @@ const t = getCopy(locale);
         <ProductCard
           name={sub.name}
           image={getSubcategoryCover(sub) || '/categories/valvulas.webp'}
-          imageFit="cover"
           href={getSubcategoryHref(category, sub)}
           meta={`${sub.products.length} modelo${sub.products.length === 1 ? '' : 's'}`}
-          cta="Ver modelos →"
         />
       ))}
     </div>

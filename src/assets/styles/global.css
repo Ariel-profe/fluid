@@ -145,15 +145,9 @@
   }
 }
 
-/* Motion helpers — transforms only, no layout thrash */
+/* Motion helpers — clip only; avoid permanent will-change (keeps GPU layers alive) */
 @layer utilities {
   .media-reveal {
     overflow: hidden;
-  }
-
-  .media-reveal img,
-  [data-reveal-media] {
-    transform-origin: center center;
-    will-change: transform, opacity;
   }
 }

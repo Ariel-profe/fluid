@@ -24,10 +24,10 @@ const isActive =
   data-nav-link
   aria-current={isActive ? 'page' : undefined}
   class:list={[
-    'nav-link group relative inline-flex items-center gap-2.5 px-3.5 py-2.5 text-sm font-medium tracking-wide outline-hidden transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-fluid-cyan/60 md:px-4 md:py-3',
+    'nav-link group relative inline-flex items-center gap-2.5 px-3.5 py-2.5 text-sm font-medium tracking-wide outline-hidden transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-fluid-navy/40 dark:focus-visible:ring-fluid-cyan/60 md:px-4 md:py-3',
     isActive
-      ? 'text-fluid-cyan dark:text-fluid-cyan-soft'
-      : 'text-neutral-600 hover:text-fluid-cyan dark:text-white/70 dark:hover:text-fluid-cyan-soft',
+      ? 'text-fluid-navy dark:text-fluid-cyan-soft'
+      : 'text-neutral-600 hover:text-fluid-navy dark:text-white/70 dark:hover:text-fluid-cyan-soft',
   ]}
 >
   {
@@ -36,8 +36,8 @@ const isActive =
         name={icon}
         class={`h-4 w-4 shrink-0 transition-colors duration-300 ${
           isActive
-            ? 'text-fluid-cyan dark:text-fluid-cyan-soft'
-            : 'text-neutral-400 group-hover:text-fluid-cyan dark:text-white/40'
+            ? 'text-fluid-navy dark:text-fluid-cyan-soft'
+            : 'text-neutral-400 group-hover:text-fluid-navy dark:text-white/40 dark:group-hover:text-fluid-cyan-soft'
         }`}
       />
     )

@@ -118,19 +118,18 @@ function initReveals(): void {
   document.querySelectorAll<HTMLElement>('[data-reveal-media]').forEach((media) => {
     const trigger = media.closest('[data-reveal-item], [data-reveal], [data-reveal-group]') ?? media;
     if (media.getBoundingClientRect().top < window.innerHeight * 0.92) {
-      gsap.set(media, { opacity: 1, scale: 1, clearProps: 'transform' });
+      gsap.set(media, { opacity: 1, clearProps: 'transform' });
       return;
     }
 
+    // Opacity-only — avoid scale on large photos (GPU decode + layer thrash).
     gsap.fromTo(
       media,
-      { opacity: 0.35, scale: 1.06 },
+      { opacity: 0 },
       {
         opacity: 1,
-        scale: 1,
-        duration: 0.85,
+        duration: 0.45,
         ease: 'power2.out',
-        force3D: true,
         overwrite: 'auto',
         scrollTrigger: {
           trigger,
@@ -141,10 +140,17 @@ function initReveals(): void {
     );
   });
 
-  // Refresh after layout settles — never mid-scroll.
+  // Refresh after layout settles — and once more after images decode.
   requestAnimationFrame(() => {
     ScrollTrigger.refresh();
   });
+  window.addEventListener(
+    'load',
+    () => {
+      ScrollTrigger.refresh();
+    },
+    { once: true }
+  );
 }
 
 if (document.readyState === 'loading') {

@@ -11,6 +11,8 @@ interface Props {
   reverse?: boolean;
   eyebrow?: string;
   compact?: boolean;
+  /** `contain` keeps the full asset visible (use for vertical maps). */
+  imageFit?: 'cover' | 'contain';
 }
 
 const {
@@ -23,29 +25,41 @@ const {
   reverse = false,
   eyebrow,
   compact = false,
+  imageFit = 'cover',
 } = Astro.props;
+
+const isContain = imageFit === 'contain';
 ---
 
 <section class="w-full py-10 lg:py-14">
   <div
     class:list={[
-      'grid items-center gap-0 overflow-hidden rounded-3xl border border-neutral-300/80 bg-white dark:border-neutral-700 dark:bg-neutral-900 lg:grid-cols-2',
+      'grid items-center overflow-hidden rounded-3xl border border-neutral-300/80 bg-white dark:border-zinc-700 dark:bg-zinc-900',
+      isContain
+        ? 'gap-0 lg:grid-cols-[minmax(10rem,15rem)_minmax(0,1fr)]'
+        : 'gap-0 lg:grid-cols-2',
       reverse && 'lg:[&>*:first-child]:order-2',
     ]}
     data-reveal
   >
     <div
       class:list={[
-        'media-reveal',
-        compact
-          ? 'aspect-[16/10] max-h-56 sm:max-h-64 lg:max-h-72 lg:aspect-auto lg:h-full'
-          : 'aspect-[4/3] sm:aspect-[16/11] lg:aspect-auto lg:h-full lg:min-h-[16rem] lg:max-h-[20rem]',
+        'media-reveal relative flex items-center justify-center',
+        isContain
+          ? 'bg-white px-3 py-4 sm:px-4 lg:h-full dark:bg-white'
+          : compact
+            ? 'aspect-[16/10] max-h-56 sm:max-h-64 lg:max-h-72 lg:aspect-auto lg:h-full'
+            : 'aspect-[4/3] sm:aspect-[16/11] lg:aspect-auto lg:h-full lg:min-h-[16rem] lg:max-h-[20rem]',
       ]}
     >
       <img
         src={imageSrc}
         alt={imageAlt}
-        class="h-full w-full object-cover"
+        class:list={[
+          isContain
+            ? 'mx-auto h-auto max-h-[21rem] w-auto max-w-full object-contain object-center sm:max-h-[23rem] lg:max-h-[25rem]'
+            : 'h-full w-full object-cover',
+        ]}
         loading="lazy"
         data-reveal-media
       />

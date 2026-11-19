@@ -30,7 +30,8 @@ const {
 } = Astro.props;
 
 const variants = {
-  navy: 'text-white bg-fluid-navy hover:bg-fluid-cyan active:bg-fluid-cyan',
+  /* Lift within the navy family — avoids navy→cyan flash */
+  navy: 'text-white bg-fluid-navy hover:bg-[#134a6e] active:bg-fluid-navy-deep',
   cyan: 'text-fluid-navy bg-fluid-cyan hover:bg-fluid-cyan-soft',
   orange:
     'text-neutral-50 bg-orange-400 hover:bg-orange-500 active:bg-orange-500',

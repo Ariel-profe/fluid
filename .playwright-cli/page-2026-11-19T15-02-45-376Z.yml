@@ -1,0 +1,417 @@
+- generic [active] [ref=e1]:
+  - link "Saltar al contenido" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - navigation "Global" [ref=e5]:
+        - link "FLUID" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e8]:
+            - generic [ref=e9]: FLUID
+            - generic [ref=e10]: Soluciones dinámicas
+        - generic [ref=e11]:
+          - link "Productos" [ref=e12] [cursor=pointer]:
+            - /url: /productos
+          - link "Nosotros" [ref=e15] [cursor=pointer]:
+            - /url: /nosotros
+          - link "Servicios" [ref=e18] [cursor=pointer]:
+            - /url: /servicios
+          - link "Clientes" [ref=e21] [cursor=pointer]:
+            - /url: /clientes
+        - generic [ref=e24]:
+          - generic [ref=e25]:
+            - generic [ref=e26]: Buscar productos…
+            - searchbox "Buscar productos…" [ref=e28]
+          - button "Activar tema oscuro" [ref=e29] [cursor=pointer]
+          - link "Ventas" [ref=e32] [cursor=pointer]:
+            - /url: /contacto
+    - main [ref=e35]:
+      - region "FLUID — Soluciones dinámicas" [ref=e37]:
+        - heading "FLUID Soluciones dinámicas" [level=1] [ref=e44]:
+          - generic [ref=e45]: FLUID
+          - generic [ref=e46]: Soluciones dinámicas
+      - generic [ref=e47]:
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - heading "Empresas que confían en nosotros" [level=2] [ref=e50]
+            - paragraph [ref=e51]: Acompañamos a distintos sectores productivos con productos de calidad y un servicio ágil.
+          - link "Ver todos los clientes →" [ref=e52] [cursor=pointer]:
+            - /url: /clientes
+        - generic [ref=e53]:
+          - generic [ref=e55]:
+            - generic "Aceitera General Deheza" [ref=e56]:
+              - img "Aceitera General Deheza" [ref=e57]
+            - generic "Acerbrag" [ref=e58]:
+              - img "Acerbrag" [ref=e59]
+            - generic "Air Liquide Argentina" [ref=e60]:
+              - img "Air Liquide Argentina" [ref=e61]
+            - generic "Akzo Nobel Argentina" [ref=e62]:
+              - img "Akzo Nobel Argentina" [ref=e63]
+            - generic "Alpek Polyester Argentina" [ref=e64]:
+              - img "Alpek Polyester Argentina" [ref=e65]
+            - generic "Asociación de Cooperativas Argentinas" [ref=e66]:
+              - img "Asociación de Cooperativas Argentinas" [ref=e67]
+            - generic "Bioetanol Río Cuarto" [ref=e68]:
+              - img "Bioetanol Río Cuarto" [ref=e69]
+            - generic "Bonafide" [ref=e70]:
+              - img "Bonafide" [ref=e71]
+            - generic "Bunge Argentina" [ref=e72]:
+              - img "Bunge Argentina" [ref=e73]
+            - generic "Celulosa Argentina" [ref=e74]:
+              - img "Celulosa Argentina" [ref=e75]
+            - generic "Celulosa Campana" [ref=e76]:
+              - img "Celulosa Campana"
+            - generic "Cervecería y Maltería Quilmes" [ref=e77]:
+              - img "Cervecería y Maltería Quilmes"
+            - generic "Coto" [ref=e78]:
+              - img "Coto"
+            - generic "Diaser" [ref=e79]:
+              - img "Diaser"
+            - generic "Disal" [ref=e80]:
+              - img "Disal"
+            - generic "Dreamco" [ref=e81]:
+              - img "Dreamco"
+            - generic "Ecopek" [ref=e82]:
+              - img "Ecopek"
+            - generic "Eling Energía" [ref=e83]:
+              - img "Eling Energía"
+            - generic "Embotelladora del Atlántico" [ref=e84]:
+              - img "Embotelladora del Atlántico"
+            - generic "Generación Mediterránea" [ref=e85]:
+              - img "Generación Mediterránea"
+            - generic "General Motors de Argentina" [ref=e86]:
+              - img "General Motors de Argentina"
+            - generic "Gulf Oil Argentina" [ref=e87]:
+              - img "Gulf Oil Argentina"
+            - generic "Intelmec Ingeniería" [ref=e88]:
+              - img "Intelmec Ingeniería"
+            - generic "JCR" [ref=e89]:
+              - img "JCR"
+            - generic "Lestar Química" [ref=e90]:
+              - img "Lestar Química"
+            - generic "Litio Minera Argentina" [ref=e91]:
+              - img "Litio Minera Argentina"
+            - generic "Aceitera General Deheza" [ref=e92]:
+              - img "Aceitera General Deheza" [ref=e93]
+            - generic "Acerbrag" [ref=e94]:
+              - img "Acerbrag" [ref=e95]
+            - generic "Air Liquide Argentina" [ref=e96]:
+              - img "Air Liquide Argentina" [ref=e97]
+            - generic "Akzo Nobel Argentina" [ref=e98]:
+              - img "Akzo Nobel Argentina" [ref=e99]
+            - generic "Alpek Polyester Argentina" [ref=e100]:
+              - img "Alpek Polyester Argentina" [ref=e101]
+            - generic "Asociación de Cooperativas Argentinas" [ref=e102]:
+              - img "Asociación de Cooperativas Argentinas" [ref=e103]
+            - generic "Bioetanol Río Cuarto" [ref=e104]:
+              - img "Bioetanol Río Cuarto" [ref=e105]
+            - generic "Bonafide" [ref=e106]:
+              - img "Bonafide" [ref=e107]
+            - generic "Bunge Argentina" [ref=e108]:
+              - img "Bunge Argentina" [ref=e109]
+            - generic "Celulosa Argentina" [ref=e110]:
+              - img "Celulosa Argentina" [ref=e111]
+            - generic "Celulosa Campana" [ref=e112]:
+              - img "Celulosa Campana"
+            - generic "Cervecería y Maltería Quilmes" [ref=e113]:
+              - img "Cervecería y Maltería Quilmes"
+            - generic "Coto" [ref=e114]:
+              - img "Coto"
+            - generic "Diaser" [ref=e115]:
+              - img "Diaser"
+            - generic "Disal" [ref=e116]:
+              - img "Disal"
+            - generic "Dreamco" [ref=e117]:
+              - img "Dreamco"
+            - generic "Ecopek" [ref=e118]:
+              - img "Ecopek"
+            - generic "Eling Energía" [ref=e119]:
+              - img "Eling Energía"
+            - generic "Embotelladora del Atlántico" [ref=e120]:
+              - img "Embotelladora del Atlántico"
+            - generic "Generación Mediterránea" [ref=e121]:
+              - img "Generación Mediterránea"
+            - generic "General Motors de Argentina" [ref=e122]:
+              - img "General Motors de Argentina"
+            - generic "Gulf Oil Argentina" [ref=e123]:
+              - img "Gulf Oil Argentina"
+            - generic "Intelmec Ingeniería" [ref=e124]:
+              - img "Intelmec Ingeniería"
+            - generic "JCR" [ref=e125]:
+              - img "JCR"
+            - generic "Lestar Química" [ref=e126]:
+              - img "Lestar Química"
+            - generic "Litio Minera Argentina" [ref=e127]:
+              - img "Litio Minera Argentina"
+          - generic [ref=e129]:
+            - generic "Maprimed" [ref=e130]:
+              - img "Maprimed" [ref=e131]
+            - generic "Massalin Particulares" [ref=e132]:
+              - img "Massalin Particulares" [ref=e133]
+            - generic "Minas Argentinas" [ref=e134]:
+              - img "Minas Argentinas" [ref=e135]
+            - generic "Niza" [ref=e136]:
+              - img "Niza" [ref=e137]
+            - generic "Papel Prensa" [ref=e138]:
+              - img "Papel Prensa" [ref=e139]
+            - generic "Pilkington Automotive Argentina" [ref=e140]:
+              - img "Pilkington Automotive Argentina" [ref=e141]
+            - generic "Pirelli Neumáticos" [ref=e142]:
+              - img "Pirelli Neumáticos" [ref=e143]
+            - generic "Porta Hnos." [ref=e144]:
+              - img "Porta Hnos." [ref=e145]
+            - generic "Praxair Argentina" [ref=e146]:
+              - img "Praxair Argentina" [ref=e147]
+            - generic "Promaíz" [ref=e148]:
+              - img "Promaíz" [ref=e149]
+            - generic "RDC Industrial" [ref=e150]:
+              - img "RDC Industrial"
+            - generic "Ruhrpumpen Argentina" [ref=e151]:
+              - img "Ruhrpumpen Argentina"
+            - generic "SAF Argentina (Lesaffre)" [ref=e152]:
+              - img "SAF Argentina (Lesaffre)"
+            - generic "Saint Gobain Argentina" [ref=e153]:
+              - img "Saint Gobain Argentina"
+            - generic "Sanovo Greenpack Argentina" [ref=e154]:
+              - img "Sanovo Greenpack Argentina"
+            - generic "Sherwin Williams" [ref=e155]:
+              - img "Sherwin Williams"
+            - generic "Siderca" [ref=e156]:
+              - img "Siderca"
+            - generic "Tecnored Energía" [ref=e157]:
+              - img "Tecnored Energía"
+            - generic "Ternium Argentina" [ref=e158]:
+              - img "Ternium Argentina"
+            - generic "Tigonbu Energía" [ref=e159]:
+              - img "Tigonbu Energía"
+            - generic "Total Especialidades Argentina" [ref=e160]:
+              - img "Total Especialidades Argentina"
+            - generic "Toyota Argentina" [ref=e161]:
+              - img "Toyota Argentina"
+            - generic "Transclor" [ref=e162]:
+              - img "Transclor"
+            - generic "Unilever de Argentina" [ref=e163]:
+              - img "Unilever de Argentina"
+            - generic "Unionpel" [ref=e164]:
+              - img "Unionpel"
+            - generic "Xstorage" [ref=e165]:
+              - img "Xstorage"
+            - generic "Maprimed" [ref=e166]:
+              - img "Maprimed" [ref=e167]
+            - generic "Massalin Particulares" [ref=e168]:
+              - img "Massalin Particulares" [ref=e169]
+            - generic "Minas Argentinas" [ref=e170]:
+              - img "Minas Argentinas" [ref=e171]
+            - generic "Niza" [ref=e172]:
+              - img "Niza" [ref=e173]
+            - generic "Papel Prensa" [ref=e174]:
+              - img "Papel Prensa" [ref=e175]
+            - generic "Pilkington Automotive Argentina" [ref=e176]:
+              - img "Pilkington Automotive Argentina" [ref=e177]
+            - generic "Pirelli Neumáticos" [ref=e178]:
+              - img "Pirelli Neumáticos" [ref=e179]
+            - generic "Porta Hnos." [ref=e180]:
+              - img "Porta Hnos." [ref=e181]
+            - generic "Praxair Argentina" [ref=e182]:
+              - img "Praxair Argentina" [ref=e183]
+            - generic "Promaíz" [ref=e184]:
+              - img "Promaíz" [ref=e185]
+            - generic "RDC Industrial" [ref=e186]:
+              - img "RDC Industrial"
+            - generic "Ruhrpumpen Argentina" [ref=e187]:
+              - img "Ruhrpumpen Argentina"
+            - generic "SAF Argentina (Lesaffre)" [ref=e188]:
+              - img "SAF Argentina (Lesaffre)"
+            - generic "Saint Gobain Argentina" [ref=e189]:
+              - img "Saint Gobain Argentina"
+            - generic "Sanovo Greenpack Argentina" [ref=e190]:
+              - img "Sanovo Greenpack Argentina"
+            - generic "Sherwin Williams" [ref=e191]:
+              - img "Sherwin Williams"
+            - generic "Siderca" [ref=e192]:
+              - img "Siderca"
+            - generic "Tecnored Energía" [ref=e193]:
+              - img "Tecnored Energía"
+            - generic "Ternium Argentina" [ref=e194]:
+              - img "Ternium Argentina"
+            - generic "Tigonbu Energía" [ref=e195]:
+              - img "Tigonbu Energía"
+            - generic "Total Especialidades Argentina" [ref=e196]:
+              - img "Total Especialidades Argentina"
+            - generic "Toyota Argentina" [ref=e197]:
+              - img "Toyota Argentina"
+            - generic "Transclor" [ref=e198]:
+              - img "Transclor"
+            - generic "Unilever de Argentina" [ref=e199]:
+              - img "Unilever de Argentina"
+            - generic "Unionpel" [ref=e200]:
+              - img "Unionpel"
+            - generic "Xstorage" [ref=e201]:
+              - img "Xstorage"
+      - generic [ref=e202]:
+        - generic [ref=e203]:
+          - heading "Catálogo industrial" [level=2] [ref=e204]
+          - paragraph [ref=e205]: Una cartera amplia para control, conducción e instrumentación. Explorá y encontrá el producto que necesitas.
+        - generic [ref=e206]:
+          - link "Disponible Válvulas Válvulas 26 modelos" [ref=e207] [cursor=pointer]:
+            - /url: /productos/valvulas
+            - generic [ref=e208]:
+              - generic [ref=e209]: Disponible
+              - img "Válvulas" [ref=e211]
+            - generic [ref=e214]:
+              - heading "Válvulas" [level=3] [ref=e215]
+              - paragraph [ref=e216]: 26 modelos
+          - generic [ref=e220]:
+            - generic [ref=e221]:
+              - generic [ref=e222]: Próximamente
+              - img "Actuadores y Accesorios" [ref=e224]
+            - heading "Actuadores y Accesorios" [level=3] [ref=e228]
+          - generic [ref=e229]:
+            - generic [ref=e230]:
+              - generic [ref=e231]: Próximamente
+              - img "Caños, Bridas y Accesorios" [ref=e233]
+            - heading "Caños, Bridas y Accesorios" [level=3] [ref=e237]
+          - generic [ref=e238]:
+            - generic [ref=e239]:
+              - generic [ref=e240]: Próximamente
+              - img "Caudal, Presión y Temperatura" [ref=e242]
+            - heading "Caudal, Presión y Temperatura" [level=3] [ref=e246]
+          - generic [ref=e247]:
+            - generic [ref=e248]:
+              - generic [ref=e249]: Próximamente
+              - img "Áreas Clasificadas" [ref=e251]
+            - heading "Áreas Clasificadas" [level=3] [ref=e255]
+      - generic [ref=e256]:
+        - generic [ref=e257]:
+          - heading "Fluid en acción" [level=2] [ref=e258]
+          - paragraph [ref=e259]: Imágenes de nuestra operación, equipo y acompañamiento a la industria.
+        - generic [ref=e260]:
+          - generic [ref=e261]:
+            - figure [ref=e262]:
+              - img "Equipo y operación Fluid" [ref=e263]
+            - figure [aria-hidden] [ref=e264]
+            - figure [aria-hidden] [ref=e266]
+            - figure [aria-hidden] [ref=e268]
+            - figure [aria-hidden] [ref=e270]
+            - figure [aria-hidden] [ref=e272]
+            - figure [aria-hidden] [ref=e274]
+            - figure [aria-hidden] [ref=e276]
+            - figure [aria-hidden] [ref=e278]
+            - generic:
+              - generic [ref=e280]:
+                - button "Ir a imagen 1" [ref=e281] [cursor=pointer]
+                - button "Ir a imagen 2" [ref=e282] [cursor=pointer]
+                - button "Ir a imagen 3" [ref=e283] [cursor=pointer]
+                - button "Ir a imagen 4" [ref=e284] [cursor=pointer]
+                - button "Ir a imagen 5" [ref=e285] [cursor=pointer]
+                - button "Ir a imagen 6" [ref=e286] [cursor=pointer]
+                - button "Ir a imagen 7" [ref=e287] [cursor=pointer]
+                - button "Ir a imagen 8" [ref=e288] [cursor=pointer]
+                - button "Ir a imagen 9" [ref=e289] [cursor=pointer]
+              - generic [ref=e290]:
+                - button "Imagen anterior" [ref=e291] [cursor=pointer]: ←
+                - button "Imagen siguiente" [ref=e292] [cursor=pointer]: →
+          - paragraph [ref=e294]: Equipo comercial y técnico en campo
+      - generic [ref=e295]:
+        - generic [ref=e296]:
+          - heading "Un aliado estratégico para la industria" [level=2] [ref=e297]
+          - paragraph [ref=e298]: Orientamos nuestros esfuerzos a optimizar el abastecimiento industrial con propuestas eficientes y adaptadas a cada proyecto.
+        - generic [ref=e299]:
+          - article [ref=e300]:
+            - generic [ref=e302]:
+              - heading "Productos de marcas líderes" [level=3] [ref=e303]
+              - paragraph [ref=e304]: Válvulas, cañerías, bridas, accesorios e instrumentos con altos estándares de calidad, seguridad y confiabilidad.
+          - article [ref=e305]:
+            - generic [ref=e307]:
+              - heading "Respaldo técnico especializado" [level=3] [ref=e308]
+              - paragraph [ref=e309]: Asesores técnico-comerciales que acompañan desde la detección de necesidades hasta el cierre.
+          - article [ref=e310]:
+            - generic [ref=e312]:
+              - heading "Stock y logística" [level=3] [ref=e313]
+              - paragraph [ref=e314]: Centro de Operaciones en General Pacheco y warehouse en Córdoba para mejorar disponibilidad y tiempos de entrega.
+      - generic [ref=e316]:
+        - generic [ref=e317]:
+          - img "Cobertura logística Fluid en Argentina"
+        - generic [ref=e318]:
+          - paragraph [ref=e319]: Red logística
+          - heading "Red logística en expansión" [level=2] [ref=e320]
+          - paragraph [ref=e321]: Infraestructura diseñada para responder con rapidez a las demandas del mercado industrial. Fluid cuenta con una infraestructura logística diseñada para acompañar el crecimiento de sus operaciones y garantizar una respuesta eficiente a las necesidades de sus clientes.
+          - link "Conocer la empresa" [ref=e323] [cursor=pointer]:
+            - /url: /nosotros
+      - generic [ref=e327]:
+        - img "Equipo Fluid Soluciones Dinámicas" [ref=e329]
+        - generic [ref=e330]:
+          - paragraph [ref=e331]: Equipo
+          - heading "Personas detrás de cada solución" [level=2] [ref=e332]
+          - paragraph [ref=e333]: Empresa argentina integrada por profesionales con más de veinte años de experiencia en el mercado industrial, comprometidos con el desarrollo de soluciones que aporten valor a los distintos sectores productivos del país. Trabajamos con orientación al cliente, mejora continua e innovación.
+          - link "Conocer la empresa" [ref=e335] [cursor=pointer]:
+            - /url: /nosotros
+      - generic [ref=e339]:
+        - generic [ref=e341]:
+          - heading "Preguntas frecuentes" [level=2] [ref=e342]
+          - paragraph [ref=e343]: Consultas frecuentes sobre productos, cobertura y cotizaciones.
+        - generic [ref=e345]:
+          - generic [ref=e346]:
+            - button "¿Qué productos comercializamos?" [expanded] [ref=e347] [cursor=pointer]
+            - region "¿Qué productos comercializamos? Válvulas industriales, cañerías, bridas, accesorios e instrumentos de medición fabricados por marcas líderes a nivel nacional e internacional, garantizando altos estándares de calidad, seguridad y confiabilidad para los procesos productivos." [ref=e350]:
+              - paragraph [ref=e351]: Válvulas industriales, cañerías, bridas, accesorios e instrumentos de medición fabricados por marcas líderes a nivel nacional e internacional, garantizando altos estándares de calidad, seguridad y confiabilidad para los procesos productivos.
+          - button "¿En qué zonas del país operamos?" [ref=e353] [cursor=pointer]
+          - button "¿Ofrecemos asesoramiento técnico?" [ref=e357] [cursor=pointer]
+          - button "Contamos con stock propio para entrega inmediata?" [ref=e361] [cursor=pointer]
+          - button "¿A qué sectores industriales acompañamos?" [ref=e365] [cursor=pointer]
+          - button "¿Cómo solicito una cotización?" [ref=e369] [cursor=pointer]
+      - generic [ref=e375]:
+        - heading "¿Necesitás una cotización?" [level=2] [ref=e376]
+        - paragraph [ref=e377]: Escribinos a cotizaciones@fluidsoluciones.com o contactanos por WhatsApp. Armamos propuestas en tiempo y forma.
+        - paragraph [ref=e378]: Fluid Soluciones Dinámicas S.A.
+        - link "Ir a contacto" [ref=e380] [cursor=pointer]:
+          - /url: /contacto
+  - contentinfo [ref=e383]:
+    - generic [ref=e384]:
+      - generic [ref=e385]:
+        - generic [ref=e386]:
+          - link [ref=e387] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e388]:
+              - paragraph [ref=e389]: Fluid
+              - paragraph [ref=e390]: Soluciones Dinámicas
+          - paragraph [ref=e391]: Soluciones industriales para control y conducción de fluidos.
+        - generic [ref=e392]:
+          - generic [ref=e393]:
+            - heading "Explorar" [level=3] [ref=e394]
+            - list [ref=e395]:
+              - listitem [ref=e396]:
+                - link "Productos" [ref=e397] [cursor=pointer]:
+                  - /url: /productos
+              - listitem [ref=e398]:
+                - link "Servicios" [ref=e399] [cursor=pointer]:
+                  - /url: /servicios
+          - generic [ref=e400]:
+            - heading "Empresa" [level=3] [ref=e401]
+            - list [ref=e402]:
+              - listitem [ref=e403]:
+                - link "Nosotros" [ref=e404] [cursor=pointer]:
+                  - /url: /nosotros
+              - listitem [ref=e405]:
+                - link "Contacto" [ref=e406] [cursor=pointer]:
+                  - /url: /contacto
+              - listitem [ref=e407]:
+                - link "Clientes" [ref=e408] [cursor=pointer]:
+                  - /url: /clientes
+        - generic [ref=e409]:
+          - heading "Cotizaciones" [level=3] [ref=e410]
+          - paragraph [ref=e411]: Escribinos a cotizaciones@fluidsoluciones.com y te respondemos con una propuesta a medida.
+          - generic [ref=e412]:
+            - link "Email" [ref=e413] [cursor=pointer]:
+              - /url: mailto:cotizaciones@fluidsoluciones.com
+            - link "WhatsApp" [ref=e416] [cursor=pointer]:
+              - /url: https://wa.me/5491176094341
+            - link "Instagram" [ref=e419] [cursor=pointer]:
+              - /url: https://www.instagram.com/fluidsoluciones
+          - paragraph [ref=e422]: Santiago de Chile 2555, General Pacheco, Buenos Aires
+      - generic [ref=e423]:
+        - paragraph [ref=e424]: © 2026 Fluid. Fluid Soluciones Dinámicas S.A..
+        - paragraph [ref=e425]:
+          - text: Desarrollado por
+          - link "AMN Consultora Informática" [ref=e426] [cursor=pointer]:
+            - /url: https://amn.com.ar

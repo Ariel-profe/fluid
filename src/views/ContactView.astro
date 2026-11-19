@@ -45,7 +45,7 @@ const copy = getCopy(locale).contact;
               href={primary.href}
               target={primary.external ? '_blank' : undefined}
               rel={primary.external ? 'noopener noreferrer' : undefined}
-              class="group flex flex-col rounded-2xl border border-neutral-300 bg-white p-5 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-fluid-cyan/40 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:hover:border-fluid-cyan/35"
+              class="group flex flex-col rounded-2xl border border-neutral-300 bg-white p-5 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-fluid-cyan/40 hover:shadow-md dark:border-zinc-700 dark:bg-zinc-900 dark:hover:border-fluid-cyan/35"
             >
               <div class="flex items-center gap-3">
                 <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-fluid-steel text-fluid-navy transition-colors duration-300 group-hover:bg-fluid-cyan/15 group-hover:text-fluid-cyan dark:bg-neutral-800 dark:text-fluid-cyan-soft">
@@ -74,7 +74,7 @@ const copy = getCopy(locale).contact;
 
     {/* Formulario: bloque principal con altura natural */}
     <div
-      class="mt-10 overflow-hidden rounded-3xl border border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-900 lg:grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]"
+      class="mt-10 overflow-hidden rounded-3xl border border-neutral-300 bg-white dark:border-zinc-700 dark:bg-zinc-900 lg:grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]"
     >
       <div class="relative hidden min-h-72 lg:block">
         <img
@@ -139,7 +139,7 @@ const copy = getCopy(locale).contact;
           </label>
           <button
             type="submit"
-            class="mt-5 inline-flex items-center gap-2 rounded-lg bg-fluid-navy px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-fluid-cyan"
+            class="mt-5 inline-flex items-center gap-2 rounded-lg bg-fluid-navy px-5 py-2.5 text-sm font-semibold text-white transition-[background-color,transform] duration-300 hover:bg-[#134a6e] active:bg-fluid-navy-deep"
           >
             <Icon name="chatBubble" class="h-4 w-4 shrink-0" />
             {copy.send}

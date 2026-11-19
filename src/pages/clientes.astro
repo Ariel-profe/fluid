@@ -21,20 +21,21 @@ import { PARTNERS } from '../../data/partners';
     </p>
 
     <ul
-      class="mt-12 grid list-none grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+      class="mt-12 grid list-none grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4"
       data-reveal-group
     >
       {
         PARTNERS.map((partner) => (
           <li data-reveal-item>
             <article
-              class="partner-tile group relative aspect-[5/3] overflow-hidden rounded-xl border border-neutral-300/90 bg-white transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-fluid-cyan/45 hover:shadow-[0_14px_36px_-28px_rgba(11,42,74,0.55)] dark:border-white/12 dark:bg-white dark:hover:border-fluid-cyan/50"
+              class="partner-tile group flex h-[5.75rem] items-center justify-center overflow-hidden rounded-xl border border-neutral-300/90 bg-white px-6 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-fluid-cyan/45 hover:shadow-[0_14px_36px_-28px_rgba(11,42,74,0.55)] sm:h-[6.25rem] dark:border-white/12 dark:bg-white dark:hover:border-fluid-cyan/50"
               title={partner.name}
             >
               <img
                 src={partner.logo}
                 alt={partner.name}
-                class="absolute inset-0 m-auto h-[58%] w-[72%] object-contain opacity-[0.92] transition-[opacity,transform] duration-300 group-hover:scale-[1.03] group-hover:opacity-100"
+                class="w-auto max-w-full object-contain opacity-[0.96] transition-[opacity,transform] duration-300 group-hover:scale-[1.03] group-hover:opacity-100"
+                style={`height: calc(3.35rem * ${partner.logoScale ?? 1})`}
                 loading="lazy"
               />
             </article>
